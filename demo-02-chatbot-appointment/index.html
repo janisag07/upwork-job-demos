@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Lead Qualification & Appointment Automation</title>
+<style>
+/* ── Reset & Base ──────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f1117;--surface:#181a24;--card:#1e2030;--border:#2a2d3e;
+  --text:#e2e4ed;--dim:#8b8fa3;--accent:#6c5ce7;--accent2:#a29bfe;
+  --green:#00cec9;--green-dim:#00b89422;--orange:#fdcb6e;--orange-dim:#fdcb6e22;
+  --red:#ff7675;--red-dim:#ff767522;--blue:#74b9ff;--blue-dim:#74b9ff22;
+  --radius:12px;--radius-sm:8px;
+}
+html{font-size:14px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden}
+a{color:var(--accent2);text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+
+/* ── Layout ────────────────────────────────────────────────── */
+.app{display:grid;grid-template-columns:260px 1fr;grid-template-rows:56px 1fr;height:100vh}
+.topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:var(--surface);border-bottom:1px solid var(--border);z-index:10}
+.topbar h1{font-size:1rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.topbar h1 span.icon{font-size:1.2rem}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.badge{font-size:.7rem;padding:2px 8px;border-radius:20px;font-weight:600}
+.badge-live{background:var(--green-dim);color:var(--green)}
+.badge-ai{background:linear-gradient(135deg,var(--accent),#a29bfe);color:#fff;padding:3px 10px}
+.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:16px 0;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-section{padding:0 16px;margin-bottom:20px}
+.sidebar-section h3{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:8px;padding:0 4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);color:var(--dim);font-size:.85rem;transition:all .15s;cursor:pointer}
+.nav-item:hover{background:#ffffff08;color:var(--text)}
+.nav-item.active{background:var(--accent)18;color:var(--accent2);font-weight:500}
+.nav-item .nav-icon{width:18px;text-align:center;font-size:.95rem}
+.nav-item .nav-badge{margin-left:auto;font-size:.7rem;background:var(--accent);color:#fff;padding:1px 7px;border-radius:10px}
+.main{overflow-y:auto;padding:24px;background:var(--bg)}
+
+/* ── View Containers ───────────────────────────────────────── */
+.view{display:none}
+.view.active{display:block}
+
+/* ── Metrics Cards ─────────────────────────────────────────── */
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.metric-card .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:4px}
+.metric-card .value{font-size:1.7rem;font-weight:700}
+.metric-card .change{font-size:.75rem;margin-top:4px}
+.change.up{color:var(--green)}
+.change.down{color:var(--red)}
+
+/* ── Cards & Tables ────────────────────────────────────────── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-header h2{font-size:1rem;font-weight:600}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);padding:10px 12px;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:.85rem}
+tr:last-child td{border-bottom:none}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.status-dot.qualified{background:var(--green)}
+.status-dot.in-progress{background:var(--orange)}
+.status-dot.disqualified{background:var(--red)}
+.status-dot.booked{background:var(--blue)}
+
+/* ── Chat Section ──────────────────────────────────────────── */
+.chat-layout{display:grid;grid-template-columns:1fr 320px;gap:16px;height:calc(100vh - 56px - 48px)}
+.chat-panel{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.chat-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.chat-header .avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff}
+.chat-header .info .name{font-weight:600;font-size:.9rem}
+.chat-header .info .status-text{font-size:.72rem;color:var(--green)}
+.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:80%;padding:10px 14px;border-radius:14px;font-size:.85rem;line-height:1.55;animation:msgIn .3s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.bot{align-self:flex-start;background:var(--surface);border:1px solid var(--border);border-bottom-left-radius:4px}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+.msg .typing{display:flex;gap:4px;padding:4px 0}
+.msg .typing span{width:6px;height:6px;background:var(--dim);border-radius:50%;animation:bounce .6s infinite alternate}
+.msg .typing span:nth-child(2){animation-delay:.15s}
+.msg .typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{to{transform:translateY(-4px);opacity:.4}}
+.chat-input-area{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px}
+.chat-input-area input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:10px 16px;color:var(--text);font-size:.85rem}
+.chat-input-area input::placeholder{color:var(--dim)}
+.chat-input-area input:focus{border-color:var(--accent)}
+.chat-input-area button{background:var(--accent);color:#fff;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:background .15s}
+.chat-input-area button:hover{background:var(--accent2)}
+
+/* ── Chat Sidebar ──────────────────────────────────────────── */
+.chat-sidebar{display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+.qual-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.qual-card h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:12px}
+.qual-step{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:.82rem}
+.qual-step .check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;transition:all .3s}
+.qual-step .check.done{background:var(--green);border-color:var(--green);color:#fff}
+.qual-step .check.active{border-color:var(--orange);color:var(--orange);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #fdcb6e44}50%{box-shadow:0 0 0 6px #fdcb6e00}}
+.qual-step .step-label{color:var(--dim)}
+.qual-step .step-label.done{color:var(--text)}
+.qual-step .step-label.active{color:var(--orange);font-weight:500}
+.score-bar{margin-top:8px}
+.score-bar .bar-bg{height:6px;background:var(--surface);border-radius:3px;overflow:hidden;margin-top:4px}
+.score-bar .bar-fill{height:100%;border-radius:3px;transition:width .5s ease;background:linear-gradient(90deg,var(--accent),var(--green))}
+.score-label{display:flex;justify-content:space-between;font-size:.75rem;color:var(--dim)}
+.crm-note{font-size:.8rem;color:var(--dim);background:var(--surface);padding:10px 12px;border-radius:var(--radius-sm);border-left:3px solid var(--accent);margin-top:6px;line-height:1.5}
+
+/* ── Booking Slots ─────────────────────────────────────────── */
+.slots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:8px}
+.slot-btn{padding:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);text-align:center;font-size:.8rem;color:var(--text);transition:all .15s;cursor:pointer}
+.slot-btn:hover{border-color:var(--accent);background:var(--accent)12}
+.slot-btn.selected{border-color:var(--green);background:var(--green-dim);color:var(--green)}
+.slot-btn .day{font-weight:600;margin-bottom:2px}
+.slot-btn .time{color:var(--dim);font-size:.75rem}
+
+/* ── Pipeline / Kanban ─────────────────────────────────────── */
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+.pipeline-col{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;min-height:200px}
+.pipeline-col h3{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.pipeline-col h3 .count{background:var(--surface);padding:1px 8px;border-radius:10px;font-size:.7rem}
+.lead-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;cursor:default;transition:border-color .15s}
+.lead-card:hover{border-color:var(--accent)}
+.lead-card .lead-name{font-weight:600;font-size:.82rem;margin-bottom:4px}
+.lead-card .lead-company{font-size:.72rem;color:var(--dim)}
+.lead-card .lead-score{font-size:.7rem;margin-top:6px;display:inline-block;padding:2px 8px;border-radius:10px}
+.score-high{background:var(--green-dim);color:var(--green)}
+.score-med{background:var(--orange-dim);color:var(--orange)}
+.score-low{background:var(--red-dim);color:var(--red)}
+
+/* ── Activity Log ──────────────────────────────────────────── */
+.activity-list{list-style:none}
+.activity-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.activity-item:last-child{border-bottom:none}
+.activity-item .a-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0}
+.a-icon.chat{background:var(--accent)22;color:var(--accent2)}
+.a-icon.book{background:var(--green-dim);color:var(--green)}
+.a-icon.qual{background:var(--orange-dim);color:var(--orange)}
+.a-icon.crm{background:var(--blue-dim);color:var(--blue)}
+.activity-item .a-text .a-time{color:var(--dim);font-size:.72rem;margin-left:8px}
+
+/* ── Charts (CSS-only) ─────────────────────────────────────── */
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:140px;padding-top:10px}
+.bar-chart .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar-chart .bar{width:100%;border-radius:4px 4px 0 0;transition:height .6s ease;min-height:4px}
+.bar-chart .bar-label{font-size:.65rem;color:var(--dim)}
+.bar-chart .bar-value{font-size:.65rem;color:var(--text);font-weight:600}
+
+.donut-chart{position:relative;width:120px;height:120px;margin:0 auto}
+.donut-chart svg{transform:rotate(-90deg)}
+.donut-chart .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.donut-center .d-val{font-size:1.4rem;font-weight:700}
+.donut-center .d-label{font-size:.65rem;color:var(--dim)}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media(max-width:1024px){
+  .chat-layout{grid-template-columns:1fr}
+  .chat-sidebar{display:none}
+  .pipeline{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .app{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .pipeline{grid-template-columns:1fr}
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ── Topbar ────────────────────────────────────────────── -->
+  <header class="topbar">
+    <h1><span class="icon">&#x1F916;</span> LeadBot AI <span class="badge badge-ai">AI-Powered</span></h1>
+    <div class="topbar-right">
+      <span class="badge badge-live">&#9679; Live</span>
+      <span style="color:var(--dim);font-size:.82rem">Admin Panel</span>
+    </div>
+  </header>
+
+  <!-- ── Sidebar ───────────────────────────────────────────── -->
+  <nav class="sidebar">
+    <div class="sidebar-section">
+      <h3>Main</h3>
+      <div class="nav-item active" data-view="dashboard">
+        <span class="nav-icon">&#x1F4CA;</span> Dashboard
+      </div>
+      <div class="nav-item" data-view="chat">
+        <span class="nav-icon">&#x1F4AC;</span> Live Chat
+        <span class="nav-badge">3</span>
+      </div>
+      <div class="nav-item" data-view="pipeline">
+        <span class="nav-icon">&#x1F4CB;</span> Pipeline
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <h3>Automation</h3>
+      <div class="nav-item" data-view="appointments">
+        <span class="nav-icon">&#x1F4C5;</span> Appointments
+      </div>
+      <div class="nav-item" data-view="crm">
+        <span class="nav-icon">&#x1F465;</span> CRM Notes
+      </div>
+      <div class="nav-item" data-view="activity">
+        <span class="nav-icon">&#x1F514;</span> Activity Log
+      </div>
+    </div>
+    <div style="margin-top:auto;padding:16px">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-size:.78rem;color:var(--dim)">
+        <div style="font-weight:600;color:var(--green);margin-bottom:4px">&#x26A1; Bot Status: Active</div>
+        <div>Avg response: 1.2s</div>
+        <div>Uptime: 99.8%</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Main Content ──────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- ── Dashboard ─────────────────────────────────────── -->
+    <div class="view active" id="view-dashboard">
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="label">Conversations Today</div>
+          <div class="value">47</div>
+          <div class="change up">&#x25B2; 12% vs yesterday</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Leads Qualified</div>
+          <div class="value">18</div>
+          <div class="change up">&#x25B2; 23% vs yesterday</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Appointments Booked</div>
+          <div class="value">9</div>
+          <div class="change up">&#x25B2; 8% vs yesterday</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Qualification Rate</div>
+          <div class="value">38%</div>
+          <div class="change down">&#x25BC; 2% vs yesterday</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Avg. Qual Time</div>
+          <div class="value">3.2m</div>
+          <div class="change up">&#x25B2; 15% faster</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">CRM Synced</div>
+          <div class="value">42</div>
+          <div class="change up">100% auto-synced</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px">
+        <div class="card">
+          <div class="card-header"><h2>Weekly Conversations</h2></div>
+          <div class="bar-chart" id="weeklyChart"></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>Lead Outcomes</h2></div>
+          <div style="padding:10px 0">
+            <div class="donut-chart">
+              <svg viewBox="0 0 120 120" width="120" height="120">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#2a2d3e" stroke-width="12"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#00cec9" stroke-width="12" stroke-dasharray="113 201" stroke-linecap="round"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#fdcb6e" stroke-width="12" stroke-dasharray="63 251" stroke-dashoffset="-113" stroke-linecap="round"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#ff7675" stroke-width="12" stroke-dasharray="38 276" stroke-dashoffset="-176" stroke-linecap="round"/>
+              </svg>
+              <div class="donut-center"><span class="d-val">68%</span><span class="d-label">Engaged</span></div>
+            </div>
+            <div style="display:flex;justify-content:center;gap:16px;margin-top:16px;font-size:.75rem">
+              <span><span class="status-dot qualified"></span>Qualified 36%</span>
+              <span><span class="status-dot in-progress"></span>In Progress 20%</span>
+              <span><span class="status-dot disqualified"></span>Dropped 12%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h2>Recent Leads</h2></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Company</th><th>Status</th><th>Score</th><th>Source</th><th>Last Action</th></tr></thead>
+            <tbody id="recentLeadsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Live Chat ─────────────────────────────────────── -->
+    <div class="view" id="view-chat">
+      <div class="chat-layout">
+        <div class="chat-panel">
+          <div class="chat-header">
+            <div class="avatar">AI</div>
+            <div class="info">
+              <div class="name">LeadBot AI Assistant</div>
+              <div class="status-text">&#9679; Online &mdash; qualifying leads</div>
+            </div>
+          </div>
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Type a message to simulate a lead..." autocomplete="off">
+            <button id="chatSend">&#x27A4;</button>
+          </div>
+        </div>
+        <div class="chat-sidebar">
+          <div class="qual-card">
+            <h3>Qualification Progress</h3>
+            <div id="qualSteps"></div>
+            <div class="score-bar" style="margin-top:14px">
+              <div class="score-label"><span>Lead Score</span><span id="scoreValue">0%</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="scoreFill" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div class="qual-card">
+            <h3>Available Booking Slots</h3>
+            <div class="slots-grid" id="slotsGrid"></div>
+          </div>
+          <div class="qual-card">
+            <h3>CRM Notes (Auto-generated)</h3>
+            <div id="crmNotes"><div class="crm-note" style="color:var(--dim);font-style:italic">Notes will appear as the conversation progresses...</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Pipeline ──────────────────────────────────────── -->
+    <div class="view" id="view-pipeline">
+      <div class="card">
+        <div class="card-header"><h2>Lead Pipeline</h2></div>
+      </div>
+      <div class="pipeline" id="pipelineBoard"></div>
+    </div>
+
+    <!-- ── Appointments ──────────────────────────────────── -->
+    <div class="view" id="view-appointments">
+      <div class="card">
+        <div class="card-header"><h2>Upcoming Appointments</h2></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Lead</th><th>Company</th><th>Date</th><th>Time</th><th>Type</th><th>Status</th></tr></thead>
+            <tbody id="appointmentsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CRM Notes ─────────────────────────────────────── -->
+    <div class="view" id="view-crm">
+      <div class="card">
+        <div class="card-header"><h2>CRM Handoff Notes</h2></div>
+        <div id="crmList"></div>
+      </div>
+    </div>
+
+    <!-- ── Activity Log ──────────────────────────────────── -->
+    <div class="view" id="view-activity">
+      <div class="card">
+        <div class="card-header"><h2>Activity Feed</h2></div>
+        <ul class="activity-list" id="activityLog"></ul>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   DATA
+   ══════════════════════════════════════════════════════════════ */
+const LEADS = [
+  {name:"Sarah Mitchell",company:"Apex Solutions",status:"qualified",score:92,source:"Website",action:"Appointment booked",email:"sarah@apex.co"},
+  {name:"James Park",company:"NovaTech Inc",status:"booked",score:87,source:"LinkedIn Ad",action:"Call scheduled",email:"james@novatech.io"},
+  {name:"Emma Rodriguez",company:"BrightPath LLC",status:"in-progress",score:64,source:"Google Ads",action:"Awaiting budget info",email:"emma@brightpath.com"},
+  {name:"Michael Chen",company:"CloudScale",status:"qualified",score:95,source:"Referral",action:"Demo booked",email:"mchen@cloudscale.dev"},
+  {name:"Lisa Thompson",company:"GreenLeaf Co",status:"in-progress",score:55,source:"Website",action:"Needs follow-up",email:"lisa@greenleaf.co"},
+  {name:"David Kim",company:"Quantum Digital",status:"disqualified",score:22,source:"Cold Email",action:"No budget",email:"dkim@quantum.io"},
+  {name:"Rachel Nguyen",company:"PeakView Analytics",status:"qualified",score:88,source:"Webinar",action:"Proposal sent",email:"rachel@peakview.ai"},
+  {name:"Tom Bradley",company:"Horizon Media",status:"booked",score:79,source:"LinkedIn Ad",action:"Appointment confirmed",email:"tom@horizon.media"},
+  {name:"Nina Patel",company:"SwiftOps",status:"in-progress",score:45,source:"Google Ads",action:"Chatbot engaged",email:"nina@swiftops.io"},
+  {name:"Alex Morgan",company:"TrueNorth SaaS",status:"disqualified",score:18,source:"Website",action:"Wrong fit",email:"alex@truenorth.com"},
+];
+
+const APPOINTMENTS = [
+  {lead:"Sarah Mitchell",company:"Apex Solutions",date:"Apr 18, 2026",time:"10:00 AM",type:"Discovery Call",status:"Confirmed"},
+  {lead:"James Park",company:"NovaTech Inc",date:"Apr 18, 2026",time:"2:30 PM",type:"Product Demo",status:"Confirmed"},
+  {lead:"Michael Chen",company:"CloudScale",date:"Apr 19, 2026",time:"11:00 AM",type:"Technical Demo",status:"Pending"},
+  {lead:"Tom Bradley",company:"Horizon Media",date:"Apr 19, 2026",time:"3:00 PM",type:"Discovery Call",status:"Confirmed"},
+  {lead:"Rachel Nguyen",company:"PeakView Analytics",date:"Apr 21, 2026",time:"9:30 AM",type:"Proposal Review",status:"Pending"},
+];
+
+const ACTIVITIES = [
+  {icon:"chat",text:"AI qualified <b>Sarah Mitchell</b> (Score: 92)",time:"2 min ago"},
+  {icon:"book",text:"Appointment booked: <b>James Park</b> — Product Demo",time:"8 min ago"},
+  {icon:"crm",text:"CRM note synced for <b>Emma Rodriguez</b>",time:"12 min ago"},
+  {icon:"qual",text:"<b>Michael Chen</b> moved to Qualified stage",time:"18 min ago"},
+  {icon:"chat",text:"New conversation started with <b>Nina Patel</b>",time:"25 min ago"},
+  {icon:"book",text:"Appointment confirmed: <b>Tom Bradley</b>",time:"31 min ago"},
+  {icon:"crm",text:"CRM handoff completed for <b>David Kim</b> (disqualified)",time:"40 min ago"},
+  {icon:"qual",text:"Lead score updated: <b>Lisa Thompson</b> 45 &#8594; 55",time:"52 min ago"},
+  {icon:"chat",text:"AI re-engaged <b>Rachel Nguyen</b> via follow-up",time:"1h ago"},
+  {icon:"book",text:"Appointment rescheduled: <b>Rachel Nguyen</b>",time:"1h ago"},
+];
+
+const CRM_NOTES = [
+  {lead:"Sarah Mitchell",company:"Apex Solutions",notes:"Decision maker. Budget approved ($50k-80k). Needs CRM + chatbot integration. Timeline: Q2 2026. Competitive eval with 2 other vendors. Key pain: manual lead follow-up taking 6 hours/week.",tags:["High Priority","Enterprise","CRM Integration"]},
+  {lead:"James Park",company:"NovaTech Inc",notes:"VP of Sales. Team of 15 reps. Current tool: HubSpot (unhappy with automation). Wants AI-powered lead routing + appointment setting. Budget: $30k-50k annual.",tags:["Mid-Market","HubSpot Migration","Sales Team"]},
+  {lead:"Michael Chen",company:"CloudScale",notes:"CTO. Technical buyer. Needs API-first solution. Current stack: Salesforce + custom scripts. Wants to reduce manual qualification from 20 min to under 2 min per lead. Budget pre-approved.",tags:["Technical Buyer","API Priority","Salesforce"]},
+  {lead:"Emma Rodriguez",company:"BrightPath LLC",notes:"Marketing Director. Exploring AI chatbot for website. Currently using Drift (basic plan). Needs: lead scoring, appointment booking, CRM sync. Budget discussion pending with CFO.",tags:["Marketing","Drift Replacement","Budget Pending"]},
+  {lead:"David Kim",company:"Quantum Digital",notes:"Disqualified: Annual revenue under $500k. No dedicated sales team. Looking for free/low-cost solution. Referred to self-serve resources.",tags:["Disqualified","No Budget","Self-Serve"]},
+];
+
+const QUAL_STEPS = [
+  {label:"Initial Contact",key:"contact"},
+  {label:"Company & Role",key:"company"},
+  {label:"Budget Range",key:"budget"},
+  {label:"Timeline & Urgency",key:"timeline"},
+  {label:"Decision Authority",key:"authority"},
+  {label:"Score & Route",key:"score"},
+];
+
+const SLOTS = [
+  {day:"Mon, Apr 20",time:"10:00 AM"},{day:"Mon, Apr 20",time:"2:00 PM"},
+  {day:"Tue, Apr 21",time:"9:30 AM"},{day:"Tue, Apr 21",time:"11:00 AM"},
+  {day:"Wed, Apr 22",time:"10:00 AM"},{day:"Wed, Apr 22",time:"3:30 PM"},
+];
+
+/* ══════════════════════════════════════════════════════════════
+   NAVIGATION
+   ══════════════════════════════════════════════════════════════ */
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + item.dataset.view).classList.add('active');
+  });
+});
+
+/* ══════════════════════════════════════════════════════════════
+   DASHBOARD RENDERS
+   ══════════════════════════════════════════════════════════════ */
+// Weekly bar chart
+const weekData = [{label:"Mon",value:32},{label:"Tue",value:45},{label:"Wed",value:38},{label:"Thu",value:52},{label:"Fri",value:47},{label:"Sat",value:19},{label:"Sun",value:14}];
+const maxVal = Math.max(...weekData.map(d=>d.value));
+document.getElementById('weeklyChart').innerHTML = weekData.map(d => {
+  const h = (d.value / maxVal) * 110;
+  return `<div class="bar-col"><div class="bar-value">${d.value}</div><div class="bar" style="height:${h}px;background:linear-gradient(180deg,var(--accent),var(--accent2))"></div><div class="bar-label">${d.label}</div></div>`;
+}).join('');
+
+// Recent leads table
+document.getElementById('recentLeadsTable').innerHTML = LEADS.slice(0,7).map(l => `
+  <tr>
+    <td style="font-weight:500">${l.name}</td>
+    <td style="color:var(--dim)">${l.company}</td>
+    <td><span class="status-dot ${l.status}"></span>${l.status.replace('-',' ').replace(/\b\w/g,c=>c.toUpperCase())}</td>
+    <td><span class="lead-score ${l.score>=75?'score-high':l.score>=40?'score-med':'score-low'}" style="padding:2px 8px;border-radius:10px;font-size:.75rem">${l.score}%</span></td>
+    <td style="color:var(--dim)">${l.source}</td>
+    <td style="color:var(--dim)">${l.action}</td>
+  </tr>
+`).join('');
+
+/* ══════════════════════════════════════════════════════════════
+   PIPELINE
+   ══════════════════════════════════════════════════════════════ */
+const stages = [
+  {name:"New Leads",leads:LEADS.filter(l=>l.status==='in-progress')},
+  {name:"Qualified",leads:LEADS.filter(l=>l.status==='qualified')},
+  {name:"Booked",leads:LEADS.filter(l=>l.status==='booked')},
+  {name:"Disqualified",leads:LEADS.filter(l=>l.status==='disqualified')},
+];
+document.getElementById('pipelineBoard').innerHTML = stages.map(s => `
+  <div class="pipeline-col">
+    <h3>${s.name} <span class="count">${s.leads.length}</span></h3>
+    ${s.leads.map(l => `
+      <div class="lead-card">
+        <div class="lead-name">${l.name}</div>
+        <div class="lead-company">${l.company}</div>
+        <div class="lead-score ${l.score>=75?'score-high':l.score>=40?'score-med':'score-low'}">${l.score}% score</div>
+      </div>
+    `).join('')}
+  </div>
+`).join('');
+
+/* ══════════════════════════════════════════════════════════════
+   APPOINTMENTS
+   ══════════════════════════════════════════════════════════════ */
+document.getElementById('appointmentsTable').innerHTML = APPOINTMENTS.map(a => `
+  <tr>
+    <td style="font-weight:500">${a.lead}</td>
+    <td style="color:var(--dim)">${a.company}</td>
+    <td>${a.date}</td>
+    <td>${a.time}</td>
+    <td><span class="badge" style="background:var(--blue-dim);color:var(--blue)">${a.type}</span></td>
+    <td><span class="badge" style="background:${a.status==='Confirmed'?'var(--green-dim)':'var(--orange-dim)'};color:${a.status==='Confirmed'?'var(--green)':'var(--orange)'}">${a.status}</span></td>
+  </tr>
+`).join('');
+
+/* ══════════════════════════════════════════════════════════════
+   CRM NOTES
+   ══════════════════════════════════════════════════════════════ */
+document.getElementById('crmList').innerHTML = CRM_NOTES.map(c => `
+  <div style="padding:16px 0;border-bottom:1px solid var(--border)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div><span style="font-weight:600">${c.lead}</span> <span style="color:var(--dim);font-size:.8rem">&mdash; ${c.company}</span></div>
+    </div>
+    <div class="crm-note">${c.notes}</div>
+    <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+      ${c.tags.map(t => `<span class="badge" style="background:var(--accent)18;color:var(--accent2);font-size:.7rem;padding:3px 8px;border-radius:6px">${t}</span>`).join('')}
+    </div>
+  </div>
+`).join('');
+
+/* ══════════════════════════════════════════════════════════════
+   ACTIVITY LOG
+   ══════════════════════════════════════════════════════════════ */
+document.getElementById('activityLog').innerHTML = ACTIVITIES.map(a => `
+  <li class="activity-item">
+    <div class="a-icon ${a.icon}">${{chat:'&#x1F4AC;',book:'&#x1F4C5;',qual:'&#x2B50;',crm:'&#x1F4BE;'}[a.icon]}</div>
+    <div class="a-text">${a.text}<span class="a-time">${a.time}</span></div>
+  </li>
+`).join('');
+
+/* ══════════════════════════════════════════════════════════════
+   CHAT SIMULATION
+   ══════════════════════════════════════════════════════════════ */
+// Qualification state
+let qualState = {step:0, score:0, notes:[], data:{}};
+
+// Render qual steps
+function renderQualSteps() {
+  document.getElementById('qualSteps').innerHTML = QUAL_STEPS.map((s, i) => {
+    let cls = i < qualState.step ? 'done' : i === qualState.step ? 'active' : '';
+    return `<div class="qual-step">
+      <div class="check ${cls}">${i < qualState.step ? '&#x2713;' : i === qualState.step ? '&#x25CF;' : ''}</div>
+      <div class="step-label ${cls}">${s.label}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('scoreValue').textContent = qualState.score + '%';
+  document.getElementById('scoreFill').style.width = qualState.score + '%';
+}
+
+// Render slots
+document.getElementById('slotsGrid').innerHTML = SLOTS.map((s, i) => `
+  <div class="slot-btn" data-slot="${i}">
+    <div class="day">${s.day}</div>
+    <div class="time">${s.time}</div>
+  </div>
+`).join('');
+
+document.querySelectorAll('.slot-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
+
+// Chat engine
+const chatEl = document.getElementById('chatMessages');
+const chatInput = document.getElementById('chatInput');
+
+function addMsg(text, type, delay) {
+  return new Promise(resolve => {
+    if (type === 'bot') {
+      const typing = document.createElement('div');
+      typing.className = 'msg bot';
+      typing.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+      chatEl.appendChild(typing);
+      chatEl.scrollTop = chatEl.scrollHeight;
+      setTimeout(() => {
+        typing.remove();
+        const msg = document.createElement('div');
+        msg.className = 'msg bot';
+        msg.textContent = text;
+        chatEl.appendChild(msg);
+        chatEl.scrollTop = chatEl.scrollHeight;
+        resolve();
+      }, delay || 1000);
+    } else {
+      const msg = document.createElement('div');
+      msg.className = 'msg user';
+      msg.textContent = text;
+      chatEl.appendChild(msg);
+      chatEl.scrollTop = chatEl.scrollHeight;
+      resolve();
+    }
+  });
+}
+
+function addCrmNote(text) {
+  qualState.notes.push(text);
+  const el = document.getElementById('crmNotes');
+  el.innerHTML = qualState.notes.map(n => `<div class="crm-note">${n}</div>`).join('');
+}
+
+function updateScore(val) {
+  qualState.score = Math.min(100, val);
+  renderQualSteps();
+}
+
+// Conversation flow
+const FLOW = [
+  {
+    bot: "Hi there! I'm the AI assistant for LeadBot. I'd love to learn about your needs and see if we can help. Could you start by telling me your name and company?",
+    match: /.+/,
+    onResponse: (input) => {
+      const parts = input.split(/,| at | from | - /);
+      qualState.data.name = parts[0]?.trim() || input;
+      qualState.data.company = parts[1]?.trim() || 'your company';
+      qualState.step = 1;
+      updateScore(15);
+      addCrmNote(`<b>Contact:</b> ${qualState.data.name} from ${qualState.data.company}`);
+    },
+    next: (input) => {
+      const name = qualState.data.name.split(' ')[0];
+      return `Great to meet you, ${name}! What's your role, and what's the main challenge you're looking to solve?`;
+    }
+  },
+  {
+    match: /.+/,
+    onResponse: (input) => {
+      qualState.data.role = input;
+      qualState.step = 2;
+      updateScore(30);
+      addCrmNote(`<b>Role & Need:</b> ${input}`);
+    },
+    next: () => "That's a great use case. To make sure we're a good fit — do you have a budget range in mind for this type of solution? (e.g., $10k-$25k, $25k-$50k, $50k+)"
+  },
+  {
+    match: /.+/,
+    onResponse: (input) => {
+      qualState.data.budget = input;
+      qualState.step = 3;
+      const high = /50k|\$50|100k|big|large|significant/i.test(input);
+      const mid = /25k|30k|20k|medium|moderate/i.test(input);
+      updateScore(high ? 65 : mid ? 55 : 42);
+      addCrmNote(`<b>Budget:</b> ${input}${high ? ' (High-value opportunity)' : ''}`);
+    },
+    next: () => "Thanks for sharing that. What's your timeline looking like? Are you looking to implement within the next month, quarter, or is this more exploratory?"
+  },
+  {
+    match: /.+/,
+    onResponse: (input) => {
+      qualState.data.timeline = input;
+      qualState.step = 4;
+      const urgent = /month|asap|week|urgent|soon|immediate/i.test(input);
+      updateScore(qualState.score + (urgent ? 20 : 10));
+      addCrmNote(`<b>Timeline:</b> ${input}${urgent ? ' (URGENT - fast track)' : ''}`);
+    },
+    next: () => "Almost there! Are you the decision-maker for this project, or is there someone else we'd need to include in the conversation?"
+  },
+  {
+    match: /.+/,
+    onResponse: (input) => {
+      qualState.data.authority = input;
+      qualState.step = 5;
+      const dm = /yes|i am|me|myself|decision.?maker|final say/i.test(input);
+      updateScore(Math.min(100, qualState.score + (dm ? 15 : 5)));
+      addCrmNote(`<b>Authority:</b> ${input}${dm ? ' (Confirmed decision-maker)' : ' (May need additional stakeholders)'}`);
+    },
+    next: () => {
+      qualState.step = 6;
+      renderQualSteps();
+      const score = qualState.score;
+      if (score >= 70) {
+        addCrmNote(`<b>&#x2705; QUALIFIED</b> — Score: ${score}%. Recommended: Schedule demo call immediately.`);
+        return `Excellent! Based on our conversation, you're a great fit for our solution (Lead Score: ${score}%). I'd love to get you scheduled for a personalized demo. I have availability this week — would any of the slots shown on the right work for you? Just pick one, or tell me your preference!`;
+      } else {
+        addCrmNote(`<b>&#x1F7E1; NURTURE</b> — Score: ${score}%. Add to email sequence and follow up in 2 weeks.`);
+        return `Thanks for sharing all of that! Based on what you've told me, I think there's potential here. I'll have our team send over some relevant case studies. Would you like to book a brief intro call to explore further?`;
+      }
+    }
+  },
+  {
+    match: /.+/,
+    onResponse: (input) => {
+      addCrmNote(`<b>Booking Response:</b> ${input}`);
+    },
+    next: () => {
+      const name = (qualState.data.name || 'there').split(' ')[0];
+      return `Perfect, ${name}! I've noted your preference. Our team will send a calendar invite with all the details shortly. You'll also receive a prep document ahead of the call. Thanks for chatting — we're excited to help ${qualState.data.company || 'your team'}! Have a great day!`;
+    },
+    final: true
+  }
+];
+
+let flowIndex = 0;
+let chatReady = true;
+
+async function handleUserInput(text) {
+  if (!text.trim() || !chatReady) return;
+  chatReady = false;
+  chatInput.value = '';
+
+  await addMsg(text, 'user');
+
+  const step = FLOW[flowIndex];
+  if (step && step.onResponse) step.onResponse(text);
+
+  const nextText = step?.next ? step.next(text) : null;
+  renderQualSteps();
+
+  if (nextText) {
+    await addMsg(nextText, 'bot', 1200);
+  }
+
+  if (step?.final) {
+    chatInput.disabled = true;
+    chatInput.placeholder = 'Conversation complete — lead qualified & routed to CRM';
+    return;
+  }
+
+  flowIndex++;
+
+  // Pre-populate next bot message if it exists and has a bot property
+  if (flowIndex < FLOW.length && FLOW[flowIndex].bot) {
+    // This case shouldn't happen after the first message
+  }
+
+  chatReady = true;
+}
+
+chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleUserInput(chatInput.value); });
+document.getElementById('chatSend').addEventListener('click', () => handleUserInput(chatInput.value));
+
+// Initial bot greeting
+renderQualSteps();
+setTimeout(() => {
+  addMsg(FLOW[0].bot, 'bot', 600);
+  flowIndex = 0;
+  chatReady = true;
+}, 400);
+
+/* ══════════════════════════════════════════════════════════════
+   ANIMATE METRICS ON LOAD
+   ══════════════════════════════════════════════════════════════ */
+document.querySelectorAll('.metric-card .value').forEach(el => {
+  const target = el.textContent;
+  const num = parseInt(target);
+  if (isNaN(num)) return;
+  const suffix = target.replace(/[\d.]/g, '');
+  let current = 0;
+  const step = Math.max(1, Math.floor(num / 30));
+  el.textContent = '0' + suffix;
+  const iv = setInterval(() => {
+    current += step;
+    if (current >= num) { current = num; clearInterval(iv); }
+    el.textContent = current + suffix;
+  }, 30);
+});
+</script>
+</body>
+</html>
