@@ -1,34 +1,21 @@
-# Upwork Job Demo Plan
+# Upwork Demo Plan — Janis
 
-## Goal
-Create focused demo assets for the most relevant Upwork jobs Janis wants to target.
+## Confirmed demos to build
 
-## Jobs discussed
-1. AI Automation / Chatbot / Workflow Project
-2. Full-Stack Developer for AI Chatbot Integration & Appointment Automation System
-3. WhatsApp Automation Platform Developer
-4. WhatsApp Business Monitoring & Action Alert System
-5. Appointment Setter (Automated Role)
-6. Automation of Quizzes for Marketing Campaigns
+1. Real Estate AI Agents — $10,000 Fixed
+- Demo: Seller/buyer lead intelligence dashboard with motivation scoring, CRM routing, follow-up suggestions.
 
-## Demo decision
-- Build demos for 1, 2, 3, 4
-- No dedicated demo needed for 5, 6 unless later requested
+2. WhatsApp Chatbot for Medical Clinic — $200 Fixed
+- Demo: WhatsApp clinic booking bot with patient flow, appointment booking, CRM sync mock.
 
-## Demo concepts
-### demo-01-ai-workflow
-A premium AI automation dashboard showing chatbot/workflow orchestration, leads, automations, and case-study style presentation.
+3. Optimum Intelligence WhatsApp/Booking Automation — $300 Fixed
+- Demo: WhatsApp customer service + booking automation system with admin dashboard.
 
-### demo-02-chatbot-appointment
-A lead qualification + appointment booking demo with chat UI, qualification logic, booking flow, CRM notes, and admin overview.
+4. Tesla Parts Sniper Automation — $350 Fixed
+- Demo: Parts monitoring dashboard with listing scanner, smart match scoring, SMS/email alerts.
 
-### demo-03-whatsapp-platform
-A WhatsApp-style automation operations panel showing inbox, automation flows, lead stages, integrations, and campaign controls.
+5. Golf Affiliate TikTok/Instagram Automation — $500 Fixed
+- Demo: AI content calendar + hooks/captions + affiliate link tracking + posting workflow.
 
-### demo-04-whatsapp-alerts
-A monitoring and action alert demo that turns incoming WhatsApp threads into action items, alerts, priorities, and escalation queues.
-
-## Output preference
-- Visual, credible, sales-usable demos
-- Good enough to show as proof/case-study style artifacts
-- Built with Claude Code
+## Rule
+Do not submit proposals automatically. Janis decides which demos/proposals to use.
