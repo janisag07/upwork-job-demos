@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Make.com + Mailchimp Daily Email Automation Demo</title>
+  <style>
+    :root{--bg:#07111f;--card:#0e1b2f;--card2:#11243e;--text:#eef6ff;--muted:#99acc6;--line:rgba(255,255,255,.11);--accent:#58d68d;--accent2:#56ccf2;--warn:#ffd166;}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 20% 0%,#17325c 0,#07111f 38%,#050a12 100%);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text)}
+    .wrap{width:min(1180px,92vw);margin:0 auto;padding:38px 0 50px}.hero{display:grid;grid-template-columns:1.04fr .96fr;gap:24px;align-items:stretch}.pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:rgba(88,214,141,.1);color:#bcffd5;border-radius:999px;padding:8px 12px;font-weight:700;font-size:13px}h1{font-size:clamp(36px,5.2vw,68px);line-height:.94;margin:18px 0 16px;letter-spacing:-2.2px}.lead{font-size:18px;line-height:1.65;color:var(--muted);max-width:680px}.disclaimer{margin:18px 0 0;padding:10px 12px;border:1px solid rgba(255,209,102,.35);border-radius:14px;background:rgba(255,209,102,.08);color:#ffe9ad;font-size:13px;line-height:1.45}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.btn{padding:13px 16px;border-radius:14px;text-decoration:none;font-weight:800;color:#04101a;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 14px 35px rgba(86,204,242,.17)}.btn.secondary{color:var(--text);background:rgba(255,255,255,.08);border:1px solid var(--line);box-shadow:none}.panel{background:linear-gradient(180deg,rgba(17,36,62,.94),rgba(9,18,33,.94));border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 24px 80px rgba(0,0,0,.38)}.topbar{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:16px}.dots{display:flex;gap:7px}.dot{width:10px;height:10px;border-radius:50%;background:#ff5f57}.dot:nth-child(2){background:#ffbd2e}.dot:nth-child(3){background:#28c840}.status{font-weight:800;color:#bcffd5;font-size:13px}.flow{display:grid;gap:12px}.step{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.045)}.ico{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:rgba(86,204,242,.14);font-weight:900;color:#9ce7ff}.step h3{margin:0;font-size:15px}.step p{margin:4px 0 0;color:var(--muted);font-size:13px}.badge{font-size:12px;color:#bcffd5;background:rgba(88,214,141,.12);border:1px solid rgba(88,214,141,.2);border-radius:999px;padding:7px 9px;font-weight:800}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}.metric,.card{border:1px solid var(--line);background:rgba(255,255,255,.045);border-radius:22px;padding:18px}.metric b{display:block;font-size:28px;letter-spacing:-1px}.metric span,.card p{color:var(--muted);font-size:14px;line-height:1.55}.section{margin-top:24px}.section h2{font-size:30px;letter-spacing:-1px;margin:0 0 14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card h3{margin:0 0 8px;font-size:17px}.log{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#050a12;border:1px solid var(--line);border-radius:22px;padding:16px;color:#c7d7ee;font-size:13px;line-height:1.8;overflow:auto}.green{color:#76ffad}.blue{color:#8be7ff}.yellow{color:#ffe083}@media(max-width:880px){.hero,.grid,.cards{grid-template-columns:1fr}h1{letter-spacing:-1px}.step{grid-template-columns:38px 1fr}.badge{display:none}.actions{flex-direction:column}.btn{text-align:center}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <span class="pill">⚡ Quick-turnaround Make.com + Mailchimp build</span>
+        <h1>Daily email automation that can be picked up fast and delivered cleanly.</h1>
+        <p class="lead">A focused Make.com scenario for scheduled daily Mailchimp email delivery, API connection handling, failure alerts, and a short handover walkthrough — built for a client who needs someone reliable to step in immediately.</p>
+        <div class="disclaimer"><strong>Disclaimer:</strong> All displayed data, names, messages, and metrics are fictional and shown for visual demonstration purposes only.</div>
+        <div class="actions"><a class="btn" href="#workflow">View workflow</a><a class="btn secondary" href="#handoff">See handoff plan</a></div>
+      </div>
+      <div class="panel">
+        <div class="topbar"><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="status">Scenario: Ready for QA</div></div>
+        <div class="flow" id="workflow">
+          <div class="step"><div class="ico">1</div><div><h3>Daily scheduler trigger</h3><p>Runs every morning at the chosen send time with timezone-safe scheduling.</p></div><span class="badge">Make.com</span></div>
+          <div class="step"><div class="ico">2</div><div><h3>Mailchimp campaign/template lookup</h3><p>Connects to Mailchimp API and selects the approved email/template.</p></div><span class="badge">API</span></div>
+          <div class="step"><div class="ico">3</div><div><h3>Audience + send validation</h3><p>Checks required fields before send to avoid silent failed campaigns.</p></div><span class="badge">Guardrails</span></div>
+          <div class="step"><div class="ico">4</div><div><h3>Daily send + logging</h3><p>Sends or schedules the campaign and writes run status to a simple log.</p></div><span class="badge">Mailchimp</span></div>
+          <div class="step"><div class="ico">5</div><div><h3>Error alerts</h3><p>If API auth, template, audience, or send fails, the owner gets notified fast.</p></div><span class="badge">Monitoring</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="metric"><b>2–3d</b><span>Realistic turnaround for a clean first version after access is provided.</span></div>
+      <div class="metric"><b>1</b><span>Focused single-session scope: daily scheduled email automation.</span></div>
+      <div class="metric"><b>API</b><span>Mailchimp API connection with basic validation and failure handling.</span></div>
+      <div class="metric"><b>Loom</b><span>Short walkthrough so the client knows exactly what was built.</span></div>
+    </section>
+
+    <section class="section cards" id="handoff">
+      <div class="card"><h3>Fast takeover</h3><p>Designed for situations where a prior contractor disappeared: inspect current setup, confirm the exact daily send behavior, then rebuild or finish the scenario without dragging the client into unnecessary discovery.</p></div>
+      <div class="card"><h3>Clean Make.com structure</h3><p>Readable module naming, clear filters, error routes, and minimal complexity so the automation is easy to maintain or extend later.</p></div>
+      <div class="card"><h3>Repeat-work ready</h3><p>Once this first automation is stable, the same approach can extend into campaign reporting, segmentation, CRM syncs, and additional marketing workflows.</p></div>
+    </section>
+
+    <section class="section">
+      <h2>Example run log</h2>
+      <div class="log">
+        <span class="blue">07:55</span> Scheduler triggered daily email scenario<br>
+        <span class="blue">07:55</span> Mailchimp API auth verified<br>
+        <span class="blue">07:56</span> Template <span class="yellow">Daily Newsletter</span> loaded successfully<br>
+        <span class="blue">07:56</span> Audience validation passed: list selected, sender configured<br>
+        <span class="green">07:57</span> Campaign sent/scheduled successfully<br>
+        <span class="green">07:57</span> Run status logged + owner confirmation sent
+      </div>
+    </section>
+  </main>
+</body>
+</html>
