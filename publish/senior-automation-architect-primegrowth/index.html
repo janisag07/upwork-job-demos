@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PrimeGrowth Lead Intake Architecture Demo</title>
+  <meta name="description" content="GHL + n8n + ManyChat + Vercel architecture demo for contractor automation lead intake." />
+  <style>
+    :root{--bg:#070b12;--panel:#0d1422;--panel2:#101a2b;--line:#24324a;--text:#edf4ff;--muted:#9cafc8;--blue:#5fe0ff;--green:#7dffb2;--purple:#b491ff;--orange:#ffba6a;--red:#ff7b8a;--shadow:0 24px 90px rgba(0,0,0,.42)}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(circle at 16% -5%,rgba(95,224,255,.25),transparent 32%),radial-gradient(circle at 92% 4%,rgba(180,145,255,.25),transparent 30%),linear-gradient(180deg,#070b12,#090e18 42%,#06080d);color:var(--text);line-height:1.45} 
+    .wrap{width:min(1180px,calc(100% - 28px));margin:auto}.hero{padding:54px 0 28px}.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:38px}.brand{display:flex;gap:12px;align-items:center;font-weight:800}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 0 32px rgba(95,224,255,.28)}.pill{border:1px solid var(--line);background:rgba(16,26,43,.72);padding:8px 12px;border-radius:999px;color:var(--muted);font-size:13px}.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:24px;align-items:stretch}.card{background:linear-gradient(180deg,rgba(16,26,43,.92),rgba(9,14,24,.94));border:1px solid rgba(130,161,207,.22);border-radius:28px;box-shadow:var(--shadow);overflow:hidden}.hero-card{padding:34px}h1{font-size:clamp(34px,5vw,62px);letter-spacing:-.06em;line-height:.98;margin:0 0 18px}.sub{font-size:18px;color:#bed0e8;max-width:760px}.disclaimer{display:inline-flex;margin:18px 0 4px;padding:9px 12px;border:1px solid rgba(255,186,106,.35);background:rgba(255,186,106,.08);border-radius:14px;color:#ffd9aa;font-size:13px}.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.btn{padding:12px 16px;border-radius:14px;border:1px solid rgba(95,224,255,.45);background:rgba(95,224,255,.12);color:var(--text);font-weight:800;text-decoration:none}.btn.secondary{border-color:var(--line);background:rgba(255,255,255,.04);color:#cbd8ec}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}.stat{padding:15px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid var(--line)}.stat b{display:block;font-size:25px;color:var(--blue)}.right-demo{padding:20px}.phone{height:100%;min-height:510px;border-radius:24px;background:#05080e;border:1px solid #263650;padding:16px;display:flex;flex-direction:column;gap:12px}.screen-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.lead-card{padding:14px;border-radius:18px;background:linear-gradient(135deg,#111b2c,#0b1220);border:1px solid #253754}.lead-row{display:flex;justify-content:space-between;gap:10px}.tag{font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(125,255,178,.11);border:1px solid rgba(125,255,178,.22);color:var(--green)}.event{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;color:#cbd8ec}.dot{width:28px;height:28px;border-radius:10px;background:rgba(95,224,255,.12);border:1px solid rgba(95,224,255,.34);display:grid;place-items:center;color:var(--blue);font-weight:900}.progress{height:9px;background:#142033;border-radius:999px;overflow:hidden}.progress span{display:block;height:100%;width:78%;background:linear-gradient(90deg,var(--blue),var(--green))}.section{padding:34px 0}.section h2{font-size:clamp(26px,3.4vw,42px);letter-spacing:-.045em;margin:0 0 12px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.module{padding:22px;border-radius:24px;background:rgba(16,26,43,.72);border:1px solid var(--line)}.module h3{margin:0 0 10px}.module ul{margin:0;padding-left:18px;color:#c6d5e9}.flow{position:relative;padding:24px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.node{padding:16px;border-radius:18px;background:#0e1727;border:1px solid #2b3c5a;text-align:center;min-height:118px}.node strong{display:block;margin-bottom:8px}.arrow{display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:28px}.table{width:100%;border-collapse:separate;border-spacing:0 10px}.table td,.table th{padding:14px;text-align:left;background:rgba(16,26,43,.72);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.table th{color:var(--blue);font-size:13px;text-transform:uppercase;letter-spacing:.08em}.table td:first-child,.table th:first-child{border-left:1px solid var(--line);border-radius:14px 0 0 14px}.table td:last-child,.table th:last-child{border-right:1px solid var(--line);border-radius:0 14px 14px 0}.logic{display:grid;grid-template-columns:1fr 1fr;gap:16px}.code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#05080e;border:1px solid #24324a;border-radius:22px;padding:20px;color:#cfe7ff;overflow:auto}.small{font-size:13px}.footer{padding:40px 0 60px;color:var(--muted);text-align:center}@media(max-width:900px){.hero-grid,.grid,.logic{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.stats{grid-template-columns:1fr}.hero-card{padding:24px}.phone{min-height:auto}}
+  </style>
+</head>
+<body>
+  <header class="hero wrap">
+    <div class="nav"><div class="brand"><div class="logo"></div><div>PrimeGrowth Architecture Demo<br><span class="muted small">GHL · n8n · ManyChat · Vercel</span></div></div><div class="pill">Prepared by Janis Agic</div></div>
+    <div class="hero-grid">
+      <div class="card hero-card">
+        <div class="pill" style="display:inline-flex;margin-bottom:18px">Senior Automation Architect Vetting Test</div>
+        <h1>Lead intake system architecture for 6 contractor entry points.</h1>
+        <p class="sub">A technical partner view of how Meta Ads, ManyChat, Vercel forms, calculators, applications and direct bookings can flow into GoHighLevel with n8n normalization, duplicate prevention, tags, custom fields, bot assignment and nurture workflows.</p>
+        <div class="disclaimer">Fictional sample data shown for demonstration only. This is a visual architecture demo, not connected to live client systems.</div>
+        <div class="cta-row"><a class="btn" href="#architecture">View architecture</a><a class="btn secondary" href="#duplicate">Duplicate prevention logic</a><a class="btn secondary" href="#ghl">GHL fields & tags</a></div>
+        <div class="stats"><div class="stat"><b>6</b><span>Lead entry points</span></div><div class="stat"><b>1</b><span>Normalized CRM source of truth</span></div><div class="stat"><b>3–5m</b><span>Loom-ready walkthrough structure</span></div></div>
+      </div>
+      <div class="card right-demo">
+        <div class="phone">
+          <div class="screen-top"><span>Live intake monitor</span><span>07:58 AM</span></div>
+          <div class="lead-card"><div class="lead-row"><strong>Marc Tremblay</strong><span class="tag">New Roofing Lead</span></div><p class="muted small">Source: Instagram DM → ManyChat · City: Laval · Project: Roof replacement · Budget: $15k+</p><div class="progress"><span></span></div></div>
+          <div class="event"><div class="dot">1</div><div><strong>ManyChat collects lead intent</strong><br><span class="muted small">IG keyword, trade type, service area, urgency, contact consent.</span></div></div>
+          <div class="event"><div class="dot">2</div><div><strong>n8n validates + normalizes payload</strong><br><span class="muted small">Phone/email cleanup, UTM preservation, source priority, duplicate lookup.</span></div></div>
+          <div class="event"><div class="dot">3</div><div><strong>GHL contact is created or updated</strong><br><span class="muted small">Tags, custom fields, pipeline stage, bot owner and nurture workflow assigned.</span></div></div>
+          <div class="event"><div class="dot">4</div><div><strong>Booking / nurture path starts</strong><br><span class="muted small">Conversation AI, SMS/email follow-up, calendar routing and contractor handoff.</span></div></div>
+          <div class="lead-card"><div class="lead-row"><strong>Duplicate check</strong><span class="tag" style="color:var(--orange);border-color:rgba(255,186,106,.35);background:rgba(255,186,106,.1)">Merged</span></div><p class="muted small">Same phone from website form 2 hours later → update existing GHL contact, do not create a second opportunity.</p></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="section" id="architecture">
+      <h2>System architecture</h2><p class="muted">Recommended split: entry channels capture context, n8n owns validation/routing, GHL owns CRM, workflows, pipeline and conversations.</p>
+      <div class="card flow">
+        <div class="node"><strong>Entry points</strong><span class="muted small">Meta Ads, IG/FB DM, website forms, calculator, apply page, booking.</span></div><div class="arrow">→</div>
+        <div class="node"><strong>n8n intake layer</strong><span class="muted small">Webhook per source, schema normalization, validation, duplicate lookup, routing.</span></div><div class="arrow">→</div>
+        <div class="node"><strong>GoHighLevel</strong><span class="muted small">Contact, opportunity, tags, custom fields, bot assignment, calendar, nurture.</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+        <div class="module"><h3>ManyChat path</h3><ul><li>Trigger from IG/FB DM keyword or ad comment.</li><li>Collect name, phone/email, trade, city, urgency.</li><li>Send payload to n8n webhook with source metadata.</li></ul></div>
+        <div class="module"><h3>Vercel website path</h3><ul><li>React forms submit to environment-based endpoint.</li><li>UTM, page path and calculator results are included.</li><li>GitHub PR updates endpoint safely before Vercel deploy.</li></ul></div>
+        <div class="module"><h3>GHL workflow path</h3><ul><li>Contact create/update + opportunity creation.</li><li>Tags assign source, service type, intent and language.</li><li>Conversation AI or nurture workflow starts by route.</li></ul></div>
+      </div>
+    </section>
+
+    <section class="section logic" id="duplicate">
+      <div><h2>Duplicate prevention logic</h2><p class="muted">The system should never blindly create a new contact. n8n should first search GHL by normalized phone, then email, then fallback match rules. If found, update the existing contact and append source history instead of overwriting important attribution.</p>
+        <table class="table"><tr><th>Check</th><th>Action</th></tr><tr><td>Phone exact match</td><td>Update existing contact, add latest source tag, append note.</td></tr><tr><td>Email exact match</td><td>Update if phone missing or confirm as same lead.</td></tr><tr><td>Name + city + recent timestamp</td><td>Flag for review or soft-merge to avoid false positives.</td></tr><tr><td>Existing open opportunity</td><td>Do not create another opportunity. Move/update stage if needed.</td></tr></table>
+      </div>
+      <pre class="code small">incoming = normalize(payload)
+contact = ghl.find_by_phone(incoming.phone)
+       or ghl.find_by_email(incoming.email)
+
+if contact:
+    ghl.update_contact(contact.id, incoming.fields)
+    ghl.add_tags(contact.id, incoming.tags + ["source-history-updated"])
+    ghl.add_note(contact.id, f"New touchpoint: {incoming.source}")
+    opportunity = ghl.find_open_opportunity(contact.id)
+    if not opportunity:
+        ghl.create_opportunity(contact.id, pipeline_stage="New Lead")
+else:
+    contact = ghl.create_contact(incoming.fields)
+    ghl.create_opportunity(contact.id, pipeline_stage="New Lead")</pre>
+    </section>
+
+    <section class="section" id="ghl">
+      <h2>GHL custom fields and tags</h2>
+      <table class="table"><tr><th>Type</th><th>Recommended items</th><th>Reason</th></tr>
+        <tr><td>Custom Fields</td><td>Lead Source Detail, Entry Point, Trade Type, Service Area, Project Type, Urgency, Budget Range, Preferred Language, Calculator Result, UTM Source, UTM Campaign, Last Touchpoint, Duplicate Confidence</td><td>Keeps routing and reporting clean across six entry points.</td></tr>
+        <tr><td>Tags</td><td>source_meta_ad, source_manychat, source_website_form, source_calculator, source_apply_page, source_booking, trade_roofing, trade_hvac, trade_plumbing, urgent_24h, nurture_estimate, bot_qualified, duplicate_checked</td><td>Fast segmentation for workflows, reporting and bot assignment.</td></tr>
+        <tr><td>Pipeline Stages</td><td>New Lead, Bot Qualifying, Needs Manual Review, Booked Call, Estimate Sent, Won, Lost, Nurture</td><td>Clear operational view for agency and contractor clients.</td></tr>
+      </table>
+    </section>
+
+    <section class="section logic">
+      <div class="module"><h3>React / Vercel endpoint update</h3><ol class="muted"><li>Locate the form submit handler or API route.</li><li>Move webhook URL into an environment variable like <b>NEXT_PUBLIC_LEAD_WEBHOOK_URL</b> or server-side secret.</li><li>Create a GitHub branch, update code, test locally, commit with a clear message.</li><li>Open PR or merge to main, let Vercel deploy automatically, verify the deployment URL.</li><li>Submit test lead and confirm n8n execution + GHL contact update.</li></ol></div>
+      <div class="module"><h3>Loom walkthrough outline</h3><ol class="muted"><li>30 sec: restate the business problem and system goal.</li><li>90 sec: walk through the architecture diagram and six lead sources.</li><li>60 sec: explain duplicate prevention and GHL tagging strategy.</li><li>45 sec: explain React/GitHub/Vercel deploy process.</li><li>30 sec: propose first-build execution plan and timeline.</li></ol></div>
+    </section>
+  </main>
+  <footer class="footer wrap">Built as a client-facing architecture preview by Janis Agic · ready to adapt into the actual Loom vetting deliverable.</footer>
+</body>
+</html>
