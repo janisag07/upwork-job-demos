@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meta + WhatsApp API Readiness Workbench</title>
+  <style>
+    :root{--bg:#07111f;--panel:#0e1b2e;--panel2:#111f35;--text:#eaf2ff;--muted:#91a4bf;--green:#36d399;--blue:#60a5fa;--amber:#fbbf24;--red:#fb7185;--line:rgba(255,255,255,.10)}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(circle at top left,#12345c 0,#07111f 38%,#040913 100%);color:var(--text)}
+    .wrap{max-width:1180px;margin:0 auto;padding:34px 18px 56px}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch}.card{background:linear-gradient(180deg,rgba(17,31,53,.94),rgba(10,20,35,.94));border:1px solid var(--line);border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.28)}
+    .hero-main{padding:34px}.eyebrow{color:var(--green);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:12px}h1{font-size:44px;line-height:1.02;margin:14px 0 14px}p{color:var(--muted);line-height:1.62}.disclaimer{display:inline-block;margin:12px 0 4px;padding:10px 12px;border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.09);color:#fde68a;border-radius:14px;font-size:13px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.btn{padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:#182a46;color:#fff;font-weight:800}.btn.primary{background:linear-gradient(135deg,#22c55e,#2563eb);border:0}.side{padding:24px;display:grid;gap:14px}.metric{padding:18px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid var(--line)}.metric b{font-size:26px;display:block}.metric span{color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}.section{margin-top:26px;padding:24px}.section h2{margin:0 0 16px;font-size:25px}.checklist{display:grid;gap:12px}.row{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:14px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.dot{width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(54,211,153,.12)}.dot.warn{background:var(--amber);box-shadow:0 0 0 5px rgba(251,191,36,.12)}.dot.red{background:var(--red);box-shadow:0 0 0 5px rgba(251,113,133,.12)}.tag{font-size:12px;font-weight:800;padding:7px 10px;border-radius:999px;background:rgba(96,165,250,.12);color:#bfdbfe;border:1px solid rgba(96,165,250,.24);white-space:nowrap}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{padding:18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.step strong{display:block;margin-bottom:7px}.mini{font-size:13px;color:var(--muted)}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#050b14;border:1px solid var(--line);border-radius:16px;padding:16px;color:#b7f7d0;overflow:auto}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.table{width:100%;border-collapse:separate;border-spacing:0 10px}.table td{padding:12px;background:rgba(255,255,255,.04);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.table td:first-child{border-left:1px solid var(--line);border-radius:14px 0 0 14px;color:#cbd5e1}.table td:last-child{border-right:1px solid var(--line);border-radius:0 14px 14px 0;text-align:right;font-weight:800}.footer{margin-top:24px;text-align:center;color:var(--muted);font-size:13px}@media(max-width:850px){.hero,.grid,.flow,.two{grid-template-columns:1fr}h1{font-size:33px}.row{grid-template-columns:24px 1fr}.tag{grid-column:2;text-align:left}.wrap{padding:20px 12px 36px}.hero-main{padding:24px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-main card">
+        <div class="eyebrow">WhatsApp Business API + Meta Verification</div>
+        <h1>SaaS launch readiness workbench for Meta + WhatsApp API setup.</h1>
+        <p>A practical audit-and-implementation dashboard for checking Business Manager readiness, WhatsApp Cloud API configuration, webhook health, template status, phone number setup, and launch blockers before going live.</p>
+        <div class="disclaimer">Demo data is fictional. Final Meta approval depends on the client’s documents, Business Manager, phone number, and Meta’s review process.</div>
+        <div class="actions"><div class="btn primary">Audit → Fix → Test → Handoff</div><div class="btn">Built for lean SaaS teams</div></div>
+      </div>
+      <div class="side card">
+        <div class="metric"><b>24–48h</b><span>Typical first audit + implementation plan</span></div>
+        <div class="metric"><b>6</b><span>Critical readiness areas checked</span></div>
+        <div class="metric"><b>0</b><span>Approval guarantees — dependencies are made explicit</span></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card section"><h2>Business Manager</h2><p>Confirm business info, domain, permissions, app access, WABA ownership, and verification requirements.</p></div>
+      <div class="card section"><h2>WhatsApp API</h2><p>Configure Cloud API, phone number, webhooks, tokens, test messages, and message template flow.</p></div>
+      <div class="card section"><h2>SaaS handoff</h2><p>Give the team a clear checklist, next actions, and what must be supplied for Meta’s review.</p></div>
+    </section>
+
+    <section class="card section">
+      <h2>Readiness checklist</h2>
+      <div class="checklist">
+        <div class="row"><div class="dot"></div><div><strong>Business Manager access verified</strong><div class="mini">Admin access, business info, company documents, domain and app permissions confirmed.</div></div><div class="tag">Ready</div></div>
+        <div class="row"><div class="dot warn"></div><div><strong>Business verification dependency</strong><div class="mini">Can guide and prepare, but final approval depends on Meta and client-provided documents.</div></div><div class="tag">Client + Meta</div></div>
+        <div class="row"><div class="dot"></div><div><strong>Cloud API credentials checked</strong><div class="mini">App ID, WABA ID, phone number ID, token scopes and token expiry documented.</div></div><div class="tag">Technical</div></div>
+        <div class="row"><div class="dot"></div><div><strong>Webhook test path</strong><div class="mini">Verify endpoint, challenge response, message receipt, event logging and retry behavior.</div></div><div class="tag">Testable</div></div>
+        <div class="row"><div class="dot warn"></div><div><strong>Message templates</strong><div class="mini">Draft utility/authentication templates, submit for approval, track status and fallback copy.</div></div><div class="tag">Review needed</div></div>
+        <div class="row"><div class="dot red"></div><div><strong>Blocked items surfaced early</strong><div class="mini">Missing documents, wrong ownership, unverified business, wrong phone number, missing admin rights.</div></div><div class="tag">Blocker log</div></div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Lean execution flow</h2>
+      <div class="flow">
+        <div class="step"><strong>1. Access audit</strong><div class="mini">Confirm what is already configured and what is missing.</div></div>
+        <div class="step"><strong>2. API setup</strong><div class="mini">Tokens, IDs, webhook, test recipient, first message tests.</div></div>
+        <div class="step"><strong>3. Verification guide</strong><div class="mini">Prepare documents and exact next actions for Meta review.</div></div>
+        <div class="step"><strong>4. Handoff</strong><div class="mini">Checklist, screenshots, credentials map, and next-step notes.</div></div>
+      </div>
+    </section>
+
+    <section class="two">
+      <div class="card section">
+        <h2>Webhook test example</h2>
+        <div class="code">POST /webhooks/whatsapp
+status: received
+phone_number_id: 123456789
+message_type: text
+action: route_to_saas_inbox
+log: saved + acknowledged</div>
+      </div>
+      <div class="card section">
+        <h2>Scope boundaries</h2>
+        <table class="table"><tr><td>Can implement</td><td>API/webhooks/setup/tests</td></tr><tr><td>Can guide</td><td>Business verification</td></tr><tr><td>Cannot guarantee</td><td>Meta approval decision</td></tr><tr><td>Best first milestone</td><td>Audit + working test flow</td></tr></table>
+      </div>
+    </section>
+    <div class="footer">Prepared as a focused proof-of-understanding for a SaaS WhatsApp API / Meta Business Verification project.</div>
+  </main>
+</body>
+</html>
