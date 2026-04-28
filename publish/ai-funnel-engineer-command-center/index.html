@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Funnel Reliability Command Center</title>
+  <style>
+    :root{--bg:#07110d;--panel:#0d1b16;--panel2:#10251e;--line:#1c3a30;--green:#20e58b;--mint:#9ff8cf;--text:#ecfff6;--muted:#9ebcaf;--amber:#ffca6b;--red:#ff6b7d;--blue:#6bb7ff;--purple:#c99cff;--shadow:0 20px 70px rgba(0,0,0,.35)}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 12% -10%,rgba(32,229,139,.22),transparent 35%),radial-gradient(circle at 88% 8%,rgba(107,183,255,.14),transparent 32%),linear-gradient(180deg,#06100c,#091611 45%,#06100c);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text)}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 18px 60px}.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}.brand{display:flex;gap:12px;align-items:center;font-weight:800;letter-spacing:.2px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--green),#2a8cff);box-shadow:0 0 35px rgba(32,229,139,.35);display:grid;place-items:center;color:#05100b;font-weight:900}.pill{border:1px solid var(--line);background:rgba(13,27,22,.72);padding:9px 12px;border-radius:999px;color:var(--muted);font-size:13px}.hero{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;align-items:stretch}.card{background:linear-gradient(180deg,rgba(16,37,30,.92),rgba(9,20,16,.92));border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:24px}.hero h1{font-size:clamp(32px,5vw,64px);line-height:.96;margin:8px 0 16px;letter-spacing:-2.2px}.lead{font-size:18px;line-height:1.55;color:#c9e8dc;margin:0 0 18px}.disclaimer{display:inline-flex;gap:8px;align-items:flex-start;color:#b7d9ca;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);padding:10px 12px;border-radius:14px;font-size:12.5px;line-height:1.35;margin:0 0 18px}.cta{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:14px;padding:12px 14px;font-weight:800;color:#06100c;background:var(--green);box-shadow:0 10px 30px rgba(32,229,139,.18)}.btn.secondary{background:transparent;color:var(--mint);border:1px solid var(--line);box-shadow:none}.metricGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.metric{padding:16px;border-radius:20px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.metric b{display:block;font-size:28px;letter-spacing:-.8px}.metric span{display:block;color:var(--muted);font-size:13px;margin-top:4px}.ok{color:var(--green)}.warn{color:var(--amber)}.bad{color:var(--red)}.section{margin-top:18px}.section h2{font-size:28px;letter-spacing:-.8px;margin:0 0 12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px}.node{position:relative;min-height:132px;padding:15px;border-radius:18px;background:rgba(255,255,255,.043);border:1px solid rgba(255,255,255,.08);overflow:hidden}.node:after{content:"";position:absolute;right:-15px;top:48%;width:30px;height:2px;background:var(--green);box-shadow:0 0 18px var(--green)}.node:last-child:after{display:none}.node small{color:var(--muted);font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.8px}.node b{display:block;margin:7px 0;font-size:15px}.node p{margin:0;color:#b9d4c8;font-size:12.5px;line-height:1.35}.tag{display:inline-flex;margin-top:9px;padding:5px 8px;border-radius:999px;background:rgba(32,229,139,.12);color:var(--mint);font-size:11px;border:1px solid rgba(32,229,139,.25)}.panelTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.selects{display:flex;gap:10px;flex-wrap:wrap}.selects label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:6px}.selects select{background:#07120e;border:1px solid var(--line);color:var(--text);border-radius:12px;padding:9px;outline:none}.table{width:100%;border-collapse:separate;border-spacing:0 8px}.table th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.7px;font-weight:800;padding:0 10px}.table td{background:rgba(255,255,255,.045);padding:12px 10px;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);font-size:13px}.table td:first-child{border-left:1px solid rgba(255,255,255,.07);border-radius:13px 0 0 13px}.table td:last-child{border-right:1px solid rgba(255,255,255,.07);border-radius:0 13px 13px 0}.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:8px;background:var(--green);box-shadow:0 0 12px var(--green)}.dot.amber{background:var(--amber);box-shadow:0 0 12px var(--amber)}.dot.red{background:var(--red);box-shadow:0 0 12px var(--red)}.event{display:flex;gap:12px;padding:12px;border:1px solid rgba(255,255,255,.07);border-radius:16px;background:rgba(255,255,255,.04);margin-bottom:9px}.event .icon{width:36px;height:36px;border-radius:12px;background:rgba(32,229,139,.12);display:grid;place-items:center}.event b{display:block}.event span{color:var(--muted);font-size:13px}.bar{height:8px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin-top:8px}.bar i{height:100%;display:block;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:999px}.timeline{display:grid;gap:10px}.step{display:grid;grid-template-columns:92px 1fr auto;gap:10px;align-items:center;padding:12px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#b9d7cc}.foot{margin-top:18px;color:var(--muted);font-size:12px;text-align:center}
+    @media(max-width:920px){.hero,.grid2,.grid3{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.node:after{display:none}.metricGrid{grid-template-columns:1fr 1fr}.nav{align-items:flex-start;flex-direction:column}.card{padding:18px}.table{font-size:12px}.wrap{padding:18px 12px 40px}}
+    @media(max-width:560px){.flow,.metricGrid{grid-template-columns:1fr}.hero h1{letter-spacing:-1.3px}.step{grid-template-columns:1fr}.selects{display:grid;grid-template-columns:1fr}.cta .btn{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav"><div class="brand"><div class="logo">AI</div><div>Funnel Reliability Command Center<br><span style="color:var(--muted);font-size:12px;font-weight:600">ManyChat · n8n · GHL · LLM · Meta CAPI</span></div></div><div class="pill">Built as a tailored proof-of-work for the AI Funnel Engineer role</div></div>
+    <section class="hero">
+      <div class="card">
+        <div class="pill" style="display:inline-flex">Instagram DM → booked call → signed client attribution</div>
+        <h1>Bulletproof the funnel, not just the automations.</h1>
+        <p class="lead">This demo shows the operating layer I would build around your high-volume IG DM funnel: reliable LLM event routing, GHL SMS follow-ups, n8n error handling, PostgreSQL lead state, and Meta CAPI feedback loops.</p>
+        <div class="disclaimer">⚠️ <span>Disclaimer: all leads, messages, metrics, and events shown here are fictional demo data for visual proof only.</span></div>
+        <div class="cta"><button class="btn" onclick="document.getElementById('router').scrollIntoView({behavior:'smooth'})">View event router</button><button class="btn secondary" onclick="document.getElementById('capi').scrollIntoView({behavior:'smooth'})">Check Meta CAPI board</button></div>
+      </div>
+      <div class="card">
+        <div class="panelTitle"><h2 style="margin:0">Live funnel health</h2><span class="tag" id="scenarioTag">Fast GHL SMS</span></div>
+        <div class="metricGrid">
+          <div class="metric"><b id="leadRate">72%</b><span>qualified lead capture</span></div>
+          <div class="metric"><b id="bookRate">38%</b><span>booking conversion</span></div>
+          <div class="metric"><b id="replyRate">31%</b><span>SMS/DM reply lift</span></div>
+          <div class="metric"><b id="capiRate">97%</b><span>CAPI match quality</span></div>
+        </div>
+        <div class="bar"><i id="healthBar" style="width:91%"></i></div>
+        <p class="mono" id="healthText">System status: n8n webhooks healthy · 1 stalled-lead queue under watch · Meta event dedupe active</p>
+      </div>
+    </section>
+
+    <section class="card section">
+      <div class="panelTitle"><h2>End-to-end lead path</h2><span class="pill">ad click to signed client</span></div>
+      <div class="flow">
+        <div class="node"><small>01 Meta</small><b>Ad click / IG profile view</b><p>UTM + fbp/fbc captured for attribution.</p><span class="tag">ViewContent</span></div>
+        <div class="node"><small>02 ManyChat</small><b>IG DM capture</b><p>Custom fields store source, offer, answers, and 24h window.</p><span class="tag">Lead</span></div>
+        <div class="node"><small>03 LLM Setter</small><b>Qualification</b><p>GPT-4o-mini / Claude classifies intent and next action.</p><span class="tag">function call</span></div>
+        <div class="node"><small>04 n8n</small><b>Orchestration</b><p>Routes booked, no-show, stalled, or disqualified leads.</p><span class="tag">webhooks</span></div>
+        <div class="node"><small>05 GHL</small><b>SMS + booking</b><p>Triggered follow-up sequences by lead state.</p><span class="tag">SMS/email</span></div>
+        <div class="node"><small>06 Meta CAPI</small><b>Feedback loop</b><p>Lead/Purchase sent back with dedupe and diagnostics.</p><span class="tag">Purchase</span></div>
+      </div>
+    </section>
+
+    <section class="grid2 section" id="router">
+      <div class="card">
+        <div class="panelTitle"><h2>LLM → GHL follow-up router</h2></div>
+        <div class="selects">
+          <label>Lead event<select id="eventSelect"><option value="booked">Call booked</option><option value="noshow">No-show</option><option value="stalled">Stalled lead</option><option value="hot">Hot buyer signal</option></select></label>
+          <label>Channel test<select id="channelSelect"><option value="ghl">GHL SMS</option><option value="imessage">iMessage test</option><option value="dm">Instagram DM</option></select></label>
+          <label>Timing<select id="timingSelect"><option value="fast">2 min</option><option value="medium">30 min</option><option value="slow">24h</option></select></label>
+        </div>
+        <div id="routerOutput" style="margin-top:14px"></div>
+      </div>
+      <div class="card">
+        <h2>Automation incident monitor</h2>
+        <div class="timeline" id="incidents"></div>
+      </div>
+    </section>
+
+    <section class="grid2 section" id="capi">
+      <div class="card">
+        <div class="panelTitle"><h2>Meta CAPI validation</h2><span class="tag">dedupe + match quality</span></div>
+        <table class="table"><thead><tr><th>Event</th><th>Status</th><th>Match</th><th>Dedupe</th></tr></thead><tbody id="capiRows"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>A/B test command panel</h2>
+        <div class="selects">
+          <label>Copy variant<select id="copySelect"><option value="direct">Direct booking CTA</option><option value="consult">Consultative qualifier</option><option value="scarcity">Urgency / scarcity</option></select></label>
+          <label>Qualification depth<select id="qualSelect"><option value="light">Light</option><option value="balanced">Balanced</option><option value="strict">Strict</option></select></label>
+        </div>
+        <div class="metricGrid" style="margin-top:14px">
+          <div class="metric"><b id="testBookings">+18%</b><span>booking lift vs control</span></div>
+          <div class="metric"><b id="testNoshow">-11%</b><span>no-show reduction</span></div>
+          <div class="metric"><b id="testCPA">$42</b><span>estimated booked-call CPA</span></div>
+          <div class="metric"><b id="testQuality">8.4/10</b><span>lead quality score</span></div>
+        </div>
+        <p class="mono" id="testNote">Recommended: keep direct booking CTA + balanced qualification; send GHL SMS at 2 min after LLM booking intent.</p>
+      </div>
+    </section>
+
+    <section class="card section">
+      <div class="panelTitle"><h2>First 7-day implementation plan</h2><span class="pill">Claude Code → Git → Docker deploy</span></div>
+      <div class="timeline">
+        <div class="step"><b>Day 1</b><span>Map current ManyChat fields, n8n workflows, Postgres schema, GHL pipelines, Meta events.</span><span class="tag">audit</span></div>
+        <div class="step"><b>Day 2–3</b><span>Implement event-state router and GHL SMS sequences for booked/no-show/stalled/hot leads.</span><span class="tag">build</span></div>
+        <div class="step"><b>Day 4</b><span>Meta CAPI ViewContent/Lead/Purchase with fbp/fbc, external_id hashing, dedupe, diagnostics.</span><span class="tag">attribution</span></div>
+        <div class="step"><b>Day 5</b><span>n8n error handling, retry queues, Slack/email alerts, broken automation detector.</span><span class="tag">reliability</span></div>
+        <div class="step"><b>Day 6–7</b><span>A/B test dashboard: copy, timing, channel, qualification; weekly funnel health report.</span><span class="tag">optimize</span></div>
+      </div>
+    </section>
+    <div class="foot">Purpose: show the exact operating system approach for a high-volume Instagram DM funnel — reliable follow-up, attribution, and measurable revenue lift.</div>
+  </div>
+<script>
+const rows=[['ViewContent','Healthy','91%','event_id OK'],['Lead','Healthy','96%','deduped'],['Purchase','Watch','88%','2 missing fbc'],['Custom: BookedCall','Healthy','94%','server+browser']];
+const incidentsBase=[['ok','ManyChat webhook','avg 180ms response; no drops in last 24h'],['amber','GHL SMS queue','3 stalled leads waiting for follow-up retry'],['ok','PostgreSQL sync','lead_state table current; 0 schema drift'],['red','Meta pixel diagnostic','Purchase event missing fbc on 2 records']];
+function dot(c){return `<span class="dot ${c==='ok'?'':c}"></span>`}
+function renderCapi(){document.getElementById('capiRows').innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${dot(r[1]==='Healthy'?'ok':'amber')}${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}
+function renderIncidents(){document.getElementById('incidents').innerHTML=incidentsBase.map(i=>`<div class="event"><div class="icon">${dot(i[0])}</div><div><b>${i[1]}</b><span>${i[2]}</span></div></div>`).join('')}
+function update(){const ev=eventSelect.value,ch=channelSelect.value,t=timingSelect.value; const channel={ghl:'GoHighLevel SMS',imessage:'iMessage test lane',dm:'Instagram DM'}[ch]; const map={booked:['Booking confirmation + reminder ladder','Create/confirm GHL appointment, send SMS within '+(t==='fast'?'2 minutes':t==='medium'?'30 minutes':'24 hours'),'+22% show-rate protection'],noshow:['No-show recovery','Trigger apology/reschedule SMS + owner alert + Meta custom event','-17% lost booked calls'],stalled:['Stalled-lead rescue','LLM detects no progress, n8n retries via '+channel+', tags reason in Postgres','+31% reactivation'],hot:['Hot buyer escalation','Push instant GHL task + priority SMS + CAPI high-value Lead','<60 sec speed-to-lead']}; const m=map[ev]; routerOutput.innerHTML=`<div class="event"><div class="icon">⚡</div><div><b>${m[0]}</b><span>${m[1]}</span><br><span class="tag">${channel}</span> <span class="tag">${m[2]}</span></div></div><table class="table"><tbody><tr><td>LLM event</td><td>${ev}</td></tr><tr><td>n8n action</td><td>validate → route → retry/error branch → log</td></tr><tr><td>GHL update</td><td>pipeline stage + SMS workflow + owner task</td></tr><tr><td>Meta feedback</td><td>Lead/BookedCall event with dedupe key</td></tr></tbody></table>`; const mult={ghl:1,imessage:.86,dm:.76}[ch]*{fast:1.08,medium:.96,slow:.7}[t]; leadRate.textContent=Math.round(72*mult)+'%'; bookRate.textContent=Math.round(38*mult)+'%'; replyRate.textContent=Math.round(31*mult)+'%'; capiRate.textContent= ch==='dm'?'94%':'97%'; healthBar.style.width=Math.max(58,Math.round(91*mult))+'%'; scenarioTag.textContent=channel+' · '+(t==='fast'?'fast follow-up':t==='medium'?'warm follow-up':'slow follow-up'); healthText.textContent=`System status: ${channel} active · ${m[0]} route selected · CAPI dedupe active`;}
+function updateTests(){const c=copySelect.value,q=qualSelect.value; const lift={direct:18,consult:12,scarcity:9}[c]+{light:3,balanced:6,strict:1}[q]; const ns={light:-5,balanced:-11,strict:-18}[q]; testBookings.textContent='+'+lift+'%'; testNoshow.textContent=ns+'%'; testCPA.textContent='$'+(58-lift+Math.abs(ns)); testQuality.textContent=({light:7.2,balanced:8.4,strict:9.1}[q]).toFixed(1)+'/10'; testNote.textContent=`Recommended next test: ${copySelect.options[copySelect.selectedIndex].text} with ${qualSelect.options[qualSelect.selectedIndex].text.toLowerCase()} qualification; monitor booked-call CPA and no-show rate.`}
+[eventSelect,channelSelect,timingSelect].forEach(e=>e.addEventListener('change',update)); [copySelect,qualSelect].forEach(e=>e.addEventListener('change',updateTests)); renderCapi(); renderIncidents(); update(); updateTests();
+</script>
+</body>
+</html>
