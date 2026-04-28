@@ -87,7 +87,9 @@ function sourceUrls(q){return [
  ['IAAI',`https://www.iaai.com/Search?Keyword=${enc(q)}`,true],
  ['Facebook manual',`https://www.facebook.com/marketplace/search/?query=${enc(q)}`,true]
 ]}
-function gen(){let m=model.value,y=year.value,c=color.value,ps=parts.value.split(',').map(x=>x.trim()).filter(Boolean); terms.innerHTML=ps.map(p=>{let q=`${y} ${m} ${c} ${p}`;let links=sourceUrls(q).map(([name,url,manual])=>`<a class="source-link ${manual?'manual':''}" href="${url}" target="_blank" rel="noopener"><span>${name}</span><b>${manual?'Review':'Open'} →</b></a>`).join('');return `<div class="query-card"><div class="query-title">${q}</div><div class="source-grid">${links}</div><div class="mini-note">Mobile-friendly output: direct buttons instead of long broken URLs. Manual sources stay review-only for V1 safety.</div></div>`}).join('')}
+function val(id){return document.getElementById(id).value.trim()}
+function gen(){const m=val('model'), y=val('year'), c=val('color'), partText=val('parts'); const out=document.getElementById('terms'); const ps=partText.split(',').map(x=>x.trim()).filter(Boolean); out.innerHTML=ps.map(p=>{let q=`${y} ${m} ${c} ${p}`.replace(/\s+/g,' ').trim();let links=sourceUrls(q).map(([name,url,manual])=>`<a class="source-link ${manual?'manual':''}" href="${url}" target="_blank" rel="noopener"><span>${name}</span><b>${manual?'Review':'Open'} →</b></a>`).join('');return `<div class="query-card"><div class="query-title">${q}</div><div class="source-grid">${links}</div><div class="mini-note">Links update from the fields above. Mobile-friendly output: direct buttons instead of long broken URLs. Manual sources stay review-only for V1 safety.</div></div>`}).join('')}
+['model','year','color','parts'].forEach(id=>document.getElementById(id).addEventListener('input', gen));
 render();gen();
 </script>
 </body>
