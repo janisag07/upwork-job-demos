@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Sales Pipeline Automation Demo</title>
+  <style>
+    :root{
+      --bg:#071018; --panel:#0e1a26; --panel2:#102235; --line:#1e3a52; --text:#edf7ff; --muted:#8fa8ba;
+      --accent:#46f0b4; --accent2:#68a7ff; --warn:#ffcc66; --danger:#ff6b86; --ok:#5ef0a4; --shadow:0 24px 70px rgba(0,0,0,.38);
+    }
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 18% 0%,#183b54 0,#071018 34%,#05090d 100%);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);}
+    a{color:inherit}.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 60px}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;margin:16px 0 26px}.eyebrow{display:inline-flex;gap:9px;align-items:center;border:1px solid rgba(70,240,180,.35);background:rgba(70,240,180,.08);color:#aaf8d9;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:700}.h1{font-size:clamp(36px,6vw,72px);line-height:.94;margin:18px 0 16px;letter-spacing:-2.2px}.hero p{color:#b6cbd8;font-size:18px;line-height:1.55;margin:0 0 14px}.disclaimer{display:inline-block;margin:8px 0 18px;color:#cbd7df;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:9px 12px;border-radius:12px;font-size:13px}.cta{display:flex;gap:12px;flex-wrap:wrap}.btn{border:0;border-radius:14px;padding:12px 15px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--accent),#78f7d0);color:#04100b;box-shadow:0 12px 34px rgba(70,240,180,.22)}.btn.secondary{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.14);box-shadow:none}.card{background:linear-gradient(180deg,rgba(16,34,53,.92),rgba(11,21,32,.92));border:1px solid rgba(143,168,186,.18);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}.heroCard{padding:18px}.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}.stage{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:10px;font-size:12px;color:#d4e8f2}.stage strong{display:block;color:#fff;margin-bottom:4px}.dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:7px;box-shadow:0 0 18px var(--accent)}.grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:18px}.panel{padding:18px}.title{font-size:15px;color:#b7cddd;text-transform:uppercase;letter-spacing:.12em;font-weight:900;margin:0 0 14px}.leadList{display:grid;gap:10px}.lead{display:flex;justify-content:space-between;gap:12px;align-items:center;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:13px;cursor:pointer;transition:.18s}.lead:hover,.lead.active{border-color:rgba(70,240,180,.55);background:rgba(70,240,180,.08);transform:translateY(-1px)}.lead b{display:block}.lead span{font-size:12px;color:var(--muted)}.pill{font-size:11px;font-weight:900;border-radius:999px;padding:6px 8px;background:rgba(104,167,255,.13);color:#b9d5ff;border:1px solid rgba(104,167,255,.24);white-space:nowrap}.pill.hot{background:rgba(255,107,134,.15);color:#ffc4cf;border-color:rgba(255,107,134,.32)}.pill.ok{background:rgba(94,240,164,.12);color:#c3ffdf;border-color:rgba(94,240,164,.3)}.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}select{width:100%;background:#081521;color:var(--text);border:1px solid rgba(143,168,186,.22);border-radius:13px;padding:11px;font-weight:750}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.metric{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:13px}.metric b{font-size:24px;display:block}.metric span{font-size:12px;color:var(--muted)}.work{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:15px;min-height:164px}.box h3{margin:0 0 10px;font-size:16px}.kv{display:grid;grid-template-columns:110px 1fr;gap:8px;font-size:13px;margin:7px 0;color:#dbe9f0}.kv span:first-child{color:var(--muted)}.draft{white-space:pre-wrap;color:#d8e8ef;line-height:1.5;font-size:14px}.timeline{display:grid;gap:10px}.step{display:grid;grid-template-columns:26px 1fr;gap:9px;align-items:start}.num{width:26px;height:26px;border-radius:50%;background:rgba(70,240,180,.14);border:1px solid rgba(70,240,180,.35);display:grid;place-items:center;color:#baffdf;font-size:12px;font-weight:900}.small{font-size:12px;color:var(--muted)}.footer{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.offer{padding:16px}.offer b{display:block;margin-bottom:5px}.mobileOnly{display:none}@media(max-width:900px){.hero,.grid,.work{grid-template-columns:1fr}.pipeline,.metrics,.footer{grid-template-columns:1fr 1fr}.controls{grid-template-columns:1fr}.h1{letter-spacing:-1.4px}.wrap{padding-top:14px}}@media(max-width:560px){.pipeline,.metrics,.footer{grid-template-columns:1fr}.hero p{font-size:16px}.lead{align-items:flex-start;flex-direction:column}.mobileOnly{display:block}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Client-facing workflow demo</div>
+        <h1 class="h1">AI Sales Pipeline Automation</h1>
+        <p>Inbound leads get captured, classified by AI, pushed into the CRM, answered faster, and followed up automatically — without turning the sales team into data-entry clerks.</p>
+        <div class="disclaimer">Disclaimer: all names, emails, numbers and metrics in this demo are fictional and shown for visual demonstration only.</div>
+        <div class="cta">
+          <button class="btn" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Open live workflow</button>
+          <button class="btn secondary" onclick="selectLead('enterprise')">Show high-value lead</button>
+        </div>
+      </div>
+      <div class="card heroCard">
+        <p class="title">Automation chain</p>
+        <div class="pipeline">
+          <div class="stage"><strong>1. Inbox</strong>Gmail / Forms</div>
+          <div class="stage"><strong>2. AI Triage</strong>Intent + urgency</div>
+          <div class="stage"><strong>3. CRM</strong>Deal + tasks</div>
+          <div class="stage"><strong>4. Reply</strong>Personal draft</div>
+          <div class="stage"><strong>5. Follow-up</strong>No lead forgotten</div>
+        </div>
+        <div class="metrics" style="margin-top:14px;margin-bottom:0">
+          <div class="metric"><b id="heroTime">4m</b><span>response target</span></div>
+          <div class="metric"><b id="heroValue">$8.5k</b><span>est. deal value</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="grid">
+      <aside class="card panel">
+        <p class="title">Inbound lead queue</p>
+        <div class="leadList" id="leadList"></div>
+      </aside>
+
+      <section class="card panel">
+        <p class="title">Live automation output</p>
+        <div class="controls">
+          <label><span class="small">CRM</span><select id="crm" onchange="render()"><option>Pipedrive</option><option>HubSpot</option><option>Close CRM</option><option>GoHighLevel</option><option>Airtable</option></select></label>
+          <label><span class="small">Automation</span><select id="automation" onchange="render()"><option>n8n</option><option>Make</option><option>Zapier</option></select></label>
+          <label><span class="small">Tone</span><select id="tone" onchange="render()"><option>Professional</option><option>Warm</option><option>Direct</option></select></label>
+        </div>
+        <div class="metrics">
+          <div class="metric"><b id="score">94%</b><span>AI confidence</span></div>
+          <div class="metric"><b id="priority">Hot</b><span>priority</span></div>
+          <div class="metric"><b id="sla">4m</b><span>reply SLA</span></div>
+          <div class="metric"><b id="value">$8.5k</b><span>deal value</span></div>
+        </div>
+        <div class="work">
+          <div class="box">
+            <h3>CRM record created</h3>
+            <div id="crmCard"></div>
+          </div>
+          <div class="box">
+            <h3>AI draft reply</h3>
+            <div class="draft" id="draft"></div>
+          </div>
+          <div class="box">
+            <h3>Routing logic</h3>
+            <div id="routing"></div>
+          </div>
+          <div class="box">
+            <h3>Follow-up plan</h3>
+            <div class="timeline" id="followup"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="footer">
+      <div class="card offer"><b>Lean first version</b><span class="small">Connect inbox + CRM + AI classification + draft reply + follow-up tasks.</span></div>
+      <div class="card offer"><b>Fast implementation</b><span class="small">Built as a controlled MVP first, then improved with real lead data and team feedback.</span></div>
+      <div class="card offer"><b>Business outcome</b><span class="small">Less manual work, faster replies, cleaner pipeline, fewer lost sales opportunities.</span></div>
+    </section>
+  </main>
+
+<script>
+const leads = {
+  enterprise: {name:'Maya Chen', company:'Northstar Clinics', email:'maya@northstar.example', source:'Website form', subject:'Need automated patient inquiry follow-up', message:'We receive 40+ patient inquiries per day and our team misses follow-ups. Can you connect forms, inbox and CRM with reply drafts?', value:8500, score:94, priority:'Hot', sla:'4m', tag:'Healthcare CRM', pain:'high-volume inbound leads', next:'Book discovery call', stage:'New qualified opportunity'},
+  agency: {name:'Leo Martinez', company:'BluePeak Agency', email:'leo@bluepeak.example', source:'Gmail', subject:'Client onboarding automation', message:'Looking for a Make or n8n workflow that turns client emails into tasks, CRM records and follow-up reminders.', value:3200, score:88, priority:'Warm', sla:'12m', tag:'Agency ops', pain:'manual onboarding', next:'Send scope checklist', stage:'Needs requirements'},
+  realestate: {name:'Sarah Brooks', company:'UrbanNest Realty', email:'sarah@urbannest.example', source:'Facebook Lead Ad', subject:'Buyer lead routing', message:'Our agents are slow to respond to buyer leads. Need routing by area, budget and urgency with automatic SMS/email follow-up.', value:5800, score:91, priority:'Hot', sla:'6m', tag:'Real estate sales', pain:'slow agent response', next:'Route to sales rep', stage:'Qualified buyer'},
+  ecommerce: {name:'Tom Adler', company:'Volt Supply Co.', email:'tom@voltsupply.example', source:'Contact form', subject:'Bulk order request', message:'We need a faster way to sort bulk order inquiries and draft responses with price/availability questions.', value:1900, score:78, priority:'Normal', sla:'30m', tag:'Ecommerce B2B', pain:'slow quote handling', next:'Ask qualification questions', stage:'Quote requested'}
+};
+let active = 'enterprise';
+function money(n){return '$' + (n>=1000?(n/1000).toFixed(n%1000?1:0)+'k':n)}
+function selectLead(id){active=id;render()}
+function leadBadge(l){return l.priority==='Hot'?'hot':(l.priority==='Normal'?'':'ok')}
+function renderList(){
+  document.getElementById('leadList').innerHTML = Object.entries(leads).map(([id,l])=>`<div class="lead ${id===active?'active':''}" onclick="selectLead('${id}')"><div><b>${l.company}</b><span>${l.source} · ${l.subject}</span></div><div class="pill ${leadBadge(l)}">${l.priority}</div></div>`).join('');
+}
+function render(){
+  const l=leads[active], crm=document.getElementById('crm').value, automation=document.getElementById('automation').value, tone=document.getElementById('tone').value;
+  renderList();
+  document.getElementById('score').textContent=l.score+'%'; document.getElementById('priority').textContent=l.priority; document.getElementById('sla').textContent=l.sla; document.getElementById('value').textContent=money(l.value); document.getElementById('heroTime').textContent=l.sla; document.getElementById('heroValue').textContent=money(l.value);
+  document.getElementById('crmCard').innerHTML = `<div class="kv"><span>Contact</span><b>${l.name}</b></div><div class="kv"><span>Company</span><b>${l.company}</b></div><div class="kv"><span>Email</span><b>${l.email}</b></div><div class="kv"><span>CRM</span><b>${crm}</b></div><div class="kv"><span>Stage</span><b>${l.stage}</b></div><div class="kv"><span>Tag</span><b>${l.tag}</b></div><div class="kv"><span>Next action</span><b>${l.next}</b></div>`;
+  const greeting = tone==='Direct'?'Hi':tone==='Warm'?'Hey':'Hi';
+  const close = tone==='Direct'?'I can map the lean first version and start with the highest-impact workflow.':'If helpful, I can outline the leanest first version and what should be automated first.';
+  document.getElementById('draft').textContent = `${greeting} ${l.name.split(' ')[0]},\n\nThanks for reaching out — the core issue sounds like ${l.pain}, not just a missing tool.\n\nI can connect ${l.source} → AI triage → ${crm} → reply drafts → follow-up reminders using ${automation}, so every lead is captured and handled quickly.\n\n${close}\n\nBest,\nJanis`;
+  document.getElementById('routing').innerHTML = `<div class="kv"><span>Detected intent</span><b>${l.tag}</b></div><div class="kv"><span>Urgency</span><b>${l.priority} · ${l.sla} target</b></div><div class="kv"><span>Automation</span><b>${automation} webhook + OpenAI classification</b></div><div class="kv"><span>Duplicate check</span><b>Email + company domain + active deal match</b></div><div class="kv"><span>Owner</span><b>${l.priority==='Hot'?'Sales lead immediately':'Ops review queue'}</b></div>`;
+  const steps = l.priority==='Hot' ? ['Create deal and notify sales owner now','Draft personalized reply for approval','If no reply in 24h, send follow-up task','Escalate after 48h with deal summary'] : ['Create CRM record','Add task for human review','Draft qualification reply','Follow up in 2 business days'];
+  document.getElementById('followup').innerHTML = steps.map((s,i)=>`<div class="step"><div class="num">${i+1}</div><div><b>${s}</b><div class="small">Logged in ${crm} via ${automation}</div></div></div>`).join('');
+}
+render();
+</script>
+</body>
+</html>
