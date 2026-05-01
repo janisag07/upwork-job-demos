@@ -87,7 +87,7 @@ To improve eBay and Car-Part beyond safe public access, the next step would be c
 | Direct listing links | Ready | Included in Listings tab and public workbench. |
 | Clean scoring | Ready | All rows have match score and notes. |
 | No duplicates | Ready | Direct-link duplicate suppression is active. |
-| eBay Motors live pull | Blocked in this environment | Safe public/RSS/text access is blocked; review URLs included. Needs approved API/provider/browser account path for full automation. |
+| eBay Motors live pull | Code-ready via official eBay Finding API | Set `EBAY_APP_ID` or `EBAY_CLIENT_ID` in `.env` and rerun monitor. Without a valid eBay app id, public RSS/browser access is blocked in this environment and review URLs are used. |
 | Car-Part live pull | Blocked unauthenticated | Review workflow included. Needs approved access/provider for full automation. |
 | Craigslist live pull | Working | Current live source. |
 | Alerts | Prepared, not live-sent | Email alert code and alert preview exist; SMTP/SMS provider needed for real sending. |
