@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WhatsApp Cloud API Integration Blueprint</title>
+  <style>
+    :root{--bg:#07111f;--panel:#0d1b2f;--line:#1f3554;--text:#eaf2ff;--muted:#93a8c8;--green:#25d366;--blue:#57a6ff;--orange:#ffb86b;--red:#ff6b7a}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial;background:radial-gradient(circle at top left,#13365e 0,#07111f 42%,#050912 100%);color:var(--text)}.wrap{max-width:1120px;margin:0 auto;padding:34px 18px 60px}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:stretch}.card{background:linear-gradient(180deg,rgba(13,27,47,.95),rgba(7,17,31,.95));border:1px solid var(--line);border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.35);padding:24px}.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(37,211,102,.35);background:rgba(37,211,102,.09);color:#b9ffd2;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:700}h1{font-size:46px;line-height:1.02;margin:18px 0 14px;letter-spacing:-1.3px}p{color:var(--muted);line-height:1.6}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:800;color:#06101d;background:var(--green);cursor:pointer}.btn.alt{background:#142842;color:var(--text);border:1px solid var(--line)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.metric{padding:16px;border-radius:18px;background:#09182a;border:1px solid #17304f}.metric b{display:block;font-size:26px}.metric span{color:var(--muted);font-size:13px}.flow{display:grid;gap:10px}.step{display:flex;gap:12px;align-items:flex-start;background:#08172a;border:1px solid #17304f;border-radius:16px;padding:13px}.dot{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:rgba(37,211,102,.15);color:var(--green);font-weight:900;flex:0 0 auto}.mock{margin-top:22px;display:grid;grid-template-columns:310px 1fr;gap:18px}.phone{background:#03070d;border:1px solid #263b5c;border-radius:30px;padding:14px;min-height:570px}.screen{background:#0b141a;border-radius:22px;padding:14px;height:100%;display:flex;flex-direction:column}.chat-head{padding:10px 8px;border-bottom:1px solid #1e2c35;font-weight:800}.msg{max-width:86%;margin:12px 0;padding:12px;border-radius:14px;background:#202c33;color:#e9edef;font-size:14px}.msg.out{align-self:flex-end;background:#005c4b}.input{margin-top:auto;background:#202c33;border-radius:20px;padding:10px;color:#8796a1}.panel-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}.pill{font-size:12px;border:1px solid #274468;color:#9fc9ff;border-radius:999px;padding:6px 9px}.events{display:grid;gap:10px}.event{border:1px solid #183353;background:#08172a;border-radius:16px;padding:13px}.event strong{display:block}.event small{color:var(--muted)}.ok{color:var(--green)}.warn{color:var(--orange)}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.tab{padding:15px;border-radius:15px;background:#09182a;border:1px solid #17304f}.tab b{display:block;margin-bottom:5px}.disc{font-size:13px;color:#aac0df;background:rgba(87,166,255,.08);border:1px solid rgba(87,166,255,.2);border-radius:14px;padding:12px;margin-top:16px}@media(max-width:860px){.hero,.mock{grid-template-columns:1fr}h1{font-size:34px}.grid,.tabs{grid-template-columns:1fr}.phone{min-height:470px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="card">
+        <span class="badge">● Meta WhatsApp Cloud API · Direct Integration</span>
+        <h1>Lean integration plan for a reliable WhatsApp Cloud API workflow.</h1>
+        <p>This is a compact blueprint showing how I would connect Meta WhatsApp Cloud API directly into an existing PHP/Python/AWS system without third-party WhatsApp providers: webhook verification, message routing, template sends, logs, retry handling and QA checks.</p>
+        <div class="disc">Fictional demo data only. Built to show architecture, QA approach and implementation thinking before touching the client’s production system.</div>
+        <div class="buttons"><button class="btn" onclick="addInbound()">Simulate inbound webhook</button><button class="btn alt" onclick="sendTemplate()">Send template message</button></div>
+        <div class="grid">
+          <div class="metric"><b id="latency">184ms</b><span>Webhook processing target</span></div>
+          <div class="metric"><b>99%+</b><span>Retry-safe delivery design</span></div>
+          <div class="metric"><b>7 days</b><span>Clean MVP handoff window</span></div>
+        </div>
+      </div>
+      <div class="card flow">
+        <div class="step"><div class="dot">1</div><div><b>Meta setup</b><p>App, business number, token handling, webhook verification and permissions checklist.</p></div></div>
+        <div class="step"><div class="dot">2</div><div><b>Webhook receiver</b><p>PHP/Python endpoint validates signatures, parses events and writes clean logs.</p></div></div>
+        <div class="step"><div class="dot">3</div><div><b>System integration</b><p>Inbound messages route into existing database/CRM/backend actions with idempotency.</p></div></div>
+        <div class="step"><div class="dot">4</div><div><b>QA + handoff</b><p>Test numbers, template states, error cases, retries, monitoring notes and documentation.</p></div></div>
+      </div>
+    </section>
+
+    <section class="mock">
+      <div class="phone"><div class="screen">
+        <div class="chat-head">WhatsApp Cloud API Test</div>
+        <div class="msg">Hi, I need help changing my booking date.</div>
+        <div class="msg out">Sure — I found your booking. Which date would you prefer?</div>
+        <div class="msg">Tomorrow afternoon if possible.</div>
+        <div class="msg out" id="reply">Template ready: booking_update_confirmation</div>
+        <div class="input">Webhook event received...</div>
+      </div></div>
+      <div class="card">
+        <div class="panel-title"><h2 style="margin:0">Integration event console</h2><span class="pill">Live demo state</span></div>
+        <div class="events" id="events">
+          <div class="event"><strong class="ok">Webhook verified</strong><small>GET /webhook verified with Meta challenge token</small></div>
+          <div class="event"><strong class="ok">Inbound message parsed</strong><small>wa_id, timestamp, message id, type=text stored for dedupe</small></div>
+          <div class="event"><strong class="warn">Template preflight</strong><small>Checks approved template name, variables and language before send</small></div>
+        </div>
+        <div class="tabs">
+          <div class="tab"><b>Backend</b><span>PHP/Python endpoint</span></div>
+          <div class="tab"><b>AWS</b><span>Logs + secure env vars</span></div>
+          <div class="tab"><b>QA</b><span>Happy path + failure cases</span></div>
+          <div class="tab"><b>Handoff</b><span>Docs + test checklist</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+<script>
+let n=0;function eventLine(title,detail,cls='ok'){const e=document.createElement('div');e.className='event';e.innerHTML=`<strong class="${cls}">${title}</strong><small>${detail}</small>`;document.getElementById('events').prepend(e)}function addInbound(){n++;document.getElementById('latency').textContent=(150+Math.floor(Math.random()*90))+'ms';eventLine('Inbound webhook #' + n, 'Message id deduped, payload normalized, routed to backend queue.')}function sendTemplate(){document.getElementById('reply').textContent='Sent: booking_update_confirmation ✅';eventLine('Template send accepted','POST /messages returned queued status; delivery status will update via webhook.','ok')}
+</script>
+</body>
+</html>
