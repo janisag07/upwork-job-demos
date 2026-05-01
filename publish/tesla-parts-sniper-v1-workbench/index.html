@@ -18,7 +18,7 @@ a{color:inherit}.wrap{width:min(1240px,calc(100% - 28px));margin:auto}.top{paddi
 <h1>Tesla Parts Sniper Workbench</h1>
 <p class="sub">A ready-to-connect V1 for finding Tesla parts faster: Google Sheets output, eBay/Craigslist monitoring first, manual review links for sensitive sources, scoring, duplicate prevention, alerts, and a clean deal pipeline.</p>
 <div class="dis">V1 safety boundary: no automated seller outreach, no aggressive Facebook automation, no account-risky actions.</div>
-<div class="stats"><div class="stat"><b>6</b><span>source types</span></div><div class="stat"><b>408</b><span>sheet-ready rows generated in latest test run</span></div><div class="stat"><b>80+</b><span>strong-match alert threshold</span></div><div class="stat"><b>XLSX + CSV</b><span>Google-Sheets-ready handoff</span></div></div>
+<div class="stats"><div class="stat"><b>6</b><span>source types</span></div><div class="stat"><b>148</b><span>sheet-ready rows in final run</span></div><div class="stat"><b>3</b><span>unique real Craigslist listings pulled</span></div><div class="stat"><b>XLSX + CSV</b><span>Google-Sheets-ready handoff</span></div></div>
 </div>
 <div class="card right"><div class="dash"><div class="bar"><span>Parts Monitor</span><span>Safe V1 Mode</span></div><div class="lead"><span class="tag">Strong Match Logic</span><strong>2024 Model Y White Front Bumper</strong><p>Source: eBay Motors · Direct link captured · Score based on year/model/part/color/source/link.</p><div class="score"><span style="width:92%"></span></div></div><div class="lead"><span class="tag" style="color:var(--yellow);border-color:#ffd36b55;background:#ffd36b12">Manual Review</span><strong>Facebook Marketplace / Car-Part / Auctions</strong><p>Search links are generated and tracked without risky login automation or automated messaging.</p><div class="score"><span style="width:78%;background:linear-gradient(90deg,var(--yellow),var(--blue))"></span></div></div><div class="lead"><span class="tag" style="color:var(--red);border-color:#ff667a55;background:#ff667a12">Duplicate Suppression</span><strong>Same source + title + location + link</strong><p>Duplicates are marked in Google Sheets format and suppressed from alerts.</p><div class="score"><span style="width:42%;background:linear-gradient(90deg,var(--red),var(--yellow))"></span></div></div></div></div>
 </div>
@@ -111,7 +111,7 @@ else:
 </section>
 <section class="section card" style="padding:22px">
 <h2>Handoff package</h2>
-<p class="sub">Local product folder created: <b>/Users/nani/workspace/rick-tesla-parts-sniper</b>. It includes Python monitor, Rick config, scoring, duplicate detection, CSV + XLSX Google Sheets import package, optional email alerts, tests, and handoff docs.</p>
+<p class="sub">Local product folder created: <b>/Users/nani/workspace/rick-tesla-parts-sniper</b>. It includes Python monitor, live Craigslist extraction, broad discovery queries, Rick config, scoring, duplicate detection, CSV + XLSX Google Sheets import package, optional email alerts, tests, and handoff docs.</p>
 </section>
 </main>
 <footer class="footer wrap">Built by Janis Agic · Rick V1 workbench · Safe monitoring first, manual review for sensitive sources.</footer>
