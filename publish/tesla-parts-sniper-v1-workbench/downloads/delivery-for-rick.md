@@ -19,9 +19,9 @@ I moved the V1 from structure-only into a working live-monitoring package focuse
 
 Latest verified run:
 
-- 148 total sheet-ready rows
+- 154 total sheet-ready rows
 - Craigslist live parsing is working and produced real listing links
-- 3 unique real Craigslist listing rows were pulled automatically in the latest run
+- 10 unique real Craigslist listing rows were pulled automatically in the latest run
 - eBay was attempted through safe public/RSS/text extraction, but the current environment blocks automated eBay access, so the system generates direct eBay review URLs instead of faking inventory
 - Car-Part.com is included as a structured usable workflow/direct review URL because unauthenticated automated extraction is blocked by the site in this environment
 - Copart/IAAI remain manual-review first, as agreed
@@ -29,19 +29,30 @@ Latest verified run:
 
 Example real listings pulled in the latest run:
 
-1. Craigslist — Tesla Model 3 Clear PPF Hood, fenders, headlights, mirrors, fog lights
-   - Price: $229
-   - Location: Spokane / Tukwila
-   - Direct link included in Listings tab
+1. Craigslist — Tesla Model Y Left Headlight (New)
+   - Price: $250
+   - Location: seattle / north vancouver
+   - Direct link: https://vancouver.craigslist.org/nvn/pts/d/north-vancouver-tesla-model-left/7896365226.html
 
-2. Craigslist — NEW 2017 2022 2023 Pair TESLA MODEL 3 FRONT LEFT RIGHT Side HOOD HINGE
-   - Price: $80
-   - Location: Bellingham / Clark-Cowlitz WA
-   - Direct link included in Listings tab
+2. Craigslist — Tesla Model Y Door Wiring Rear Right 2020-2024 OEM 1489
+   - Price: $135
+   - Location: seattle / Marysville
+   - Direct link: https://seattle.craigslist.org/see/pts/d/marysville-tesla-model-door-wiring-rear/7922263989.html
 
-3. Craigslist — Tesla Model Y / 3 Parts
-   - Location: Spokane / Marysville
-   - Direct link included in Listings tab
+3. Craigslist — 2021-2023 Tesla Model Y Front Drivers Left Door Panel Card
+   - Price: $100
+   - Location: seattle / 8h ago NE Portland
+   - Direct link: https://portland.craigslist.org/mlt/pts/d/portland-tesla-model-front-drivers-left/7917863484.html
+
+4. Craigslist — Tesla Model Y performance 21” wheel rims covers curb protectors gunmetal grey
+   - Price: $79
+   - Location: seattle / Vancouver
+   - Direct link: https://vancouver.craigslist.org/van/pts/d/vancouver-tesla-model-performance-21/7901293693.html
+
+5. Craigslist — ONE Tesla Model Y Wheel Cover
+   - Price: $10
+   - Location: bellingham / Vancouver
+   - Direct link: https://vancouver.craigslist.org/van/pts/d/vancouver-one-tesla-model-wheel-cover/7906969903.html
 
 ## Important honesty note
 
@@ -83,7 +94,7 @@ To improve eBay and Car-Part beyond safe public access, the next step would be c
 | Rick requirement | Current V1 status | Notes |
 |---|---|---|
 | Google Sheet structure | Ready | XLSX + CSV tabs are included and downloadable/importable. |
-| Actual live listings | Partially working | Craigslist live parsing works and produced 3 unique real listings in latest run. |
+| Actual live listings | Partially working | Craigslist live parsing works and produced 10 unique real listings in latest run. |
 | Direct listing links | Ready | Included in Listings tab and public workbench. |
 | Clean scoring | Ready | All rows have match score and notes. |
 | No duplicates | Ready | Direct-link duplicate suppression is active. |
@@ -95,7 +106,7 @@ To improve eBay and Car-Part beyond safe public access, the next step would be c
 
 ## Public download links
 
-- Workbench: https://janisag07.github.io/upwork-job-demos/publish/tesla-parts-sniper-v1-workbench/?v=final-handoff
+- Workbench: https://janisag07.github.io/upwork-job-demos/publish/tesla-parts-sniper-v1-workbench/?v=morning-refresh
 - Google Sheets XLSX: https://janisag07.github.io/upwork-job-demos/publish/tesla-parts-sniper-v1-workbench/downloads/tesla-parts-sniper-v1-google-sheet.xlsx
 - Listings CSV: https://janisag07.github.io/upwork-job-demos/publish/tesla-parts-sniper-v1-workbench/downloads/listings.csv
 - Delivery notes: https://janisag07.github.io/upwork-job-demos/publish/tesla-parts-sniper-v1-workbench/downloads/delivery-for-rick.md
