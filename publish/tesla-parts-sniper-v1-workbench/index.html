@@ -26,7 +26,7 @@ a{color:inherit}.wrap{width:min(1240px,calc(100% - 28px));margin:auto}.top{paddi
 <main class="wrap">
 <section class="section grid">
 <div class="module"><h3>Priority sources</h3><ol><li>eBay Motors</li><li>Car-Part.com</li><li>Craigslist</li><li>Copart / IAAI</li><li>Facebook Marketplace manual/assisted</li></ol></div>
-<div class="module"><h3>Priority vehicles</h3><ul><li>2024–2025 Model Y</li><li>2024–2025 Model 3</li><li>Cybertruck</li><li>Model X / Model S</li><li>Custom / blank model option</li></ul></div>
+<div class="module"><h3>Priority vehicles</h3><ul><li>Tesla priority: Model Y, Model 3, Cybertruck, Model X, Model S</li><li>Flexible year or year range, e.g. 2020–2024</li><li>Type any vehicle manually or select common makes/models A–Z</li></ul></div>
 <div class="module"><h3>Priority regions</h3><ul><li>Washington / Oregon</li><li>Bay Area, Los Angeles / San Diego</li><li>Idaho, Las Vegas</li><li>Arizona / Utah remain fallback coverage</li></ul></div>
 </section>
 <section class="section grid2">
@@ -36,26 +36,66 @@ a{color:inherit}.wrap{width:min(1240px,calc(100% - 28px));margin:auto}.top{paddi
 <section class="section card" style="padding:22px">
 <h2>Search profile generator</h2>
 <div class="form controls">
-<select class="input" id="model">
-  <option>Tesla Model Y</option>
-  <option>Tesla Model 3</option>
-  <option>Tesla Cybertruck</option>
-  <option>Tesla Model X</option>
-  <option>Tesla Model S</option>
-  <option value="">Custom / blank model</option>
-</select>
-<input class="input custom-model" id="customModel" type="text" placeholder="Custom model or variation (optional)" aria-label="Custom model or variation" />
-<select class="input" id="year">
-  <option>2026</option>
-  <option>2025</option>
-  <option>2024</option>
-  <option>2023</option>
-  <option>2022</option>
-  <option>2021</option>
-  <option>2020</option>
-  <option>2019</option>
-  <option>2018</option>
-</select>
+<input class="input" id="model" type="text" list="vehicleOptions" value="Tesla Model Y" placeholder="Type vehicle or choose from A–Z list" aria-label="Vehicle make and model" />
+<datalist id="vehicleOptions">
+  <option value="Acura Integra"></option>
+  <option value="Audi A4"></option>
+  <option value="Audi Q5"></option>
+  <option value="BMW 3 Series"></option>
+  <option value="BMW X5"></option>
+  <option value="Chevrolet Bolt"></option>
+  <option value="Chevrolet Silverado"></option>
+  <option value="Chrysler Pacifica"></option>
+  <option value="Dodge Charger"></option>
+  <option value="Ford Bronco"></option>
+  <option value="Ford F-150"></option>
+  <option value="Ford Mustang"></option>
+  <option value="GMC Sierra"></option>
+  <option value="Honda Accord"></option>
+  <option value="Honda Civic"></option>
+  <option value="Honda CR-V"></option>
+  <option value="Hyundai Ioniq 5"></option>
+  <option value="Hyundai Sonata"></option>
+  <option value="Jeep Wrangler"></option>
+  <option value="Kia EV6"></option>
+  <option value="Kia Telluride"></option>
+  <option value="Lexus RX"></option>
+  <option value="Mazda CX-5"></option>
+  <option value="Mercedes-Benz C-Class"></option>
+  <option value="Mercedes-Benz Sprinter"></option>
+  <option value="Nissan Altima"></option>
+  <option value="Nissan Leaf"></option>
+  <option value="Porsche Taycan"></option>
+  <option value="Rivian R1T"></option>
+  <option value="Subaru Outback"></option>
+  <option value="Tesla Cybertruck"></option>
+  <option value="Tesla Model 3"></option>
+  <option value="Tesla Model S"></option>
+  <option value="Tesla Model X"></option>
+  <option value="Tesla Model Y"></option>
+  <option value="Toyota Camry"></option>
+  <option value="Toyota Corolla"></option>
+  <option value="Toyota Prius"></option>
+  <option value="Toyota RAV4"></option>
+  <option value="Volkswagen ID.4"></option>
+  <option value="Volvo XC90"></option>
+</datalist>
+<input class="input" id="year" type="text" list="yearOptions" value="2020-2026" placeholder="Year or range, e.g. 2020-2024" aria-label="Year or year range" />
+<datalist id="yearOptions">
+  <option value="2020-2026"></option>
+  <option value="2020-2024"></option>
+  <option value="2021-2025"></option>
+  <option value="2024-2026"></option>
+  <option value="2026"></option>
+  <option value="2025"></option>
+  <option value="2024"></option>
+  <option value="2023"></option>
+  <option value="2022"></option>
+  <option value="2021"></option>
+  <option value="2020"></option>
+  <option value="2019"></option>
+  <option value="2018"></option>
+</datalist>
 <select class="input" id="color">
   <option>White</option>
   <option>Black</option>
@@ -149,16 +189,9 @@ const data=[
 function cls(score){return score>=80?'good':score>=60?'warn':'bad'}
 function render(){rows.innerHTML=data.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td><td>${x[2]}</td><td>${x[3]}</td><td>${x[4]}</td><td>${x[5]}</td><td>${x[6]}</td><td>${x[7]}</td><td class="${cls(x[8])}">${x[8]}%</td><td>${x[9]}</td></tr>`).join('')}
 function enc(s){return encodeURIComponent(s).replaceAll('%20','+')}
-function sourceUrls(q){return [
- ['eBay Motors',`https://www.ebay.com/sch/i.html?_nkw=${enc(q)}&_sacat=6028`,false],
- ['Craigslist Seattle',`https://seattle.craigslist.org/search/pta?query=${enc(q)}`,false],
- ['Car-Part',`https://www.car-part.com/`,true],
- ['Copart',`https://www.copart.com/lotSearchResults?free=true&query=${enc(q)}`,true],
- ['IAAI',`https://www.iaai.com/Search?Keyword=${enc(q)}`,true],
- ['Facebook manual',`https://www.facebook.com/marketplace/search/?query=${enc(q)}`,true]
-]}
 function val(id){return document.getElementById(id).value.trim()}
-function currentModel(){const selected=val('model'); const custom=document.getElementById('customModel'); if(custom){custom.classList.toggle('is-visible', !selected); if(!selected) return custom.value.trim();} return selected;}
+function currentModel(){return val('model') || 'Vehicle'}
+function currentYear(){return val('year') || 'Any year'}
 function selectedParts(){return [...document.querySelectorAll('#partPicker input:checked')].map(x=>x.value)}
 function sourceUrls(q, site){return [
  ['eBay Motors',`https://www.ebay.com/sch/i.html?_nkw=${enc(q)}&_sacat=6028`,false],
@@ -178,7 +211,7 @@ function gen(showFeedback=false){
    btn.textContent='Updating source links…';
    window.clearTimeout(btn._feedbackTimer);
  }
- const model=currentModel(), year=val('year'), color=val('color'), site=val('region');
+ const model=currentModel(), year=currentYear(), color=val('color'), site=val('region');
  const colorPart = color === 'Any color' ? '' : color;
  const ps=selectedParts();
  const out=document.getElementById('terms');
@@ -190,7 +223,7 @@ function gen(showFeedback=false){
  out.innerHTML=ps.map(p=>{
    let q=`${year} ${model} ${colorPart} ${p}`.replace(/\s+/g,' ').trim();
    let links=sourceUrls(q, site).map(([name,url,manual])=>`<a class="source-link ${manual?'manual':''}" href="${url}" target="_blank" rel="noopener"><span>${name}</span><b>${manual?'Review':'Open'} →</b></a>`).join('');
-   return `<div class="query-card"><div class="query-title">${q}</div><div class="source-grid">${links}</div><div class="mini-note">This card updates instantly from the dropdowns above. In the real backend, the same profile is used for scheduled monitoring + Sheets export.</div></div>`
+   return `<div class="query-card"><div class="query-title">${q}</div><div class="source-grid">${links}</div><div class="mini-note">This card updates instantly from the vehicle/year fields and controls above. In the real backend, the same profile is used for scheduled monitoring + Sheets export.</div></div>`
  }).join('')
  if(showFeedback&&btn){
    requestAnimationFrame(()=>{
@@ -205,8 +238,7 @@ function gen(showFeedback=false){
  }
 }
 document.getElementById('generateBtn').addEventListener('click', ()=>gen(true));
-['model','year','color','region'].forEach(id=>document.getElementById(id).addEventListener('change', gen));
-document.getElementById('customModel').addEventListener('input', gen);
+['model','year','color','region'].forEach(id=>{const el=document.getElementById(id); el.addEventListener('change', gen); el.addEventListener('input', gen);});
 document.querySelectorAll('#partPicker input').forEach(x=>x.addEventListener('change', gen));
 render();gen();
 </script>

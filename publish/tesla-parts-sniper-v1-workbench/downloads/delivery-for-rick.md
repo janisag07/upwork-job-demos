@@ -19,8 +19,8 @@ I moved the V1 from structure-only into a working live-monitoring package focuse
 
 Latest UI refinement:
 
-- Year dropdown now includes 2026.
-- Search Profile Generator vehicle dropdown now includes Cybertruck, Model X, Model S, plus a custom/blank model input for other variations.
+- Year field is now flexible and accepts single years or ranges like `2020-2024` / `2020-2026`.
+- Search Profile Generator vehicle field is now directly typable and also includes an A-Z common vehicle/make/model list, including Tesla Model Y, Model 3, Cybertruck, Model X, Model S, and non-Tesla examples.
 
 
 Latest verified run:
