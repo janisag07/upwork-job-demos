@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Arbitrage Outbound System Blueprint</title>
+  <style>
+    :root{--bg:#080b12;--card:#111827;--muted:#9ca3af;--text:#f9fafb;--green:#22c55e;--blue:#38bdf8;--yellow:#facc15;--border:#263244}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top left,#13213d,#080b12 45%);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text);line-height:1.5}
+    .wrap{max-width:1120px;margin:0 auto;padding:42px 18px 64px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:stretch}.card{background:rgba(17,24,39,.88);border:1px solid var(--border);border-radius:24px;padding:24px;box-shadow:0 18px 60px rgba(0,0,0,.35)}
+    .eyebrow{color:var(--green);font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:.14em}h1{font-size:44px;line-height:1.04;margin:12px 0 14px}h2{margin:0 0 14px;font-size:22px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}.lane{border:1px solid var(--border);border-radius:18px;padding:18px;background:#0c1220}.lane b{display:block;margin-bottom:8px;color:#fff}.pill{display:inline-block;padding:7px 10px;border-radius:999px;background:#0b3b2b;color:#86efac;font-size:13px;font-weight:700;margin:4px 6px 4px 0}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}.step{padding:14px;border-radius:16px;background:#0b1220;border:1px solid #243044;text-align:center;font-size:14px}.step span{display:block;color:var(--blue);font-weight:800;margin-bottom:4px}.check{margin:0;padding-left:20px}.check li{margin:9px 0}.cta{margin-top:20px;padding:18px;border:1px solid #164e33;background:rgba(20,83,45,.25);border-radius:18px}code{color:#93c5fd}@media(max-width:850px){.hero,.grid,.flow{grid-template-columns:1fr}h1{font-size:34px}}
+  </style>
+</head>
+<body><main class="wrap">
+  <section class="hero">
+    <div class="card">
+      <div class="eyebrow">Project-specific blueprint</div>
+      <h1>AI outbound system that connects Apollo, GoHighLevel, Discord and fulfillment.</h1>
+      <p class="muted">The risk is not just generating leads. The real risk is selling an offer that cannot be fulfilled consistently. This blueprint keeps offer, booking, CRM automation and delivery feedback in one loop.</p>
+      <div>
+        <span class="pill">Apollo.io lead sourcing</span><span class="pill">GoHighLevel CRM + automations</span><span class="pill">Discord ops alerts</span><span class="pill">Offer + fulfillment loop</span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>First implementation sprint</h2>
+      <ul class="check">
+        <li>Define one simple offer with clear ICP, promise, proof and fulfillment boundary.</li>
+        <li>Map Apollo lead filters into GHL pipeline stages and follow-up triggers.</li>
+        <li>Add booking handoff, owner assignment, missed-reply alerts and Discord summaries.</li>
+        <li>Create QA checks before scale: bounced leads, duplicates, reply routing, booked-call attribution.</li>
+      </ul>
+      <div class="cta"><b>Outcome:</b> a system that can be tested with a small batch before spending weeks scaling the wrong offer.</div>
+    </div>
+  </section>
+  <section class="grid">
+    <div class="lane"><b>1. Offer lock</b><p class="muted">Niche, pain, guarantee, deliverable and fulfillment limits. No vague “AI automation” positioning.</p></div>
+    <div class="lane"><b>2. Pipeline build</b><p class="muted">Apollo lists → GHL contacts → stages → tasks → calendar booking → Discord ops notifications.</p></div>
+    <div class="lane"><b>3. Fulfillment feedback</b><p class="muted">Track which segment replies, books and closes so the offer improves instead of blindly sending more volume.</p></div>
+  </section>
+  <section class="card" style="margin-top:18px">
+    <h2>System flow</h2>
+    <div class="flow">
+      <div class="step"><span>01</span>Apollo ICP list</div><div class="step"><span>02</span>GHL pipeline + tags</div><div class="step"><span>03</span>Outbound sequence</div><div class="step"><span>04</span>Booking + Discord alert</div><div class="step"><span>05</span>Fulfillment QA loop</div>
+    </div>
+  </section>
+</main></body></html>
