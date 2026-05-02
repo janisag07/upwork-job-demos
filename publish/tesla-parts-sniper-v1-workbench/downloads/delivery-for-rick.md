@@ -19,6 +19,7 @@ I moved the V1 from structure-only into a working live-monitoring package focuse
 
 Latest UI refinement:
 
+- Year dropdown now includes 2026.
 - Search Profile Generator vehicle dropdown now includes Cybertruck, Model X, Model S, plus a custom/blank model input for other variations.
 
 
