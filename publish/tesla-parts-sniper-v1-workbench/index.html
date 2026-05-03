@@ -25,7 +25,7 @@ a{color:inherit}.wrap{width:min(1240px,calc(100% - 28px));margin:auto}.top{paddi
 </header>
 <main class="wrap">
 <section class="section grid">
-<div class="module"><h3>Priority sources</h3><ol><li>eBay Motors</li><li>Car-Part.com</li><li>Craigslist</li><li>Copart / IAAI</li><li>Facebook Marketplace manual/assisted</li></ol></div>
+<div class="module"><h3>Priority sources</h3><ol><li>eBay Motors</li><li>Car-Part.com</li><li>Craigslist Auto Parts / Parts for Sale</li><li>Copart / IAAI</li><li>Facebook Marketplace manual/assisted</li></ol></div>
 <div class="module"><h3>Priority vehicles</h3><ul><li>Tesla priority: Model Y, Model 3, Cybertruck, Model X, Model S</li><li>Flexible year or year range, e.g. 2020–2024</li><li>Type any vehicle manually or select common makes/models A–Z</li></ul></div>
 <div class="module"><h3>Priority regions</h3><ul><li>Washington / Oregon</li><li>Bay Area, Los Angeles / San Diego</li><li>Idaho, Las Vegas</li><li>Arizona / Utah remain fallback coverage</li></ul></div>
 </section>
@@ -165,7 +165,7 @@ else:
 <a class="source-link" href="downloads/delivery-for-rick.md"><span>Delivery notes</span><b>Open notes →</b></a>
 <a class="source-link" href="downloads/tesla-parts-sniper-v1-package.zip"><span>Full V1 package</span><b>Download ZIP →</b></a>
 </div>
-<div class="dis">Coverage note: Craigslist live pull is working. eBay/Car-Part are included but may need approved API/provider/account access for full automated live extraction because public automated access is blocked.</div>
+<div class="dis">Coverage note: Craigslist live pull is working and every generated Craigslist search uses the Auto Parts / Parts for Sale category (`/search/pta`) — not cars/trucks. eBay/Car-Part are included but may need approved API/provider/account access for full automated live extraction because public automated access is blocked.</div>
 </section>
 <section class="section">
 <h2>Real live listings pulled in latest run</h2>
@@ -195,7 +195,7 @@ function currentYear(){return val('year') || 'Any year'}
 function selectedParts(){return [...document.querySelectorAll('#partPicker input:checked')].map(x=>x.value)}
 function sourceUrls(q, site){return [
  ['eBay Motors',`https://www.ebay.com/sch/i.html?_nkw=${enc(q)}&_sacat=6028`,false],
- [`Craigslist ${site}`,`https://${site}.craigslist.org/search/pta?query=${enc(q)}`,false],
+ [`Craigslist Auto Parts (${site})`,`https://${site}.craigslist.org/search/pta?query=${enc(q)}`,false],
  ['Car-Part',`https://www.car-part.com/`,true],
  ['Copart',`https://www.copart.com/lotSearchResults?free=true&query=${enc(q)}`,true],
  ['IAAI',`https://www.iaai.com/Search?Keyword=${enc(q)}`,true],

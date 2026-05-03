@@ -29,6 +29,7 @@ Latest verified run:
 - 26 unique real Craigslist/eBay direct listing rows were pulled automatically in the latest run
 - The Listings tab now includes every configured Rick part category: hood, front bumper, rear bumper, fender, headlight, door, hatch, trunk, wheel, seat, suspension, and module
 - Vehicle/year, part type, color, price, location, direct link, score, duplicate flag, status, and notes are all mapped into the sheet export
+- Craigslist search/profile links explicitly use Craigslist Auto Parts / Parts for Sale (`/search/pta`), not cars/trucks (`/search/cta`, `/search/cto`, or `/search/ctd`)
 - eBay was attempted through safe public/RSS/text extraction, but the current environment blocks automated eBay access, so the system generates direct eBay review URLs instead of faking inventory
 - Car-Part.com is included as a structured usable workflow/direct review URL because unauthenticated automated extraction is blocked by the site in this environment
 - Copart/IAAI remain manual-review first, as agreed
