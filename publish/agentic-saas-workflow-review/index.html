@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agentic SaaS Workflow Review & Deployment Plan</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2f;--muted:#9bb0c9;--text:#edf5ff;--green:#54f1a6;--blue:#6bb7ff;--line:#213454;--warn:#ffd166}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 20% 0%,#123d5f 0,#07111f 38%,#050912 100%);color:var(--text)}main{max-width:1120px;margin:0 auto;padding:42px 22px 70px}.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid #2c5177;background:#0a2038;border-radius:999px;padding:8px 12px;color:#bfe3ff;font-size:13px}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:stretch;margin-top:22px}.card{background:linear-gradient(180deg,rgba(13,27,47,.94),rgba(7,15,28,.94));border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 60px rgba(0,0,0,.28)}h1{font-size:46px;line-height:1.02;margin:16px 0 14px;letter-spacing:-.04em}h2{font-size:22px;margin:0 0 14px}p{color:#cbd8ea;line-height:1.55}.accent{color:var(--green)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}.mini{border:1px solid var(--line);border-radius:16px;padding:16px;background:#09182b}.mini b{display:block;color:#fff;margin-bottom:6px}.flow{display:grid;gap:10px}.step{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);background:#08182a;border-radius:15px;padding:14px}.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#123a5a;color:var(--green);font-weight:800;flex:0 0 30px}.table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:16px}td,th{padding:12px;border-bottom:1px solid var(--line);text-align:left;color:#cfe0f5}th{color:#fff;background:#0e223a}.pill{display:inline-block;border:1px solid #2d8c63;color:#a9ffd4;background:#092719;border-radius:999px;padding:5px 9px;font-size:12px;margin:3px}.warn{color:var(--warn)}@media(max-width:820px){.hero,.grid{grid-template-columns:1fr}h1{font-size:34px}}
+</style>
+</head>
+<body>
+<main>
+  <span class="badge">Project-specific preview for an Upwork SaaS / Agentic AI workflow review</span>
+  <section class="hero">
+    <div class="card">
+      <h1>Agentic AI workflow audit → <span class="accent">stable deployment plan</span></h1>
+      <p>This is a lean implementation preview for reviewing an existing AI tool, resolving architecture issues, and deploying a scalable SaaS workflow with clear data flow, governance, and action controls.</p>
+      <div class="grid">
+        <div class="mini"><b>Data origination</b><span>Business search, document intake, RFQ/chat triggers, favorites, geo context.</span></div>
+        <div class="mini"><b>Reasoning layer</b><span>Ollama/local LLM orchestration, semantic routing, confidence checks.</span></div>
+        <div class="mini"><b>Deployment</b><span>Hetzner-ready services, logs, queueing, security gates, QA checklist.</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>First 7-day work plan</h2>
+      <div class="flow">
+        <div class="step"><div class="num">1</div><div><b>Map current system</b><p>Inputs, storage, compute, semantic reasoning, action triggers, document/chat/RFQ objects.</p></div></div>
+        <div class="step"><div class="num">2</div><div><b>Find failure points</b><p>Broken workflows, missing state, weak prompts, unsafe actions, deployment bottlenecks.</p></div></div>
+        <div class="step"><div class="num">3</div><div><b>Ship fixes in order</b><p>Prioritize fixes that unblock scalable SaaS use: reliable data model, queue, APIs, logs, permissions.</p></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="card" style="margin-top:18px">
+    <h2>Architecture checkpoints</h2>
+    <table class="table">
+      <tr><th>Area</th><th>What I would verify</th><th>Output</th></tr>
+      <tr><td>NLP search + geo</td><td>How users locate businesses, favorites, and customer/vendor records.</td><td>Clean query-to-record routing spec.</td></tr>
+      <tr><td>Document/RFQ workflow</td><td>RFQ distribution, vendor responses, selection, quote/note consolidation.</td><td>State machine + audit trail.</td></tr>
+      <tr><td>Agent actions</td><td>Calendar booking, chat summaries, follow-up actions, human approval points.</td><td>Action guardrails + rollback plan.</td></tr>
+      <tr><td>Deployment</td><td>Ollama/Hetzner services, env vars, logs, background jobs, backups.</td><td>Production deployment checklist.</td></tr>
+    </table>
+  </section>
+  <section class="card" style="margin-top:18px">
+    <h2>Tools / implementation fit</h2>
+    <span class="pill">Ollama</span><span class="pill">Hetzner</span><span class="pill">Python / APIs</span><span class="pill">Workflow automation</span><span class="pill">Document/RFQ systems</span><span class="pill">Governance + security</span><span class="pill">SaaS deployment</span>
+    <p class="warn">Main principle: fix reliability and data/control flow first, then expand the agentic layer. This avoids turning a buggy workflow into a larger buggy workflow.</p>
+  </section>
+</main>
+</body>
+</html>
