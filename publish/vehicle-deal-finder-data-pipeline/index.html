@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vehicle Deal Finder Data Pipeline — Proof of Approach</title>
+  <style>
+    :root{--bg:#08111f;--card:#101b2d;--muted:#8ea3bc;--text:#edf5ff;--line:#233653;--blue:#61dafb;--green:#4ade80;--orange:#f59e0b;--red:#fb7185}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#17345c 0,#08111f 38%,#050913 100%);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text)}main{max-width:1120px;margin:0 auto;padding:46px 20px 60px}.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid #2d5d86;background:#0b2138;color:#b8ecff;border-radius:999px;padding:8px 12px;font-size:13px}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center;margin-top:20px}.panel{background:rgba(16,27,45,.88);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 20px 70px rgba(0,0,0,.32)}h1{font-size:48px;line-height:1.02;margin:16px 0 14px;letter-spacing:-1.6px}h2{margin:0 0 14px;font-size:22px}p{color:#c9d7e8;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}.step{background:#0b1526;border:1px solid var(--line);border-radius:18px;padding:16px;min-height:154px}.step strong{display:block;margin:8px 0 6px;font-size:16px}.num{width:28px;height:28px;border-radius:50%;background:#123b5f;color:#8de6ff;display:grid;place-items:center;font-weight:800}.flow{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:18px 0}.node{flex:1;background:#0b1526;border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center;color:#dbeafe}.arrow{color:#61dafb;font-size:22px}.table{width:100%;border-collapse:collapse;margin-top:10px;overflow:hidden;border-radius:16px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);font-size:14px}th{color:#91e7ff;background:#0b1729}td{color:#dce8f7}.score{font-weight:800}.good{color:var(--green)}.warn{color:var(--orange)}.risk{color:var(--red)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#a7f3d0;background:#06141f;border:1px solid #1f3a34;border-radius:14px;padding:16px;white-space:pre-wrap}.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}.check{background:#0b1526;border:1px solid var(--line);border-radius:14px;padding:12px;color:#dce8f7}.small{font-size:13px;color:var(--muted)}@media(max-width:900px){.hero,.grid,.checks{grid-template-columns:1fr}.flow{flex-direction:column}.arrow{transform:rotate(90deg)}h1{font-size:36px}}
+  </style>
+</head>
+<body>
+<main>
+  <span class="badge">Proof-of-approach • fictional vehicle data • source-compliant scope first</span>
+  <section class="hero">
+    <div>
+      <h1>Vehicle Deal Finder Data Pipeline</h1>
+      <p>A lean automation blueprint for Appium / Android-emulator extraction → clean vehicle listing JSON → dedupe and deal scoring → Node/Next.js handoff for scheduled runs.</p>
+      <div class="flow">
+        <div class="node">Appium intake</div><div class="arrow">→</div><div class="node">JSON normalizer</div><div class="arrow">→</div><div class="node">Dedupe + scoring</div><div class="arrow">→</div><div class="node">Next.js API queue</div>
+      </div>
+      <p class="small">Important: proxy / source access assumptions should be checked first. I would scope this around client-provided accounts, allowed sources, rate limits, and test data before any production run.</p>
+    </div>
+    <div class="panel">
+      <h2>Sample normalized output</h2>
+      <div class="mono">{
+  "source": "android_emulator_run_042",
+  "title": "2019 Toyota Camry SE",
+  "price": 14950,
+  "year": 2019,
+  "mileage": 62700,
+  "location": "Dallas, TX",
+  "seller_type": "dealer",
+  "deal_score": 87,
+  "dedupe_key": "toyota-camry-2019-dallas-14950",
+  "status": "ready_for_api_handoff"
+}</div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="step"><span class="num">1</span><strong>Emulator extraction map</strong><p>Define selectors, scroll logic, retries, screenshots/logs, and safe run limits for the Android/Appium layer.</p></div>
+    <div class="step"><span class="num">2</span><strong>Structured listing parser</strong><p>Normalize title, price, year, mileage, location, seller and source metadata into a predictable JSON schema.</p></div>
+    <div class="step"><span class="num">3</span><strong>Dedupe + QA queue</strong><p>Prevent duplicate vehicles, flag missing fields, detect price anomalies, and keep failed records reviewable.</p></div>
+    <div class="step"><span class="num">4</span><strong>Node / Next.js handoff</strong><p>Expose a clean API payload for scheduled processing, dashboards, alerts, or downstream scoring logic.</p></div>
+  </section>
+
+  <section class="panel" style="margin-top:18px">
+    <h2>Deal scoring example</h2>
+    <table class="table">
+      <thead><tr><th>Vehicle</th><th>Price</th><th>Mileage</th><th>Location</th><th>Status</th><th>Score</th></tr></thead>
+      <tbody>
+        <tr><td>2019 Toyota Camry SE</td><td>$14,950</td><td>62,700</td><td>Dallas, TX</td><td class="good">Clean JSON</td><td class="score good">87</td></tr>
+        <tr><td>2017 Honda Accord EX</td><td>$12,400</td><td>91,200</td><td>Austin, TX</td><td class="warn">Review mileage</td><td class="score warn">71</td></tr>
+        <tr><td>2020 Ford F-150 XLT</td><td>$26,900</td><td>58,000</td><td>Tulsa, OK</td><td class="risk">Possible duplicate</td><td class="score risk">54</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" style="margin-top:18px">
+    <h2>First milestone I would propose</h2>
+    <div class="checks">
+      <div class="check">✅ Confirm source/proxy/account assumptions and allowed request behavior.</div>
+      <div class="check">✅ Build one Appium extraction path with logs and retry handling.</div>
+      <div class="check">✅ Output title / price / year / mileage / location JSON.</div>
+      <div class="check">✅ Add dedupe keys, validation errors, and a Next.js API handoff sample.</div>
+    </div>
+    <p class="small">Built as a project-specific proof-of-approach for the Upwork job. Fictional sample data only.</p>
+  </section>
+</main>
+</body>
+</html>
