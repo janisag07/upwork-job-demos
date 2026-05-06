@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HubSpot RevOps Control Map</title>
+  <style>
+    :root{--bg:#07111f;--panel:#0d1b2e;--muted:#8ea0b8;--text:#eef5ff;--blue:#5ee1ff;--green:#68f5a6;--orange:#ffd166;--red:#ff6b6b;--line:#1f3552}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(145deg,#06101d,#0a1d34 55%,#081424);color:var(--text);padding:34px}
+    .wrap{max-width:1180px;margin:auto}.tag{color:var(--blue);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:12px}h1{font-size:44px;line-height:1.05;margin:12px 0 12px}.sub{font-size:18px;color:#b9c9dc;max-width:860px;line-height:1.5}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:26px}.card{background:rgba(13,27,46,.86);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+    h2{margin:0 0 16px;font-size:20px}.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.stage{border:1px solid #29486c;background:#0a1628;border-radius:14px;padding:14px;min-height:150px}.stage b{display:block;margin-bottom:8px;color:#fff}.stage span{display:block;color:var(--muted);font-size:13px;line-height:1.35}.pill{display:inline-flex;border:1px solid #31577e;border-radius:999px;padding:7px 10px;margin:5px 5px 0 0;color:#cfe5ff;background:#0a182a;font-size:13px}.flow{display:grid;gap:10px}.row{display:grid;grid-template-columns:150px 1fr 115px;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}.row:last-child{border:0}.status{font-weight:800;text-align:center;border-radius:999px;padding:7px}.ok{background:#123d2b;color:var(--green)}.warn{background:#493b12;color:var(--orange)}.bad{background:#441d25;color:var(--red)}
+    .events{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.event{background:#081629;border:1px solid #25435f;border-radius:16px;padding:16px}.event strong{color:#fff}.event p{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.4}.small{color:var(--muted);font-size:13px;margin-top:18px}.wide{grid-column:1/-1}.check{color:var(--green)}
+    @media(max-width:900px){body{padding:18px}.grid,.pipeline,.events{grid-template-columns:1fr}h1{font-size:34px}.row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="tag">Proof of approach · HubSpot Admin / RevOps</div>
+    <h1>HubSpot RevOps Control Map</h1>
+    <p class="sub">A lightweight blueprint for the exact admin role: SaaS pipeline architecture, required deal/contact properties, membership logic, webhook/API error handling, and custom behavioral events for segmentation and workflows.</p>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Multi-stage SaaS sales pipeline</h2>
+        <div class="pipeline">
+          <div class="stage"><b>1 · Self-serve signup</b><span>Lifecycle stage, source, ICP segment, product intent, trial start, MQL score.</span></div>
+          <div class="stage"><b>2 · Qualified</b><span>Required: persona, company size, use case, ARR estimate, next step owner.</span></div>
+          <div class="stage"><b>3 · Demo / discovery</b><span>Meeting booked, pain category, decision process, competitor, timeline.</span></div>
+          <div class="stage"><b>4 · Proposal / enterprise</b><span>Plan tier, stakeholders, legal/security status, forecast category, close date.</span></div>
+          <div class="stage"><b>5 · Won / onboarding</b><span>Hand-off checklist, onboarding segment, success owner, activation event.</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Required fields + list hygiene</h2>
+        <span class="pill">Deal stage guardrails</span><span class="pill">Suppression lists</span><span class="pill">Over-enrollment checks</span><span class="pill">Duplicate contact rules</span><span class="pill">Active vs static lists</span><span class="pill">Owner handoff notes</span><span class="pill">Lifecycle sync</span><span class="pill">Data QA dashboard</span>
+        <p class="small">Goal: keep reps moving fast without letting incomplete deals, messy memberships, or duplicate workflows pollute reporting.</p>
+      </div>
+
+      <div class="card">
+        <h2>Webhook/API workflow handling</h2>
+        <div class="flow">
+          <div class="row"><b>Trigger</b><span>Deal enters enterprise proposal or contact completes a product action.</span><em class="status ok">clean</em></div>
+          <div class="row"><b>Payload</b><span>Contact ID, deal ID, plan tier, event name, timestamp, source, owner.</span><em class="status ok">mapped</em></div>
+          <div class="row"><b>External app</b><span>POST to app/warehouse/ops tool with retry token and dedupe key.</span><em class="status warn">retry</em></div>
+          <div class="row"><b>Error handling</b><span>Log failed deliveries, alert owner, create task, re-enroll only after fix.</span><em class="status bad">visible</em></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Custom behavioral event setup</h2>
+        <div class="events">
+          <div class="event"><strong>Event</strong><p><span class="check">●</span> `activation_completed` for in-app action, not a page view/form fill.</p></div>
+          <div class="event"><strong>Properties</strong><p>Plan, account ID, role, feature used, timestamp, workspace size.</p></div>
+          <div class="event"><strong>Use</strong><p>Segment activated trials, trigger sales task, suppress nurture, route enterprise users.</p></div>
+        </div>
+      </div>
+
+      <div class="card wide">
+        <h2>First milestone proposal</h2>
+        <span class="pill">Audit current pipeline + properties</span><span class="pill">Map self-serve vs enterprise motion</span><span class="pill">Build required-field rules</span><span class="pill">Create list cleanup plan</span><span class="pill">Draft webhook/event workflow</span><span class="pill">Deliver admin handoff doc</span>
+        <p class="small">Built as a project-specific proof-of-approach for the Upwork post. Fictional sample data only.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
