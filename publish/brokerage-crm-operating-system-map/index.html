@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brokerage CRM Operating System Map</title>
+  <style>
+    :root{--bg:#071018;--panel:#0d1b24;--line:#214153;--text:#edf7fb;--muted:#a6bbc7;--blue:#66d9ff;--green:#78f2b2;--gold:#ffd166;--red:#ff7b7b}
+    *{box-sizing:border-box} body{margin:0;padding:34px;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at top left,#143248,#071018 45%,#050b10);color:var(--text)}
+    .wrap{max-width:1180px;margin:auto}.tag{color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:.13em;font-size:12px}h1{font-size:44px;line-height:1.05;margin:12px 0}.sub{font-size:18px;line-height:1.5;color:#bfd0d9;max-width:900px}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:26px}.card{background:rgba(13,27,36,.9);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 24px 60px rgba(0,0,0,.28)}h2{margin:0 0 16px;font-size:20px}.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.stage{border:1px solid #2b5369;background:#091721;border-radius:16px;padding:14px;min-height:155px}.stage b{display:block;margin-bottom:8px}.stage span{display:block;color:var(--muted);font-size:13px;line-height:1.4}.pill{display:inline-flex;border:1px solid #315a70;border-radius:999px;padding:7px 10px;margin:5px 5px 0 0;color:#d8edf6;background:#081722;font-size:13px}.flow{display:grid;gap:10px}.row{display:grid;grid-template-columns:155px 1fr 120px;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}.row:last-child{border:0}.status{font-weight:800;text-align:center;border-radius:999px;padding:7px}.ok{background:#123829;color:var(--green)}.warn{background:#423714;color:var(--gold)}.bad{background:#3e1b22;color:var(--red)}.sops{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.sop{background:#081722;border:1px solid #284b5f;border-radius:16px;padding:16px}.sop strong{color:#fff}.sop p{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.4}.wide{grid-column:1/-1}.small{color:var(--muted);font-size:13px;margin-top:18px}.check{color:var(--green)}
+    @media(max-width:900px){body{padding:18px}.grid,.pipeline,.sops{grid-template-columns:1fr}h1{font-size:34px}.row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="tag">Proof of approach · Total Brokerage CRM + Real Estate SOPs</div>
+    <h1>Brokerage CRM Operating System Map</h1>
+    <p class="sub">A practical blueprint for turning Total Brokerage into a cleaner real estate operations system: lead routing, pipeline stages, tags, automations, agent task SOPs, reporting, and handoff documentation for a small but growing brokerage.</p>
+
+    <section class="grid">
+      <div class="card wide">
+        <h2>Lead → client → close pipeline structure</h2>
+        <div class="pipeline">
+          <div class="stage"><b>1 · New lead intake</b><span>Source, buyer/seller intent, location, price range, urgency, assigned agent, required first-touch SLA.</span></div>
+          <div class="stage"><b>2 · Contacted / qualified</b><span>Contact status, financing/pre-approval, needs, timeline, next action, follow-up cadence.</span></div>
+          <div class="stage"><b>3 · Active buyer/listing</b><span>Showing tasks, listing prep, seller docs, agent checklist, communication notes.</span></div>
+          <div class="stage"><b>4 · Under contract</b><span>Contract-to-close checklist, dates, contingencies, inspections, lender/title tasks.</span></div>
+          <div class="stage"><b>5 · Closed / nurture</b><span>Review request, referral follow-up, past-client nurture, reporting and agent accountability.</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Total Brokerage setup checklist</h2>
+        <span class="pill">Pipelines</span><span class="pill">Lead routing</span><span class="pill">Tags</span><span class="pill">Automations</span><span class="pill">Follow-up sequences</span><span class="pill">Agent task templates</span><span class="pill">Reporting fields</span><span class="pill">Handoff notes</span>
+        <p class="small">Goal: not just “click around in the CRM” — create a consistent operating system the broker and agents can actually follow.</p>
+      </div>
+
+      <div class="card">
+        <h2>Workflow QA map</h2>
+        <div class="flow">
+          <div class="row"><b>New lead</b><span>Lead enters CRM, source and intent are captured, routing rule assigns owner.</span><em class="status ok">mapped</em></div>
+          <div class="row"><b>Agent follow-up</b><span>Tasks, reminders, and SOP steps are triggered without relying on memory.</span><em class="status ok">repeatable</em></div>
+          <div class="row"><b>Transaction stage</b><span>Buyer/listing/contract-to-close checklist changes based on stage.</span><em class="status warn">needs audit</em></div>
+          <div class="row"><b>Reporting</b><span>Broker sees lead source, agent activity, stuck deals, and missing next steps.</span><em class="status ok">visible</em></div>
+        </div>
+      </div>
+
+      <div class="card wide">
+        <h2>SOP playbook modules</h2>
+        <div class="sops">
+          <div class="sop"><strong><span class="check">●</span> Lead follow-up SOP</strong><p>First-touch standard, missed-call/text/email sequence, qualification fields, and escalation rules.</p></div>
+          <div class="sop"><strong><span class="check">●</span> Buyer + listing SOPs</strong><p>Step-by-step agent checklists for consultations, showings, listing prep, docs, and next actions.</p></div>
+          <div class="sop"><strong><span class="check">●</span> Contract-to-close SOP</strong><p>Critical dates, title/lender coordination, inspection/appraisal tasks, and closing handoff.</p></div>
+          <div class="sop"><strong><span class="check">●</span> Agent onboarding</strong><p>CRM usage rules, pipeline hygiene, daily task routine, lead ownership, and reporting expectations.</p></div>
+          <div class="sop"><strong><span class="check">●</span> Gap recommendations</strong><p>Identify missing automations, reporting blind spots, and places where staff are manually repeating work.</p></div>
+          <div class="sop"><strong><span class="check">●</span> Handoff documentation</strong><p>Clean playbook so the team can run the system without needing constant founder involvement.</p></div>
+        </div>
+      </div>
+
+      <div class="card wide">
+        <h2>Suggested fixed-scope first milestone</h2>
+        <span class="pill">Audit current Total Brokerage setup</span><span class="pill">Map lead + transaction pipelines</span><span class="pill">Define tags/fields/routing rules</span><span class="pill">Build SOP skeletons</span><span class="pill">Create follow-up/task logic</span><span class="pill">Test with sample leads</span><span class="pill">Deliver handoff playbook</span>
+        <p class="small">Built as a project-specific proof-of-approach for the Upwork post. Fictional workflow/sample data only.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
