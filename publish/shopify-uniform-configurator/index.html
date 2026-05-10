@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopify Uniform Configurator — Quote Flow Proof</title>
+  <style>
+    :root{--bg:#f6f2ea;--ink:#172019;--muted:#667064;--green:#1f6b45;--gold:#c49a4a;--line:#ded6c9;--card:#fffaf2;--dark:#0f1b14}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.45}.wrap{max-width:1160px;margin:0 auto;padding:34px 18px 70px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px}.brand{font-weight:900;letter-spacing:.08em;text-transform:uppercase}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:#fff;color:var(--muted);font-size:13px}.hero{display:grid;grid-template-columns:1.04fr .96fr;gap:24px;align-items:stretch;margin-top:28px}.card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:0 20px 50px rgba(30,20,10,.09);padding:26px}h1{font-size:48px;line-height:1.02;letter-spacing:-1.7px;margin:10px 0 14px}.lead{font-size:19px;color:#4e5b50;max-width:760px}.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}.step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;min-height:118px}.num{width:30px;height:30px;border-radius:10px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:900;margin-bottom:10px}.step b{display:block;margin-bottom:6px}.step span{color:var(--muted);font-size:13px}.mock{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px}.mock h3{margin:0 0 14px}.row{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid #eee4d6}.swatches{display:flex;gap:8px;margin:10px 0 16px}.sw{width:30px;height:30px;border-radius:999px;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}.quote{margin-top:14px;background:var(--dark);color:#fff;border-radius:18px;padding:18px}.quote strong{font-size:34px;color:#83e2a9}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}.module{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.module b{display:block;margin-bottom:7px}.module span{color:var(--muted);font-size:14px}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.flow div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.cta{margin-top:18px;border-left:5px solid var(--green);background:#eef7ef;padding:14px 16px;border-radius:12px;color:#183c29}@media(max-width:900px){.hero{grid-template-columns:1fr}.steps,.grid,.flow{grid-template-columns:1fr 1fr}h1{font-size:36px}}@media(max-width:560px){.steps,.grid,.flow{grid-template-columns:1fr}.top{display:block}.pill{display:inline-block;margin-top:10px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top"><div class="brand">Jones Supply Co. / Uniform Program Builder</div><div class="pill">Proof-of-approach • fictional data only • built for the Upwork configurator job</div></div>
+    <section class="hero">
+      <div class="card">
+        <h1>5-Step Shopify Uniform Configurator with HubSpot Lead Routing</h1>
+        <p class="lead">A mobile-friendly quote builder embedded on a Shopify page. Prospects choose style, quantity, Pantone color and branding method, see an instant estimate, then submit a quote request that routes to HubSpot and triggers a confirmation email.</p>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><b>Product style</b><span>7 uniform options with editable base pricing.</span></div>
+          <div class="step"><div class="num">2</div><b>Quantity</b><span>Slider from 25–500 with volume tiers.</span></div>
+          <div class="step"><div class="num">3</div><b>Pantone color</b><span>Swatches plus custom PMS input.</span></div>
+          <div class="step"><div class="num">4</div><b>Branding</b><span>Embroidery, screenprint, patch, woven label.</span></div>
+          <div class="step"><div class="num">5</div><b>Quote request</b><span>Estimate, contact form, HubSpot + email handoff.</span></div>
+        </div>
+        <div class="cta">Recommended build: Tally/Typeform for the guided logic + Zapier for HubSpot/contact/email + Shopify Custom HTML/Liquid embed. No risky theme-code changes.</div>
+      </div>
+      <aside class="card">
+        <div class="mock">
+          <h3>Instant Estimate Preview</h3>
+          <div class="row"><span>Style</span><b>Performance Polo</b></div>
+          <div class="row"><span>Quantity</span><b>150 units</b></div>
+          <div class="swatches"><div class="sw" style="background:#1f4f8f"></div><div class="sw" style="background:#143c2c"></div><div class="sw" style="background:#ede0c4"></div><div class="sw" style="background:#111"></div><div class="sw" style="background:#b22b2b"></div></div>
+          <div class="row"><span>PMS</span><b>Custom PMS 3435 C</b></div>
+          <div class="row"><span>Branding</span><b>Embroidery</b></div>
+          <div class="quote"><div>Estimated program quote</div><strong>$2,925</strong><br><small>Final pricing confirmed after artwork + size run review.</small></div>
+        </div>
+      </aside>
+    </section>
+    <section class="card" style="margin-top:20px">
+      <h2>Delivery Blueprint</h2>
+      <div class="flow">
+        <div><b>Shopify page</b><br><span class="small">Create `/pages/build-your-program`, embed configurator, add nav/menu link after approval.</span></div>
+        <div><b>Configurator logic</b><br><span class="small">Conditional steps, pricing formula, PMS/custom fields, mobile responsive layout.</span></div>
+        <div><b>Zapier handoff</b><br><span class="small">Submission → HubSpot contact/deal → internal notification → prospect confirmation email.</span></div>
+        <div><b>Handoff</b><br><span class="small">Short Loom + edit doc so the team can change options/prices later.</span></div>
+      </div>
+      <div class="grid">
+        <div class="module"><b>Theme-safe</b><span>Embedded as a page block/custom HTML so existing product/theme pages stay untouched.</span></div>
+        <div class="module"><b>Brand-matched</b><span>Colors, spacing, typography and button style can be matched to jonessupplyco.com.</span></div>
+        <div class="module"><b>CRM-ready</b><span>HubSpot fields map style, quantity, PMS, branding method, estimate and contact info.</span></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
