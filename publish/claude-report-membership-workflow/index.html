@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claude Report + Membership Automation</title>
+  <style>
+    :root{--bg:#080b12;--panel:#101624;--panel2:#0c1220;--text:#f4f7fb;--muted:#9aa8bb;--green:#50ef9f;--purple:#a78bfa;--line:#243044;--orange:#fbbf24}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#1f2550 0,#080b12 42%,#05070b 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.45}.wrap{max-width:1080px;margin:0 auto;padding:42px 20px 70px}.pill{display:inline-block;border:1px solid #364268;background:#111936;color:#d8ddff;border-radius:999px;padding:8px 12px;font-size:13px}h1{font-size:48px;line-height:1.03;letter-spacing:-1.6px;margin:18px 0 12px}.lead{font-size:19px;color:#cad4e5;max-width:760px}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:stretch}.card{background:linear-gradient(180deg,rgba(16,22,36,.96),rgba(10,15,26,.96));border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 20px 60px rgba(0,0,0,.38)}.pipeline{display:grid;gap:12px}.node{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:flex-start;border:1px solid #2a3852;background:#0b1322;border-radius:18px;padding:15px}.icon{height:48px;border-radius:15px;display:grid;place-items:center;font-weight:900;color:#06100c;background:var(--green)}.node:nth-child(even) .icon{background:var(--purple);color:#0d0820}.node b{display:block;margin-bottom:4px}.node span{color:var(--muted);font-size:14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.module{border:1px solid #2a3852;border-radius:18px;background:#0b1322;padding:16px}.module b{display:block;margin-bottom:7px}.module span{color:var(--muted);font-size:14px}.preview{border:1px solid #34435e;background:#0a111e;border-radius:18px;padding:18px;margin-top:15px}.label{color:#06100c;background:var(--green);font-weight:900;font-size:12px;border-radius:999px;padding:4px 8px}.cta{margin-top:18px;border-left:4px solid var(--green);background:#0d1a23;padding:13px 16px;border-radius:12px;color:#defbea}@media(max-width:850px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}h1{font-size:36px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <span class="pill">Proof-of-approach • Stripe → Website Form → Claude → PDF → Email + Membership Area</span>
+    <section class="hero">
+      <div class="card">
+        <h1>Automated Claude PDF Report Delivery System</h1>
+        <p class="lead">A clean workflow for selling a PDF report or monthly membership: Stripe handles payment, the buyer submits form data, Claude generates structured report content, the system renders a formatted PDF, emails it, and stores it inside the member area.</p>
+        <div class="grid">
+          <div class="module"><b>Stripe gate</b><span>Checkout/session webhook confirms purchase or active subscription.</span></div>
+          <div class="module"><b>Claude report engine</b><span>Validated form answers become a controlled prompt/template for Claude.</span></div>
+          <div class="module"><b>Delivery + portal</b><span>PDF is emailed and attached to the customer’s membership account.</span></div>
+        </div>
+        <div class="cta">First milestone: implement one purchase path end-to-end with sample form data, a branded PDF template, email delivery, and admin logs.</div>
+      </div>
+      <aside class="card">
+        <span class="label">Workflow Map</span>
+        <div class="pipeline" style="margin-top:14px">
+          <div class="node"><div class="icon">1</div><div><b>Stripe purchase</b><span>Webhook verifies payment/subscription and creates an order record.</span></div></div>
+          <div class="node"><div class="icon">2</div><div><b>Website form</b><span>Buyer submits required data; validation prevents incomplete report runs.</span></div></div>
+          <div class="node"><div class="icon">3</div><div><b>Claude generation</b><span>Prompt template returns structured sections for the report, not raw messy text.</span></div></div>
+          <div class="node"><div class="icon">4</div><div><b>PDF + email + member area</b><span>Generate formatted PDF, email buyer, save file to account dashboard.</span></div></div>
+        </div>
+      </aside>
+    </section>
+    <section class="card" style="margin-top:20px">
+      <h2>Build Notes</h2>
+      <div class="preview">
+        <b>Reliability pieces I would include:</b>
+        <ul style="color:#cad4e5;margin-bottom:0">
+          <li>Webhook idempotency so Stripe events do not generate duplicate reports.</li>
+          <li>Prompt/version logging so report outputs are traceable and easier to improve.</li>
+          <li>PDF render queue + retry path for failed report generation.</li>
+          <li>Admin status table: paid → form received → Claude complete → PDF sent → member area uploaded.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

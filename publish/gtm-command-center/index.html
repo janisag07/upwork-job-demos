@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GTM Command Center — Portfolio Intelligence Briefing</title>
+  <style>
+    :root{--bg:#071018;--panel:#0d1b27;--muted:#8ea2b2;--text:#edf6ff;--green:#51f0a8;--blue:#6cb7ff;--line:#183448;--warn:#ffd166}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top left,#12304a 0,#071018 38%,#05090d 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.45}
+    .wrap{max-width:1120px;margin:0 auto;padding:42px 20px 70px}.pill{display:inline-flex;gap:8px;align-items:center;border:1px solid #24516a;background:#0b2233;color:#b7e7ff;border-radius:999px;padding:8px 12px;font-size:13px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:stretch;margin-top:18px}.card{background:linear-gradient(180deg,rgba(13,27,39,.96),rgba(8,17,25,.96));border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 60px rgba(0,0,0,.35);padding:26px}h1{font-size:48px;letter-spacing:-1.7px;line-height:1.02;margin:18px 0 14px}.lead{font-size:19px;color:#c6d7e5;max-width:760px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}.module{border:1px solid #1d4055;background:#091a27;border-radius:18px;padding:16px}.module b{display:block;margin-bottom:7px;color:#fff}.module span{color:var(--muted);font-size:14px}.flow{display:grid;gap:10px;margin-top:16px}.step{display:flex;gap:12px;align-items:flex-start;border:1px solid #1b394d;background:#081721;border-radius:16px;padding:14px}.num{min-width:28px;height:28px;border-radius:9px;background:var(--green);color:#042012;display:grid;place-items:center;font-weight:800}.tag{color:#071018;background:var(--green);border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800}.small{color:var(--muted);font-size:13px}.companies{display:grid;gap:12px;margin-top:14px}.company{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #183448;padding:12px 0}.brief{background:#081722;border:1px solid #24475a;border-radius:18px;padding:18px;margin-top:14px}.brief h3{margin:0 0 10px}.brief ul{margin:0;padding-left:20px;color:#c6d7e5}.cta{margin-top:18px;border-left:4px solid var(--green);padding:12px 16px;background:#0a1d28;color:#dff7ee;border-radius:12px}@media(max-width:850px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}h1{font-size:36px}}@media(max-width:560px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <span class="pill">Proof-of-approach • fictional data only • built for the GTM Command Center job</span>
+    <section class="hero">
+      <div class="card">
+        <h1>Personal Portfolio Intelligence Briefing for a GTM Advisor</h1>
+        <p class="lead">A daily command center that pulls signals from Slack, Gmail, Gong and Otter.ai across Keboola, HiveMQ and Duvo.ai, then sends one clean morning briefing with risks, asks, follow-ups and board-level priorities.</p>
+        <div class="grid">
+          <div class="module"><b>Slack signals</b><span>Channel mentions, blockers, launch updates, customer escalations.</span></div>
+          <div class="module"><b>Gmail signals</b><span>Investor/client asks, unread priority threads, follow-up deadlines.</span></div>
+          <div class="module"><b>Gong + Otter</b><span>Call summaries, objections, next steps, buyer/account mentions.</span></div>
+          <div class="module"><b>Inbox briefing</b><span>One organized email by company, urgency and action owner.</span></div>
+        </div>
+        <div class="cta">First milestone: connect one company + two sources, generate the daily briefing format, then expand source-by-source safely.</div>
+      </div>
+      <aside class="card">
+        <span class="tag">Sample 07:30 Briefing</span>
+        <div class="brief">
+          <h3>Keboola</h3>
+          <ul><li>2 customer expansion mentions in Gong</li><li>Board prep thread needs reply by EOD</li><li>Slack risk: partner integration delayed</li></ul>
+        </div>
+        <div class="brief">
+          <h3>HiveMQ</h3>
+          <ul><li>Enterprise prospect asked about SOC2 docs</li><li>Otter call: pricing objection flagged</li><li>Suggested follow-up: send case study</li></ul>
+        </div>
+        <div class="brief">
+          <h3>Duvo.ai</h3>
+          <ul><li>New GTM experiment summary ready</li><li>1 warm intro request waiting in Gmail</li><li>Priority: prepare advisor notes</li></ul>
+        </div>
+      </aside>
+    </section>
+    <section class="card" style="margin-top:20px">
+      <h2>Implementation Plan</h2>
+      <div class="flow">
+        <div class="step"><div class="num">1</div><div><b>Source map + access model</b><br><span class="small">Define companies, channels, labels, Gong/Otter folders, privacy boundaries and what should never enter the briefing.</span></div></div>
+        <div class="step"><div class="num">2</div><div><b>Ingestion + normalization</b><br><span class="small">Pull daily deltas from Slack/Gmail/Gong/Otter into a normalized signal table with source links and timestamps.</span></div></div>
+        <div class="step"><div class="num">3</div><div><b>AI ranking + summarization</b><br><span class="small">Classify each signal as risk, opportunity, follow-up, decision or context; dedupe repeated mentions across tools.</span></div></div>
+        <div class="step"><div class="num">4</div><div><b>Morning email + QA log</b><br><span class="small">Send one brief every morning with confidence labels, original-source references and a simple error/debug log.</span></div></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
