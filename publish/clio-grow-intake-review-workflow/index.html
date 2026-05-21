@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clio Grow Intake + Review Workflow Demo</title>
+  <style>
+    :root{
+      color-scheme:dark;
+      --bg:#071018;--panel:#0e1a27;--panel2:#111f2f;--ink:#f7fbff;--muted:#a9b8c7;--line:rgba(190,210,230,.16);
+      --gold:#d8ad5f;--blue:#5db7ff;--green:#58d68d;--red:#ff7d7d;--violet:#b996ff;--shadow:0 28px 90px rgba(0,0,0,.38);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 16% 0%,rgba(216,173,95,.28),transparent 32%),radial-gradient(circle at 88% 10%,rgba(93,183,255,.20),transparent 30%),linear-gradient(145deg,#071018 0%,#0b1622 48%,#05090f 100%)}
+    body:after{content:"";position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.62),transparent 78%)}
+    a{color:inherit}.wrap{width:min(1180px,calc(100% - 36px));margin:auto;padding:30px 0 70px}.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.brand{display:flex;gap:12px;align-items:center;font-weight:800;letter-spacing:.02em}.mark{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#fff0bc);box-shadow:0 0 30px rgba(216,173,95,.35)}.navlinks{display:flex;gap:10px;flex-wrap:wrap}.navlinks a{font-size:13px;text-decoration:none;color:#d9e3ee;border:1px solid var(--line);padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.035)}
+    .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:stretch}.panel{border:1px solid var(--line);background:linear-gradient(180deg,rgba(17,31,47,.88),rgba(9,18,29,.82));border-radius:28px;box-shadow:var(--shadow);backdrop-filter:blur(16px)}.heroMain{padding:38px}.badge{display:inline-flex;align-items:center;gap:9px;color:#fff2d6;background:rgba(216,173,95,.11);border:1px solid rgba(216,173,95,.34);padding:8px 12px;border-radius:999px;font-size:13px;font-weight:750}.dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 20px var(--gold)}h1{margin:22px 0 16px;font-size:clamp(34px,5.2vw,66px);line-height:.96;letter-spacing:-.06em}h2{font-size:clamp(23px,2.5vw,34px);margin:0 0 13px;letter-spacing:-.035em}h3{margin:0 0 8px;font-size:18px}.sub{max-width:780px;color:#c9d5e2;font-size:19px}.note{margin-top:18px;border-left:3px solid var(--gold);background:rgba(255,255,255,.055);padding:13px 15px;border-radius:13px;color:#dfe9f4;font-size:13px}.heroSide{padding:24px;display:grid;gap:14px}.kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}.kpi,.card,.mini,.stage,.source,.doc,.check{background:rgba(3,9,16,.48);border:1px solid var(--line);border-radius:19px;padding:16px}.kpi b{display:block;font-size:30px;color:#fff}.kpi span,.eyebrow{font-size:12px;color:#93a6b8;text-transform:uppercase;letter-spacing:.09em;font-weight:750}.status{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#cbd8e5;font-size:14px}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(88,214,141,.32);color:#b7ffd1;background:rgba(88,214,141,.1);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:750}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}.section{margin-top:22px;padding:25px}.sources{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.source{cursor:pointer;transition:.2s transform,.2s border-color}.source:hover,.source.active{transform:translateY(-3px);border-color:rgba(216,173,95,.62)}.source .icon{font-size:25px}.source p,.card p,.doc p,.stage p{color:#aebdca;margin:8px 0 0;font-size:14px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.metric{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:15px;padding:13px}.metric strong{display:block;font-size:21px}.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0 18px}.tab{border:1px solid var(--line);background:rgba(255,255,255,.045);color:#dce8f3;padding:10px 13px;border-radius:999px;cursor:pointer;font-weight:750}.tab.active{background:linear-gradient(135deg,rgba(216,173,95,.28),rgba(93,183,255,.12));border-color:rgba(216,173,95,.55);color:#fff}.tabPanel{display:none}.tabPanel.active{display:block}.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.stage{position:relative;min-height:170px}.stage:before{content:"";position:absolute;top:20px;right:-16px;width:20px;height:2px;background:rgba(216,173,95,.42)}.stage:last-child:before{display:none}.num{width:32px;height:32px;display:grid;place-items:center;border-radius:12px;background:rgba(216,173,95,.16);border:1px solid rgba(216,173,95,.34);color:#ffe8ba;font-weight:900;margin-bottom:12px}.automation{display:grid;grid-template-columns:1fr 1fr;gap:13px}.sequence{padding:16px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.04)}.sequence ol{margin:10px 0 0;padding-left:20px;color:#bfd0df}.reviewFlow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;align-items:stretch}.route{border-radius:20px;padding:18px;border:1px solid var(--line);background:rgba(255,255,255,.045)}.route.good{border-color:rgba(88,214,141,.42)}.route.bad{border-color:rgba(255,125,125,.42)}.arrow{display:grid;place-items:center;color:var(--gold);font-size:28px}.toggleRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.toggle{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.045);color:#eaf2fb;border-radius:15px;padding:12px 14px}.toggle.active{border-color:rgba(93,183,255,.62);box-shadow:0 0 0 3px rgba(93,183,255,.08)}#timingDetails{margin-top:12px;color:#d7e4f0;background:rgba(93,183,255,.075);border:1px solid rgba(93,183,255,.24);padding:14px;border-radius:16px}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.check{display:flex;gap:10px;align-items:flex-start}.box{min-width:20px;height:20px;border-radius:6px;background:rgba(88,214,141,.13);border:1px solid rgba(88,214,141,.38);display:grid;place-items:center;color:#9effbd;font-size:13px}.docs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.footer{margin-top:22px;text-align:center;color:#94a6b8;font-size:13px}.small{font-size:13px;color:#9fb0c1}.highlight{color:#ffe1a6}.mobileBar{display:none}
+    @media(max-width:920px){.hero,.grid2,.automation,.reviewFlow{grid-template-columns:1fr}.pipeline,.sources,.docs{grid-template-columns:1fr 1fr}.stage:before{display:none}.nav{align-items:flex-start;flex-direction:column}.heroMain{padding:28px}.section{padding:20px}.arrow{display:none}}
+    @media(max-width:560px){.wrap{width:min(100% - 24px,1180px);padding-top:18px}.navlinks{display:none}.kpis,.metrics,.pipeline,.sources,.docs,.checklist{grid-template-columns:1fr}h1{font-size:38px}.sub{font-size:16px}.panel{border-radius:22px}.mobileBar{display:flex;position:sticky;bottom:10px;z-index:5;gap:8px;justify-content:center;background:rgba(5,9,15,.72);border:1px solid var(--line);backdrop-filter:blur(12px);border-radius:999px;padding:8px}.mobileBar a{text-decoration:none;font-size:12px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.06)}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="nav">
+      <div class="brand"><div class="mark"></div><div>Clio Grow Workflow Proof<br><span class="small">Solo Missouri family law firm · fictional data</span></div></div>
+      <div class="navlinks"><a href="#intake">Intake</a><a href="#pipeline">Pipeline</a><a href="#automation">Automation</a><a href="#reviews">Review intercept</a><a href="#handoff">Handoff</a></div>
+    </nav>
+
+    <section class="hero">
+      <div class="panel heroMain">
+        <div class="badge"><span class="dot"></span> Upwork proof demo · Clio Grow Intake and Review Workflow Consultant</div>
+        <h1>Clio Grow intake pipeline + post-matter review intercept.</h1>
+        <p class="sub">A build-ready operating model for capturing Missouri family law leads, tagging source/cost, moving consults through a clean pipeline, and routing happy clients to Google while keeping critical feedback private.</p>
+        <div class="note">Fictional demonstration data only. No client logos, testimonials, or claims of live integrations. This shows the approach, screens, logic, and handoff structure I would implement in Clio Grow / Clio Manage with native tools or Zapier where needed.</div>
+      </div>
+      <aside class="panel heroSide">
+        <div class="status"><strong>Demo workspace</strong><span class="pill"><span class="dot"></span> maintainable</span></div>
+        <div class="kpis">
+          <div class="kpi"><b>4</b><span>Lead sources</span></div><div class="kpi"><b>5</b><span>Pipeline stages</span></div><div class="kpi"><b>2</b><span>Review routes</span></div><div class="kpi"><b>18</b><span>QA checks</span></div>
+        </div>
+        <div class="mini"><div class="eyebrow">Phase plan</div><p><span class="highlight">Phase 1:</span> audit + configure Clio Grow intake. <br><span class="highlight">Phase 2:</span> trigger post-matter survey from Clio Manage close event.</p></div>
+      </aside>
+    </section>
+
+    <section id="intake" class="panel section">
+      <div class="eyebrow">Lead source intake</div><h2>Every lead enters with source, campaign, and next action visible.</h2>
+      <div class="sources" id="sourceCards">
+        <div class="source active" data-source="Website" data-leads="18" data-cost="$0" data-retained="5" data-cpr="$0"><div class="icon">🌐</div><h3>Website form</h3><p>Practice-area form creates a Grow lead, tags source=Website, starts first response.</p></div>
+        <div class="source" data-source="Google Business Profile" data-leads="14" data-cost="$120" data-retained="4" data-cpr="$30"><div class="icon">📍</div><h3>Google Business Profile</h3><p>Call/form leads tagged GBP with UTM or intake field confirmation.</p></div>
+        <div class="source" data-source="Google Local Service Ads" data-leads="22" data-cost="$880" data-retained="6" data-cpr="$147"><div class="icon">⚖️</div><h3>Google LSA</h3><p>Paid leads capture estimated monthly cost for cost-per-retained reporting.</p></div>
+        <div class="source" data-source="Referral" data-leads="9" data-cost="$0" data-retained="5" data-cpr="$0"><div class="icon">🤝</div><h3>Referral</h3><p>Referral source + referring party fields support thank-you follow-up.</p></div>
+      </div>
+      <div class="metrics" aria-live="polite">
+        <div class="metric"><span class="eyebrow" id="metricSource">Website</span><strong id="metricLeads">18 leads</strong></div>
+        <div class="metric"><span class="eyebrow">Retained matters</span><strong id="metricRetained">5</strong></div>
+        <div class="metric"><span class="eyebrow">Cost per retained</span><strong id="metricCpr">$0</strong></div>
+      </div>
+    </section>
+
+    <section id="pipeline" class="panel section">
+      <div class="eyebrow">Pipeline stages</div><h2>Simple Clio Grow stages built for fast triage and clean reporting.</h2>
+      <div class="pipeline">
+        <div class="stage"><div class="num">1</div><h3>New lead</h3><p>Auto-created from form/call/Zap. Conflict check flag, source tag, practice area, urgency.</p></div>
+        <div class="stage"><div class="num">2</div><h3>Consult scheduled</h3><p>Calendar confirmation, fee/consult instructions, reminders, no-show rescue.</p></div>
+        <div class="stage"><div class="num">3</div><h3>Consult complete</h3><p>Attorney notes, fit assessment, fee quote, retainer link, follow-up deadline.</p></div>
+        <div class="stage"><div class="num">4</div><h3>Retained</h3><p>Engagement packet complete, matter created in Clio Manage, review trigger deferred until close.</p></div>
+        <div class="stage"><div class="num">5</div><h3>Declined</h3><p>Reason captured: no fit, budget, conflict, no response, DIY, hired another firm.</p></div>
+      </div>
+    </section>
+
+    <section id="automation" class="grid2">
+      <div class="panel section">
+        <div class="eyebrow">Automated follow-up</div><h2>Email/SMS sequences that use the attorney's copy.</h2>
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="newLead">New lead</button><button class="tab" data-tab="consult">Consult</button><button class="tab" data-tab="retainer">Retainer</button><button class="tab" data-tab="nurture">No response</button>
+        </div>
+        <div id="newLead" class="tabPanel active sequence"><h3>New lead first response</h3><ol><li>Immediate email: received + what happens next.</li><li>Immediate SMS: short confirmation + booking link.</li><li>Task: staff reviews conflict/urgency within business hours.</li></ol></div>
+        <div id="consult" class="tabPanel sequence"><h3>Consult scheduled</h3><ol><li>Email confirmation with Zoom/office details.</li><li>24-hour SMS reminder.</li><li>2-hour SMS reminder with reschedule link.</li></ol></div>
+        <div id="retainer" class="tabPanel sequence"><h3>Consult complete → retainer</h3><ol><li>Same-day email with next steps and engagement packet.</li><li>Day 2 SMS: answer questions / reminder.</li><li>Day 5 task: attorney follow-up if high-value fit.</li></ol></div>
+        <div id="nurture" class="tabPanel sequence"><h3>No response rescue</h3><ol><li>Day 1 polite check-in.</li><li>Day 3 final scheduling prompt.</li><li>Day 7 mark stale unless replied; keep source reporting intact.</li></ol></div>
+      </div>
+      <div class="panel section">
+        <div class="eyebrow">Trigger timing</div><h2>Rules that avoid awkward or premature messages.</h2>
+        <div class="toggleRow">
+          <button class="toggle active" data-detail="intake">Intake timing</button><button class="toggle" data-detail="consult">Consult timing</button><button class="toggle" data-detail="review">Review timing</button>
+        </div>
+        <div id="timingDetails">Intake automations fire immediately only after source + consent fields are present; staff task remains the safeguard for family-law urgency and conflict review.</div>
+        <div class="automation" style="margin-top:13px">
+          <div class="card"><h3>Consent-aware SMS</h3><p>SMS steps are conditional on opt-in/consent fields and can be disabled per matter.</p></div>
+          <div class="card"><h3>Zapier fallback</h3><p>If native forms cannot map a source cleanly, Zapier normalizes source, campaign, and referral fields.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="panel section">
+      <div class="eyebrow">Post-matter review intercept</div><h2>Private feedback first, then route based on sentiment.</h2>
+      <div class="reviewFlow">
+        <div class="route"><h3>1. Matter closed in Clio Manage</h3><p>Trigger waits a configurable buffer after close (for example 2–7 days) and checks exclusions such as sensitive outcomes or attorney hold.</p></div>
+        <div class="route"><h3>2. Private feedback survey</h3><p>Short form: rating, comments, permission question. Responses stay private unless the client chooses public review.</p></div>
+        <div class="route good"><h3>3A. Positive route → Google</h3><p>4–5 star / positive response shows one-click Google Business Profile review link and thank-you email.</p></div>
+        <div class="route bad"><h3>3B. Critical route → private</h3><p>1–3 star / concern response routes to a private attorney notification and internal issue form, not a public ask.</p></div>
+        <div class="route"><h3>4. Follow-up task</h3><p>Critical feedback creates a Clio task for attorney review; positive feedback is logged for source/outcome insight.</p></div>
+        <div class="route"><h3>5. Documentation</h3><p>Maintained with editable templates, trigger map, field glossary, and QA checklist.</p></div>
+      </div>
+    </section>
+
+    <section class="grid2" id="handoff">
+      <div class="panel section">
+        <div class="eyebrow">Test checklist</div><h2>Acceptance checks before handoff.</h2>
+        <div class="checklist">
+          <div class="check"><span class="box">✓</span><span>Website form creates lead with source tag.</span></div>
+          <div class="check"><span class="box">✓</span><span>GBP/LSA/referral fields map correctly.</span></div>
+          <div class="check"><span class="box">✓</span><span>Each pipeline stage transition fires only intended actions.</span></div>
+          <div class="check"><span class="box">✓</span><span>Email/SMS copy is editable by the firm.</span></div>
+          <div class="check"><span class="box">✓</span><span>Cost-per-retained report uses fictional test rows, then client data.</span></div>
+          <div class="check"><span class="box">✓</span><span>Positive feedback opens Google review route.</span></div>
+          <div class="check"><span class="box">✓</span><span>Critical feedback creates private notification only.</span></div>
+          <div class="check"><span class="box">✓</span><span>Trigger timing and exclusions documented.</span></div>
+        </div>
+      </div>
+      <div class="panel section">
+        <div class="eyebrow">Handoff documentation</div><h2>Built to be owned by a solo firm, not a black box.</h2>
+        <div class="docs">
+          <div class="doc"><h3>Field map</h3><p>Lead source, campaign, referral name, practice area, consent, close date.</p></div>
+          <div class="doc"><h3>Automation map</h3><p>Trigger, condition, message, owner, fallback, and stop rules.</p></div>
+          <div class="doc"><h3>Template library</h3><p>Editable email/SMS placeholders with client-provided copy.</p></div>
+          <div class="doc"><h3>Admin SOP</h3><p>How to add sources, update costs, pause automations, and test routes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="mobileBar"><a href="#intake">Intake</a><a href="#automation">Follow-up</a><a href="#reviews">Reviews</a><a href="#handoff">QA</a></div>
+    <footer class="footer">Static HTML proof-of-approach for Janis · no external dependencies · fictional data only</footer>
+  </main>
+
+  <script>
+    const sourceCards = document.querySelectorAll('.source');
+    const metricSource = document.getElementById('metricSource');
+    const metricLeads = document.getElementById('metricLeads');
+    const metricRetained = document.getElementById('metricRetained');
+    const metricCpr = document.getElementById('metricCpr');
+    sourceCards.forEach(card=>card.addEventListener('click',()=>{
+      sourceCards.forEach(c=>c.classList.remove('active')); card.classList.add('active');
+      metricSource.textContent = card.dataset.source;
+      metricLeads.textContent = card.dataset.leads + ' leads';
+      metricRetained.textContent = card.dataset.retained;
+      metricCpr.textContent = card.dataset.cpr;
+    }));
+
+    document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tabPanel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active'); document.getElementById(btn.dataset.tab).classList.add('active');
+    }));
+
+    const detailCopy = {
+      intake:'Intake automations fire immediately only after source + consent fields are present; staff task remains the safeguard for family-law urgency and conflict review.',
+      consult:'Consult reminders send 24 hours and 2 hours before the appointment. No-show rescue is delayed until after the scheduled end time to avoid duplicate messages.',
+      review:'Review request waits until the matter is closed in Clio Manage plus a configurable buffer. Attorney hold/exclusion fields stop the survey for sensitive situations.'
+    };
+    document.querySelectorAll('.toggle').forEach(btn=>btn.addEventListener('click',()=>{
+      document.querySelectorAll('.toggle').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active'); document.getElementById('timingDetails').textContent = detailCopy[btn.dataset.detail];
+    }));
+  </script>
+</body>
+</html>
