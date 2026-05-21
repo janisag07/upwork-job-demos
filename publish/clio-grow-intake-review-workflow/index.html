@@ -139,13 +139,24 @@
     const metricLeads = document.getElementById('metricLeads');
     const metricRetained = document.getElementById('metricRetained');
     const metricCpr = document.getElementById('metricCpr');
-    sourceCards.forEach(card=>card.addEventListener('click',()=>{
-      sourceCards.forEach(c=>c.classList.remove('active')); card.classList.add('active');
+    function selectSource(card){
+      if(!card) return;
+      sourceCards.forEach(c=>c.classList.remove('active'));
+      card.classList.add('active');
       metricSource.textContent = card.dataset.source;
       metricLeads.textContent = card.dataset.leads + ' leads';
       metricRetained.textContent = card.dataset.retained;
       metricCpr.textContent = card.dataset.cpr;
-    }));
+    }
+    sourceCards.forEach(card=>{
+      card.setAttribute('tabindex','0');
+      card.setAttribute('role','button');
+      card.addEventListener('click',()=>selectSource(card));
+      card.addEventListener('keydown',(event)=>{
+        if(event.key === 'Enter' || event.key === ' '){ event.preventDefault(); selectSource(card); }
+      });
+    });
+    document.getElementById('sourceCards').addEventListener('click',(event)=>selectSource(event.target.closest('.source')));
 
     document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
       document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
