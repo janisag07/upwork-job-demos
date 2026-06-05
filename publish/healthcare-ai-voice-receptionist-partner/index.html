@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Healthcare AI Voice Receptionist Deployment Blueprint</title>
+<style>
+:root{--bg:#071018;--card:#0f1b2a;--card2:#101827;--text:#eaf6ff;--muted:#9fb2c7;--blue:#65d6ff;--green:#6ee7b7;--amber:#fbbf24;--line:#223449;--red:#fb7185}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial;background:radial-gradient(circle at 10% 0%,#12314a 0,#071018 45%,#05080d 100%);color:var(--text)}main{max-width:1180px;margin:0 auto;padding:46px 20px 64px}.hero{border:1px solid var(--line);border-radius:30px;padding:34px;background:linear-gradient(135deg,rgba(15,27,42,.96),rgba(8,17,28,.76));box-shadow:0 28px 80px rgba(0,0,0,.38)}.eyebrow{color:var(--green);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px}h1{font-size:clamp(34px,5.5vw,66px);line-height:.94;margin:12px 0 14px;max-width:960px}p{font-size:17px;line-height:1.62;color:var(--muted)}.hero p{font-size:20px;max-width:920px}.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.badge{border:1px solid #2d5871;background:rgba(101,214,255,.08);color:#c8f2ff;border-radius:999px;padding:9px 13px;font-size:14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}.card{background:rgba(15,27,42,.88);border:1px solid var(--line);border-radius:22px;padding:22px}.card h2,.card h3{margin:0 0 10px}.num{width:36px;height:36px;border-radius:12px;background:rgba(110,231,183,.12);color:var(--green);display:grid;place-items:center;font-weight:900;margin-bottom:14px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:22px 0}.step{border:1px solid #29415a;border-radius:18px;padding:16px;background:rgba(5,12,21,.72);min-height:142px}.step b{display:block;color:#fff;margin-bottom:8px}.panel{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;margin-top:18px}.row{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #1e3147;padding:13px 0}.row:last-child{border-bottom:0}.row span{color:#cbd5e1}.row strong{text-align:right;color:#fff}.risk{border-left:4px solid var(--amber);background:rgba(251,191,36,.08)}.cta{border-left:4px solid var(--green);background:rgba(110,231,183,.08)}.pill{display:inline-block;border-radius:999px;padding:5px 9px;margin:4px 4px 0 0;font-size:12px;background:#13243a;color:#c7d2fe;border:1px solid #2c4364}.script{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#050b12;border:1px solid #203247;border-radius:16px;padding:16px;color:#d7f9ff}.small{font-size:13px;color:#8fa3bb;margin-top:20px}@media(max-width:900px){.grid,.flow,.panel{grid-template-columns:1fr}h1{font-size:40px}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+  <div class="eyebrow">Project-specific proof of approach · fictional data only</div>
+  <h1>Healthcare AI Voice Receptionist Deployment Blueprint</h1>
+  <p>A reusable Vapi/Retell + Twilio + GoHighLevel/CRM template for medical practices: inbound calls, after-hours handling, urgent-call routing, SMS follow-up, documentation, and a deployment process that can be duplicated for future healthcare clients.</p>
+  <div class="badges"><span class="badge">Initial fixed-price build: $1,500</span><span class="badge">No direct EMR integration required for V1</span><span class="badge">Built in client-owned accounts</span><span class="badge">Designed for long-term rollout</span></div>
+</section>
+
+<section class="flow">
+  <article class="step"><div class="num">1</div><b>Inbound Call Answering</b><span>Professional greeting, practice-specific FAQs, office hours, services, insurance-safe info boundaries.</span></article>
+  <article class="step"><div class="num">2</div><b>Caller Intake</b><span>Name, phone, patient/new-patient status, reason for call, callback preference, urgency flags.</span></article>
+  <article class="step"><div class="num">3</div><b>Urgency Router</b><span>Emergency disclaimer, urgent escalation, staff transfer path, after-hours message capture.</span></article>
+  <article class="step"><div class="num">4</div><b>SMS + CRM Handoff</b><span>Follow-up SMS, GHL/CRM contact creation, tags, task/opportunity, call summary and transcript link.</span></article>
+  <article class="step"><div class="num">5</div><b>Cloneable Deployment</b><span>Practice settings sheet, prompt variables, testing script, documentation, training video outline.</span></article>
+</section>
+
+<section class="panel">
+  <div class="card">
+    <h2>First milestone build plan</h2>
+    <div class="row"><span>Discovery map</span><strong>practice type, call categories, escalation rules</strong></div>
+    <div class="row"><span>Voice platform setup</span><strong>Vapi/Retell recommendation + first agent</strong></div>
+    <div class="row"><span>Prompt + guardrails</span><strong>healthcare-safe call flow, no diagnosis claims</strong></div>
+    <div class="row"><span>Workflow automation</span><strong>Twilio/SMS + GHL/CRM + Make/Zapier webhook</strong></div>
+    <div class="row"><span>QA + handoff</span><strong>test calls, edge cases, docs, deployment checklist</strong></div>
+  </div>
+  <div class="card risk">
+    <h2>Important reliability/compliance notes</h2>
+    <p>For live medical practice deployment, phone number/Twilio/A2P setup, HIPAA/compliance posture, and account ownership should be verified first. V1 can avoid direct EMR integration and focus on call capture, routing, CRM handoff, and safe human escalation.</p>
+    <span class="pill">Client-owned accounts</span><span class="pill">Human escalation</span><span class="pill">No EMR in V1</span><span class="pill">Test-call script</span>
+  </div>
+</section>
+
+<section class="grid">
+  <article class="card"><h3>Recommended stack</h3><p><b>Retell or Vapi</b> for voice agent control, <b>Twilio</b> for phone/SMS, <b>GoHighLevel or CRM</b> for contacts/tasks, and <b>Make/Zapier</b> for deployment-friendly workflow glue.</p></article>
+  <article class="card"><h3>Future client customization</h3><p>Each new practice gets a cloned template: office hours, FAQs, escalation rules, staff transfer numbers, intake fields, SMS copy, CRM tags, and reporting view.</p></article>
+  <article class="card"><h3>Ongoing partner angle</h3><p>The real value is not just one voice agent — it is a repeatable onboarding and QA process so the healthcare automation company can sell and deploy consistently.</p></article>
+</section>
+
+<section class="card cta" style="margin-top:18px">
+  <h2>Sample call logic</h2>
+  <div class="script">Caller: “I need to speak with the office after hours.”<br>AI: capture caller info → classify reason → if urgent, explain emergency/911 guidance + route to on-call/staff path if configured → create CRM task → send SMS confirmation → log transcript/summary for staff.</div>
+</section>
+
+<p class="small">This mockup was created specifically for the Upwork post “AI Voice Receptionist Expert Needed for Healthcare Automation Startup.” It uses fictional data and does not claim live access to any client systems.</p>
+</main>
+</body>
+</html>
