@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Typeform + Kit Assessment Funnel QA Map</title>
+  <style>
+    :root{--bg:#07111f;--card:#0f1f35;--muted:#8fa7c4;--text:#eef6ff;--line:#203a5d;--accent:#70e1c8;--accent2:#8aa8ff;--warn:#ffd166}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial;background:radial-gradient(circle at top left,#162d55 0,#07111f 42%,#050912 100%);color:var(--text)}
+    .wrap{max-width:1120px;margin:0 auto;padding:42px 20px 64px}.pill{display:inline-flex;gap:8px;align-items:center;border:1px solid #31537d;background:#0b182a;border-radius:999px;padding:8px 12px;color:#b9cae2;font-size:13px}.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:stretch;margin-top:22px}.panel{background:rgba(15,31,53,.86);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:0 22px 80px rgba(0,0,0,.32)}h1{font-size:46px;line-height:1.02;margin:18px 0 14px;letter-spacing:-.04em}p{color:#c7d7eb;line-height:1.62}.lead{font-size:18px;color:#dce9fa}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}.step{border:1px solid #27486e;background:#0a1728;border-radius:18px;padding:16px;min-height:142px}.step b{display:block;color:#fff;margin:8px 0}.num{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04111e;font-weight:800}.small{font-size:13px;color:var(--muted)}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}.check{border:1px solid #27486e;border-radius:16px;padding:14px;background:#0a1728}.check:before{content:'✓';color:var(--accent);font-weight:900;margin-right:8px}.mock{display:grid;gap:12px}.field{background:#071426;border:1px solid #28476c;border-radius:14px;padding:14px}.tag{display:inline-block;margin:4px 6px 0 0;padding:7px 10px;border-radius:999px;background:#102744;border:1px solid #31537d;color:#cfe4ff;font-size:12px}.flowline{height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:20px;margin:20px 0}.qa{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:18px}.note{border-left:3px solid var(--warn);padding:12px 14px;background:#211b0a;border-radius:12px;color:#ffe9aa}@media(max-width:880px){.hero,.qa{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.checklist{grid-template-columns:1fr}h1{font-size:34px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <span class="pill">Proof-of-approach · Typeform + Kit · fictional sample data</span>
+    <section class="hero">
+      <div class="panel">
+        <h1>Coaching Assessment Funnel QA Map</h1>
+        <p class="lead">A lean build plan for turning a 23-question coaching assessment from a Word document into a polished Typeform experience connected to Kit tags, segments, and an immediate welcome email.</p>
+        <div class="flowline"></div>
+        <div class="grid">
+          <div class="step"><span class="num">1</span><b>Assessment build</b><span class="small">3 sections, opt-in gate, results page, existing copy imported cleanly.</span></div>
+          <div class="step"><span class="num">2</span><b>Brand pass</b><span class="small">Colors, fonts, spacing, mobile flow, progress language, low-friction layout.</span></div>
+          <div class="step"><span class="num">3</span><b>Kit routing</b><span class="small">Opt-in creates subscriber, applies source tag and assessment segment.</span></div>
+          <div class="step"><span class="num">4</span><b>Email trigger</b><span class="small">Welcome email sends immediately with provided copy and safe naming.</span></div>
+          <div class="step"><span class="num">5</span><b>End-to-end QA</b><span class="small">Test records, inbox check, tag check, result-page check, handoff notes.</span></div>
+        </div>
+      </div>
+      <aside class="panel mock">
+        <div class="field"><b>Typeform structure</b><p class="small">Section A: context · Section B: coaching goals · Section C: readiness/results logic</p></div>
+        <div class="field"><b>Kit subscriber tags</b><br><span class="tag">source:typeform-assessment</span><span class="tag">lead-magnet</span><span class="tag">new-coaching-lead</span></div>
+        <div class="field"><b>QA record</b><p class="small">Test email → submitted form → Kit subscriber visible → tag applied → welcome email received → notes documented.</p></div>
+      </aside>
+    </section>
+
+    <section class="qa">
+      <div class="panel">
+        <h2>First milestone</h2>
+        <div class="checklist">
+          <div class="check">Import all questions and result copy into a clean Typeform flow.</div>
+          <div class="check">Style the assessment around the provided brand colors and font direction.</div>
+          <div class="check">Connect Kit with opt-in tag/segment logic and one welcome email.</div>
+          <div class="check">Run test submissions and document the exact user experience.</div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Handoff notes</h2>
+        <p>The goal is not to over-engineer the funnel. The useful version is a polished assessment that the client can review from first question to inbox, with clear setup names inside Typeform and Kit so it stays maintainable.</p>
+        <p class="note">Built as a client-safe proof-of-approach for an Upwork proposal. No real client content or account access is shown.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
