@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI E-Com Sales & Support System — Demo</title>
+  <meta name="description" content="A fictional streetwear store demo showing how an AI product assistant, cart recovery flow, support automation and owner dashboard can help e-commerce brands stop losing customers." />
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#061b31;
+      --muted:#64748d;
+      --label:#273951;
+      --line:#e5edf5;
+      --soft:#f6f9fc;
+      --purple:#533afd;
+      --purple2:#4434d4;
+      --ruby:#ea2261;
+      --magenta:#f96bee;
+      --navy:#1c1e54;
+      --dark:#0b1020;
+      --green:#15be53;
+      --shadow:rgba(50,50,93,.25) 0 30px 45px -30px, rgba(0,0,0,.10) 0 18px 36px -18px;
+      --shadow2:rgba(23,23,23,.08) 0 15px 35px 0;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;font-feature-settings:"ss01";}
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
+    .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(229,237,245,.85)}
+    .navin{height:68px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:-.02em;color:var(--ink)}
+    .mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--purple),var(--ruby) 58%,var(--magenta));box-shadow:var(--shadow2);position:relative;overflow:hidden}
+    .mark:after{content:"";position:absolute;inset:7px;border:1px solid rgba(255,255,255,.66);border-radius:5px}
+    .navlinks{display:flex;gap:22px;align-items:center;color:#273951;font-size:14px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:6px;padding:10px 15px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:.18s ease;background:var(--purple);color:#fff;box-shadow:rgba(83,58,253,.28) 0 12px 24px -14px}
+    .btn:hover{background:var(--purple2);transform:translateY(-1px)}
+    .btn.ghost{background:#fff;color:var(--purple);border-color:#b9b9f9;box-shadow:none}
+    .btn.ghost:hover{background:rgba(83,58,253,.05)}
+    .hero{position:relative;overflow:hidden;padding:86px 0 62px;background:radial-gradient(circle at 10% -10%,rgba(249,107,238,.26),transparent 28%),radial-gradient(circle at 88% 4%,rgba(83,58,253,.20),transparent 34%),linear-gradient(180deg,#fff 0,#f7faff 100%)}
+    .hero:before{content:"";position:absolute;left:50%;top:0;width:960px;height:360px;transform:translateX(-50%);background:linear-gradient(135deg,rgba(83,58,253,.10),rgba(234,34,97,.10));clip-path:polygon(10% 0,100% 0,78% 100%,0 78%);filter:blur(.2px);opacity:.85}
+    .hero-grid{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:38px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #d6d9fc;background:rgba(255,255,255,.72);color:var(--purple);border-radius:999px;padding:7px 10px;font-size:13px;font-weight:650;box-shadow:rgba(23,23,23,.05) 0 10px 30px}
+    .pulse{width:8px;height:8px;background:var(--green);border-radius:99px;box-shadow:0 0 0 6px rgba(21,190,83,.12)}
+    h1{font-size:clamp(42px,6.2vw,72px);line-height:.98;letter-spacing:-.055em;font-weight:420;margin:22px 0 18px;color:var(--ink)}
+    .lead{font-size:20px;line-height:1.5;color:#53657d;margin:0 0 24px;max-width:650px;font-weight:400}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 22px}
+    .proofs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px;max-width:690px}
+    .proof{background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:8px;padding:12px;box-shadow:rgba(23,23,23,.05) 0 10px 25px}
+    .proof b{display:block;font-size:18px;color:var(--ink);letter-spacing:-.02em}.proof span{display:block;margin-top:3px;font-size:13px;color:var(--muted)}
+    .device{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;transform:rotate(-1deg)}
+    .bar{height:42px;background:#f8fbff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 14px;gap:8px}.dot{width:10px;height:10px;border-radius:50%;background:#ff6b6b}.dot:nth-child(2){background:#ffce56}.dot:nth-child(3){background:#3cd278}.url{margin-left:8px;color:#8a98ae;font-size:12px;background:#fff;border:1px solid var(--line);border-radius:5px;padding:5px 9px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .store{padding:18px;background:linear-gradient(180deg,#fff,#f9fbff)}
+    .store-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.store-name{font-weight:800;letter-spacing:-.04em}.cart{font-size:12px;color:var(--purple);border:1px solid #d6d9fc;border-radius:99px;padding:5px 9px;background:#fff}
+    .product{display:grid;grid-template-columns:116px 1fr;gap:14px;align-items:center}.jacket{height:132px;border-radius:10px;background:radial-gradient(circle at 34% 16%,#ffffff 0 7%,transparent 8%),linear-gradient(135deg,#10172a,#2b3356 42%,#111827);box-shadow:inset rgba(255,255,255,.17) 0 1px 0, rgba(50,50,93,.18) 0 20px 30px -18px;position:relative}.jacket:before{content:"";position:absolute;left:24px;right:24px;top:22px;height:92px;border:2px solid rgba(255,255,255,.20);border-radius:18px 18px 8px 8px}.jacket:after{content:"DROP 01";position:absolute;left:16px;bottom:12px;color:#fff;font-size:10px;letter-spacing:.12em;font-weight:800}
+    .p-title{font-size:20px;line-height:1.05;font-weight:750;letter-spacing:-.035em;margin:0 0 5px}.price{font-size:18px;color:var(--ink);font-weight:760}.small{font-size:13px;color:var(--muted);line-height:1.38}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.chip{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:4px 8px;background:#fff;color:#53657d}
+    .assistant{margin-top:16px;border:1px solid #d6d9fc;border-radius:10px;background:#fff;overflow:hidden}.a-head{display:flex;justify-content:space-between;align-items:center;background:#f5f6ff;padding:11px 12px;border-bottom:1px solid #d6d9fc}.a-head b{font-size:13px}.status{font-size:11px;color:#108c3d;background:rgba(21,190,83,.13);border:1px solid rgba(21,190,83,.32);padding:3px 6px;border-radius:99px}.chat{padding:12px;display:grid;gap:9px}.bubble{max-width:90%;padding:9px 10px;border-radius:9px;font-size:12.5px;line-height:1.35}.bubble.user{background:#eff4ff;justify-self:end;color:#273951}.bubble.bot{background:#101a3d;color:#eef3ff}.chat-options{display:flex;gap:7px;flex-wrap:wrap}.ask{font-size:11px;border:1px solid #d6d9fc;background:#fff;color:var(--purple);border-radius:99px;padding:6px 8px;cursor:pointer}
+    section{padding:72px 0}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:26px}.section-head h2{font-size:clamp(30px,4vw,48px);line-height:1.03;letter-spacing:-.045em;font-weight:430;margin:0;color:var(--ink)}.section-head p{max-width:440px;margin:0;color:var(--muted);font-size:17px;line-height:1.48}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:var(--shadow2)}.card h3{font-size:21px;letter-spacing:-.025em;margin:0 0 9px}.card p{color:var(--muted);line-height:1.48;margin:0}.icon{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,rgba(83,58,253,.12),rgba(234,34,97,.12));border:1px solid #d6d9fc;display:grid;place-items:center;color:var(--purple);font-weight:900;margin-bottom:14px}
+    .dark{background:var(--navy);color:#fff;position:relative;overflow:hidden}.dark:before{content:"";position:absolute;inset:-20% -10% auto auto;width:520px;height:520px;background:radial-gradient(circle,rgba(249,107,238,.22),transparent 62%)}.dark .section-head h2{color:#fff}.dark .section-head p{color:rgba(255,255,255,.7)}
+    .system{position:relative;display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}.panel{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:18px;backdrop-filter:blur(10px)}.panel h3{margin:0 0 12px;font-size:18px}.flow{display:grid;gap:10px}.flow-row{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:10px;border-radius:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10)}.num{width:30px;height:30px;border-radius:8px;background:#fff;color:var(--purple);display:grid;place-items:center;font-weight:800}.flow-row b{font-size:14px}.flow-row span{font-size:12px;color:rgba(255,255,255,.62)}.tag{font-size:11px;color:#dce4ff;border:1px solid rgba(255,255,255,.20);padding:4px 6px;border-radius:99px;white-space:nowrap}.dashboard{background:#071026;border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;box-shadow:rgba(0,0,0,.24) 0 24px 60px}.dash-top{height:44px;background:#0c1731;border-bottom:1px solid rgba(255,255,255,.10);display:flex;align-items:center;justify-content:space-between;padding:0 14px;color:#aebdf0;font-size:12px}.dash-body{padding:16px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.metric{background:#0f1d3b;border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:12px}.metric b{display:block;font-size:24px;letter-spacing:-.03em}.metric span{font-size:11px;color:#99a8dc}.tickets{display:grid;gap:9px}.ticket{display:grid;grid-template-columns:1fr auto;gap:10px;background:#0f1d3b;border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:11px}.ticket b{font-size:13px}.ticket p{margin:3px 0 0;color:#99a8dc;font-size:12px}.prio{font-size:11px;border-radius:99px;padding:5px 7px;background:rgba(21,190,83,.12);color:#9ff4bb;height:max-content}.prio.hot{background:rgba(234,34,97,.14);color:#ffb8cc}
+    .audit{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.leak{display:flex;gap:12px;padding:15px;border:1px solid var(--line);border-radius:10px;background:#fff;box-shadow:rgba(23,23,23,.05) 0 10px 25px}.leak strong{display:grid;place-items:center;flex:0 0 34px;height:34px;border-radius:8px;background:var(--soft);color:var(--purple)}.leak h3{font-size:17px;margin:0 0 5px}.leak p{margin:0;color:var(--muted);line-height:1.42;font-size:14px}.offer{border:1px solid #d6d9fc;background:linear-gradient(180deg,#fff,#f8f9ff);border-radius:12px;padding:22px;box-shadow:var(--shadow)}.offer h3{font-size:25px;letter-spacing:-.035em;margin:0 0 10px}.pricebox{display:grid;gap:9px;margin-top:16px}.price-row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:10px 0;color:var(--label)}.price-row b{color:var(--ink)}
+    .outreach{background:#f6f9fc}.script{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow2);font-size:16px;line-height:1.6;color:#273951}.script code{display:block;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#0d253d;background:#f9fbff;border:1px solid var(--line);padding:16px;border-radius:9px;font-size:13px;line-height:1.55}.split{display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:start}.checklist{display:grid;gap:10px}.check{display:flex;gap:10px;align-items:flex-start;color:#53657d}.check:before{content:"✓";display:grid;place-items:center;width:22px;height:22px;border-radius:6px;background:rgba(21,190,83,.13);color:#108c3d;font-weight:900;flex:0 0 auto}
+    footer{padding:36px 0;color:#7c8aa2;border-top:1px solid var(--line);font-size:13px}.foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.notice{color:#53657d}
+    @media (max-width:900px){.hero-grid,.system,.audit,.split{grid-template-columns:1fr}.device{transform:none}.grid3{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:12px}.proofs{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.navlinks{display:none}section{padding:54px 0}.hero{padding:62px 0 46px}.product{grid-template-columns:92px 1fr}.jacket{height:112px}.wrap{width:min(100% - 28px,1120px)}h1{font-size:42px}.lead{font-size:18px}.hero-actions .btn{width:100%}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap navin">
+      <a class="brand" href="#top" aria-label="Demo home"><span class="mark"></span><span>E-Com AI System</span></a>
+      <div class="navlinks">
+        <a href="#modules">Modules</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#audit">Audit offer</a>
+        <a class="btn" href="#outreach">Use this demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="pulse"></span>Zero-budget showcase for small e-commerce brands</span>
+        <h1>Stop losing shoppers in DMs, support tickets and abandoned carts.</h1>
+        <p class="lead">A fictional streetwear-store demo showing how Janis can install an AI product assistant, cart-recovery follow-up, support automation and an owner dashboard — without the brand changing its whole shop.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#dashboard">View the system</a>
+          <a class="btn ghost" href="#audit">See the mini-audit offer</a>
+        </div>
+        <div class="proofs" aria-label="Proof cards">
+          <div class="proof"><b>0€ tools</b><span>static demo, no paid stack needed</span></div>
+          <div class="proof"><b>4 flows</b><span>assistant, cart, support, reviews</span></div>
+          <div class="proof"><b>1 goal</b><span>turn store leaks into paid setup work</span></div>
+        </div>
+      </div>
+
+      <div class="device" aria-label="Fictional streetwear store mockup">
+        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">novathreads.example / product / shadow-shell-jacket</span></div>
+        <div class="store">
+          <div class="store-head"><div class="store-name">NOVA THREADS</div><div class="cart">Cart · 1 item</div></div>
+          <div class="product">
+            <div class="jacket" aria-hidden="true"></div>
+            <div>
+              <h2 class="p-title">Shadow Shell Jacket</h2>
+              <div class="price">€89</div>
+              <p class="small">Water-resistant streetwear shell with oversized fit. Sizes S–XL. Ships in 2–4 business days.</p>
+              <div class="chips"><span class="chip">Size question</span><span class="chip">Shipping</span><span class="chip">Fit advice</span></div>
+            </div>
+          </div>
+          <div class="assistant">
+            <div class="a-head"><b>AI Product Assistant</b><span class="status">ready</span></div>
+            <div class="chat" id="chat">
+              <div class="bubble user">I’m 183cm / 82kg. What size should I take?</div>
+              <div class="bubble bot" id="botReply">For an oversized look, take L. If you prefer a tighter fit, M should still work — but L is the safer pick for this jacket.</div>
+              <div class="chat-options">
+                <button class="ask" data-answer="The jacket ships in 2–4 business days. For Germany/Austria, the assistant can show the exact estimated date before checkout.">Shipping?</button>
+                <button class="ask" data-answer="This shell is water-resistant, not a heavy winter jacket. Best use: spring, rain, layering and night-out streetwear fits.">Is it warm?</button>
+                <button class="ask" data-answer="If the size is wrong, the system can trigger a return/exchange flow and tell the owner which sizes create the most returns.">Returns?</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="modules">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What this sells to a store owner.</h2>
+        <p>Not “AI for fun”. These are practical revenue and support workflows a small brand can understand in 30 seconds.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><div class="icon">01</div><h3>AI product assistant</h3><p>Answers size, fit, shipping, product and return questions directly on the product page or in DM-style support.</p></article>
+        <article class="card"><div class="icon">02</div><h3>Cart recovery flow</h3><p>Turns abandoned carts into a clean follow-up sequence: reminder, objection handling, FAQ answer and owner alert for hot carts.</p></article>
+        <article class="card"><div class="icon">03</div><h3>Support triage</h3><p>Groups questions by topic, drafts replies and escalates only the cases that need a human decision.</p></article>
+        <article class="card"><div class="icon">04</div><h3>Review automation</h3><p>After delivery, customers receive a review request. Bad experiences get routed internally before becoming public damage.</p></article>
+        <article class="card"><div class="icon">05</div><h3>Owner dashboard</h3><p>Shows lost carts, common objections, unanswered questions, refund reasons and the next quick wins.</p></article>
+        <article class="card"><div class="icon">06</div><h3>Mini-audit entry</h3><p>Starts with a small 3-point leak check, then sells the first implementation flow instead of asking for a huge commitment.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="dark">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The system layer behind the shop.</h2>
+        <p>For outreach, this makes the offer visual: “Here is how questions, carts and support issues would be handled for your store.”</p>
+      </div>
+      <div class="system">
+        <div class="panel">
+          <h3>Customer journey</h3>
+          <div class="flow">
+            <div class="flow-row"><div class="num">1</div><div><b>Shopper has a question</b><br><span>Size, delivery, return, material, product comparison</span></div><span class="tag">AI reply</span></div>
+            <div class="flow-row"><div class="num">2</div><div><b>Buyer hesitates</b><br><span>Cart left open, high intent but no checkout</span></div><span class="tag">follow-up</span></div>
+            <div class="flow-row"><div class="num">3</div><div><b>Support gets repetitive</b><br><span>Same questions again and again</span></div><span class="tag">triage</span></div>
+            <div class="flow-row"><div class="num">4</div><div><b>Owner sees leaks</b><br><span>Most common objections and next fix list</span></div><span class="tag">dashboard</span></div>
+          </div>
+        </div>
+        <div class="dashboard">
+          <div class="dash-top"><span>NOVA THREADS · AI sales/support command center</span><span>demo data</span></div>
+          <div class="dash-body">
+            <div class="metrics">
+              <div class="metric"><b>37</b><span>product questions this week</span></div>
+              <div class="metric"><b>12</b><span>hot abandoned carts</span></div>
+              <div class="metric"><b>4</b><span>support topics to fix</span></div>
+            </div>
+            <div class="tickets">
+              <div class="ticket"><div><b>Cart left after size question</b><p>Suggested fix: add fit guide + automated size answer.</p></div><span class="prio hot">hot</span></div>
+              <div class="ticket"><div><b>Shipping ETA repeated 9 times</b><p>Suggested fix: add shipping answer before checkout.</p></div><span class="prio">quick win</span></div>
+              <div class="ticket"><div><b>Return policy blocks purchase</b><p>Suggested fix: simplify FAQ and recovery message.</p></div><span class="prio hot">revenue leak</span></div>
+              <div class="ticket"><div><b>Review request not automated</b><p>Suggested fix: send review request 5 days after delivery.</p></div><span class="prio">trust</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="audit">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The zero-budget way to sell it.</h2>
+        <p>We do not need ads. We find visible leaks, ask permission, then send a short useful diagnosis and this demo link.</p>
+      </div>
+      <div class="audit">
+        <div style="display:grid;gap:12px">
+          <div class="leak"><strong>1</strong><div><h3>Find a visible leak</h3><p>Example: product page has no size guidance, no shipping clarity, weak FAQ or no trust/review flow.</p></div></div>
+          <div class="leak"><strong>2</strong><div><h3>Ask permission first</h3><p>Short message: “I found 2–3 places where your shop may lose customers. Want me to send them?”</p></div></div>
+          <div class="leak"><strong>3</strong><div><h3>Send value, then offer</h3><p>3 concrete points + this demo + a small implementation offer. No spam. No fake urgency.</p></div></div>
+        </div>
+        <aside class="offer">
+          <h3>Starter offer Janis can sell</h3>
+          <p class="small">A small, low-risk entry offer for brands that do not want a giant agency project.</p>
+          <div class="pricebox">
+            <div class="price-row"><span>3-point shop leak audit</span><b>€99–€199</b></div>
+            <div class="price-row"><span>First automation flow</span><b>€499–€999</b></div>
+            <div class="price-row"><span>Full sales/support system</span><b>€1.5k–€3.5k</b></div>
+            <div class="price-row"><span>Monthly care</span><b>€149–€799/mo</b></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="outreach" class="outreach">
+    <div class="wrap split">
+      <div>
+        <div class="section-head" style="margin-bottom:14px"><h2>First message.</h2></div>
+        <div class="checklist">
+          <div class="check">Manual and low-volume only.</div>
+          <div class="check">Personalized to the actual store.</div>
+          <div class="check">Permission-first: ask before sending the audit.</div>
+          <div class="check">No paid tools, no bought lists, no spam automation.</div>
+        </div>
+      </div>
+      <div class="script">
+        <code>Hi [Name], quick note: I looked at your shop and saw 2–3 places where customers may be dropping off or asking the same questions repeatedly.
+
+I build small AI sales & support systems for e-commerce brands — product-question answers, cart follow-up and support triage.
+
+Want me to send you the 3 points I noticed for your store?</code>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <span class="notice">Fictional demo data. No real customer data. Built as a zero-budget sales asset for Janis.</span>
+      <span>AI E-Com Sales & Support System · Demo v1</span>
+    </div>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('.ask');
+    const reply = document.getElementById('botReply');
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      reply.textContent = btn.dataset.answer;
+    }));
+  </script>
+</body>
+</html>
