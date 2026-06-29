@@ -4,7 +4,7 @@ Status: demos prepared locally for GitHub Pages publishing. Submission blocked u
 
 ## Job 1 — AI Automation Engineer
 URL: https://www.upwork.com/jobs/span-class-highlight-Automation-span-Engineer_~022071509329994690669/?referrer_url_path=/nx/search/jobs/
-Demo: https://janisag07.github.io/upwork-job-demos/publish/ai-automation-workflow-control-center/index.html?v=<SHA>
+Demo: https://janisag07.github.io/upwork-job-demos/publish/ai-automation-workflow-control-center/index.html?v=9162676
 Bid: $199 fixed
 Duration: Less than 1 month
 
@@ -14,7 +14,7 @@ Hi,
 I can help with the n8n / Make / AI-agent automation work you described.
 
 I made a focused proof-of-approach here:
-https://janisag07.github.io/upwork-job-demos/publish/ai-automation-workflow-control-center/index.html?v=<SHA>
+https://janisag07.github.io/upwork-job-demos/publish/ai-automation-workflow-control-center/index.html?v=9162676
 
 I focused it on the exact things you mentioned: multi-step workflows, REST/webhook logic, AI API steps, logging/retries, and clean documentation so the automation does not silently break after launch.
 
@@ -32,7 +32,7 @@ Janis
 
 ## Job 4 — LeadConnector / SalesLion CRM Expert
 URL: https://www.upwork.com/jobs/LeadConnector-SalesLion-span-class-highlight-CRM-span-Expert_~022071338118129477609/?referrer_url_path=/nx/search/jobs/
-Demo: https://janisag07.github.io/upwork-job-demos/publish/leadconnector-saleslion-crm-launch-board/index.html?v=<SHA>
+Demo: https://janisag07.github.io/upwork-job-demos/publish/leadconnector-saleslion-crm-launch-board/index.html?v=9162676
 Bid: $100 fixed
 Duration: Less than 1 month
 
@@ -44,7 +44,7 @@ Hi,
 I can help you configure SalesLion / LeadConnector properly instead of just adding disconnected pieces.
 
 I made a focused proof-of-approach here:
-https://janisag07.github.io/upwork-job-demos/publish/leadconnector-saleslion-crm-launch-board/index.html?v=<SHA>
+https://janisag07.github.io/upwork-job-demos/publish/leadconnector-saleslion-crm-launch-board/index.html?v=9162676
 
 I focused it on your exact setup needs: contact import/organization, social/calendar/payment/domain connections, pipelines, booking forms, workflows, testing, and a proactive improvement queue for AI integrations, reporting and onboarding.
 
@@ -62,7 +62,7 @@ Janis
 
 ## Job 5 — Airtable and QuickBooks Workflow Automation
 URL: https://www.upwork.com/jobs/Expert-needed-integrate-Airtable-and-QuickBooks-Workflow-span-class-highlight-Automation-span_~022071396937327950004/?referrer_url_path=/nx/search/jobs/
-Demo: https://janisag07.github.io/upwork-job-demos/publish/airtable-quickbooks-automotive-handoff/index.html?v=<SHA>
+Demo: https://janisag07.github.io/upwork-job-demos/publish/airtable-quickbooks-automotive-handoff/index.html?v=9162676
 Bid: $100 placeholder / scope discussion
 Duration: Less than 1 month
 
@@ -72,7 +72,7 @@ Hi,
 I can help connect Airtable with QuickBooks so new Airtable projects/orders can create the correct QuickBooks counterpart automatically.
 
 I made a focused proof-of-approach here:
-https://janisag07.github.io/upwork-job-demos/publish/airtable-quickbooks-automotive-handoff/index.html?v=<SHA>
+https://janisag07.github.io/upwork-job-demos/publish/airtable-quickbooks-automotive-handoff/index.html?v=9162676
 
 I mapped it around your Toyota dealership context: repair orders, parts/inventory, service billing, customer/vehicle records, project creation and exception handling when accounting fields are missing.
 
@@ -90,7 +90,7 @@ Janis
 
 ## Job 6 — Kaveret CRM Lead Tasks via GoHighLevel & Google Ads Tracking
 URL: https://www.upwork.com/jobs/Kaveret-CRM-span-class-highlight-Lead-span-Tasks-via-GoHighLevel-amp-Google-Ads-Group-Tracking-Upgrade_~022070943092263845747/?referrer_url_path=/nx/search/jobs/
-Demo: https://janisag07.github.io/upwork-job-demos/publish/ghl-kaveret-google-ads-tracking-qa-map/index.html?v=<SHA>
+Demo: https://janisag07.github.io/upwork-job-demos/publish/ghl-kaveret-google-ads-tracking-qa-map/index.html?v=9162676
 Bid: $140 fixed
 Duration: Less than 1 month
 
@@ -100,7 +100,7 @@ Hi,
 I can help with the three tasks you listed across GoHighLevel, Kaveret CRM and Google Ads tracking.
 
 I made a focused proof-of-approach here:
-https://janisag07.github.io/upwork-job-demos/publish/ghl-kaveret-google-ads-tracking-qa-map/index.html?v=<SHA>
+https://janisag07.github.io/upwork-job-demos/publish/ghl-kaveret-google-ads-tracking-qa-map/index.html?v=9162676
 
 I split the work into the same deliverables from your post: website sales lead → GoHighLevel workflow/webhook → Kaveret CRM task, Google Ads ad-group-level conversion tracking, and fixing the two conversion tags with a short before/after summary.
 
