@@ -1,0 +1,93 @@
+[
+  {
+    "field_name": "applicant.full_name",
+    "type": "text",
+    "required": true,
+    "json_path": "applicant.full_name",
+    "page": 1
+  },
+  {
+    "field_name": "applicant.id_number",
+    "type": "text",
+    "required": true,
+    "json_path": "applicant.id_number",
+    "page": 1
+  },
+  {
+    "field_name": "applicant.date_of_birth",
+    "type": "date",
+    "required": true,
+    "json_path": "applicant.date_of_birth",
+    "page": 1
+  },
+  {
+    "field_name": "applicant.address",
+    "type": "text",
+    "required": true,
+    "json_path": "applicant.address",
+    "page": 1
+  },
+  {
+    "field_name": "application.pass_type",
+    "type": "choice/text",
+    "required": true,
+    "json_path": "application.pass_type",
+    "page": 1
+  },
+  {
+    "field_name": "application.effective_date",
+    "type": "date",
+    "required": true,
+    "json_path": "application.effective_date",
+    "page": 1
+  },
+  {
+    "field_name": "application.expiration_date",
+    "type": "date",
+    "required": true,
+    "json_path": "application.expiration_date",
+    "page": 1
+  },
+  {
+    "field_name": "employer.agency",
+    "type": "text",
+    "required": false,
+    "json_path": "employer.agency",
+    "page": 1
+  },
+  {
+    "field_name": "employer.supervisor",
+    "type": "text",
+    "required": false,
+    "json_path": "employer.supervisor",
+    "page": 1
+  },
+  {
+    "field_name": "review.officer",
+    "type": "text",
+    "required": false,
+    "json_path": "review.officer",
+    "page": 1
+  },
+  {
+    "field_name": "review.approved",
+    "type": "checkbox/text",
+    "required": false,
+    "json_path": "review.approved",
+    "page": 1
+  },
+  {
+    "field_name": "signature.applicant",
+    "type": "signature/text",
+    "required": true,
+    "json_path": "signature.applicant",
+    "page": 1
+  },
+  {
+    "field_name": "signature.date",
+    "type": "date",
+    "required": true,
+    "json_path": "signature.date",
+    "page": 1
+  }
+]

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adobe XFA to AcroForm PDF Conversion Proof</title>
+  <style>
+    :root{
+      --bg:#07111f; --panel:#0d1b2f; --panel2:#10243d; --ink:#f6f8fc; --muted:#aebbd0;
+      --blue:#54a3ff; --green:#44d18c; --amber:#f4c96b; --red:#ff6b6b; --line:rgba(255,255,255,.12);
+      --shadow:0 22px 80px rgba(0,0,0,.38); --radius:24px;
+    }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:
+      radial-gradient(circle at 20% 0%,rgba(84,163,255,.22),transparent 34%),
+      radial-gradient(circle at 80% 12%,rgba(68,209,140,.16),transparent 28%),var(--bg);color:var(--ink);line-height:1.45}
+    .wrap{max-width:1180px;margin:0 auto;padding:34px 20px 64px}.badge{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);color:#dbe8fb;font-size:13px}.dot{width:9px;height:9px;background:var(--green);border-radius:50%;box-shadow:0 0 18px var(--green)}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;margin-top:22px}.card{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.045));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.hero-copy{padding:38px}h1{font-size:clamp(36px,5vw,64px);line-height:.96;margin:18px 0 18px;letter-spacing:-.05em}.lead{font-size:19px;color:#dce6f8;max-width:700px}.jobline{margin-top:22px;color:var(--muted);font-size:14px}.jobline strong{color:#fff}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;align-items:center;gap:9px;padding:12px 15px;border-radius:13px;text-decoration:none;font-weight:700;font-size:14px}.btn.primary{background:var(--blue);color:#04101f}.btn.secondary{border:1px solid var(--line);color:#fff;background:rgba(255,255,255,.06)}
+    .machine{padding:22px}.terminal{background:#050b14;border:1px solid rgba(84,163,255,.22);border-radius:18px;padding:18px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:#cbe0ff}.term-head{display:flex;gap:7px;margin-bottom:14px}.term-head i{width:11px;height:11px;border-radius:99px;background:#ff6161}.term-head i:nth-child(2){background:#ffc65d}.term-head i:nth-child(3){background:#49d17d}.ok{color:var(--green)}.warn{color:var(--amber)}.blue{color:#80bdff}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}.stat{padding:18px;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid var(--line)}.stat b{display:block;font-size:28px}.stat span{color:var(--muted);font-size:13px}.section{margin-top:34px;padding:28px}.section h2{margin:0 0 14px;font-size:28px;letter-spacing:-.03em}.muted{color:var(--muted)}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}.step{padding:18px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid var(--line);min-height:150px}.step .num{color:var(--blue);font-weight:800;font-size:13px}.step h3{margin:8px 0;font-size:17px}.step p{margin:0;color:var(--muted);font-size:14px}.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}.pdf-preview{background:#e9edf5;color:#172033;border-radius:18px;padding:18px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}.paper{background:white;min-height:440px;border-radius:8px;padding:20px;box-shadow:0 18px 55px rgba(0,0,0,.24);font-size:11px}.paper h3{margin:0 0 12px;text-align:center;letter-spacing:.08em}.paper .row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.field{border:1px solid #9aa6b6;padding:8px;border-radius:3px;background:#fbfdff}.field small{display:block;color:#66758a;margin-bottom:5px}.field strong{font-size:12px}.field.wide{grid-column:1/-1}.code{background:#050b14;border:1px solid var(--line);border-radius:18px;padding:16px;overflow:auto;color:#dff0ff;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;max-height:430px}.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.check{padding:14px;border-radius:15px;background:rgba(68,209,140,.08);border:1px solid rgba(68,209,140,.22)}.check b{color:#7dffc0}.assets{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.asset{padding:16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--line);text-decoration:none;color:#fff;min-height:112px}.asset span{display:block;color:var(--muted);font-size:13px;margin-top:6px}.tabs{display:flex;gap:8px;margin:18px 0}.tab{border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;padding:10px 12px;border-radius:12px;cursor:pointer}.tab.active{background:var(--blue);color:#06111f;border-color:transparent;font-weight:800}.hidden{display:none}.note{border-left:4px solid var(--amber);padding:13px 15px;background:rgba(244,201,107,.08);border-radius:12px;color:#f8e8bd;margin-top:16px}.footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}@media(max-width:900px){.hero,.split{grid-template-columns:1fr}.flow,.grid,.assets,.checks{grid-template-columns:1fr 1fr}}@media(max-width:560px){.flow,.grid,.assets,.checks{grid-template-columns:1fr}.hero-copy{padding:26px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <span class="badge"><span class="dot"></span> Project-specific proof for the XFA → AcroForm government form job</span>
+    <section class="hero">
+      <div class="card hero-copy">
+        <h1>XFA / LiveCycle PDF → Standard AcroForm Master</h1>
+        <p class="lead">A small working proof that mirrors the requested deliverable: recreate a government-style form as normal AcroForm fields, map field names, fill it from JSON, then generate a flattened final PDF.</p>
+        <div class="jobline"><strong>Target workflow:</strong> old Adobe LiveCycle/XFA form → visually matched AcroForm template → SaaS/AI/Python/Node fill pipeline → editable review → flattened final.</div>
+        <div class="actions">
+          <a class="btn primary" href="assets/sample_acroform_master.pdf" target="_blank">Open AcroForm master</a>
+          <a class="btn secondary" href="assets/sample_json_filled.pdf" target="_blank">Open JSON-filled PDF</a>
+          <a class="btn secondary" href="assets/sample_flattened_final.pdf" target="_blank">Open flattened final</a>
+        </div>
+        <div class="note">Fictional sample data only. I would keep the client’s real PDF/private source files off public demo pages and use them only inside the Upwork project workspace.</div>
+      </div>
+      <div class="card machine">
+        <div class="terminal">
+          <div class="term-head"><i></i><i></i><i></i></div>
+          <div><span class="blue">$</span> inspect sample_acroform_master.pdf</div>
+          <div class="ok">✓ 13 standard AcroForm fields detected</div>
+          <div class="ok">✓ No /XFA marker</div>
+          <div class="ok">✓ No LiveCycle marker</div>
+          <div><br><span class="blue">$</span> fill_from_json sample_data.json</div>
+          <div class="ok">✓ field values populated</div>
+          <div class="ok">✓ editable review copy generated</div>
+          <div><br><span class="blue">$</span> flatten final</div>
+          <div class="ok">✓ 0 editable widgets remain</div>
+          <div class="warn">→ ready for final locked PDF handoff</div>
+        </div>
+        <div class="grid">
+          <div class="stat"><b>13</b><span>mapped fields</span></div>
+          <div class="stat"><b>0</b><span>XFA markers</span></div>
+          <div class="stat"><b>3</b><span>PDF outputs</span></div>
+          <div class="stat"><b>1</b><span>JSON payload</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Exact delivery path</h2>
+      <p class="muted">This is the workflow I would use for the real form: preserve layout first, then rebuild the field technology underneath it.</p>
+      <div class="flow">
+        <div class="step"><div class="num">01</div><h3>Audit the old PDF</h3><p>Identify XFA/LiveCycle structure, page count, fonts, field locations, signatures, validation rules, and browser/automation failure points.</p></div>
+        <div class="step"><div class="num">02</div><h3>Recreate layout</h3><p>Match the original form visually without redesigning it: spacing, borders, labels, page breaks and government-form hierarchy.</p></div>
+        <div class="step"><div class="num">03</div><h3>Build AcroForm fields</h3><p>Create standard text/date/signature fields with stable field names for JSON, Python, Node or SaaS population.</p></div>
+        <div class="step"><div class="num">04</div><h3>Fill + flatten test</h3><p>Generate a filled editable PDF from JSON and a flattened final PDF, then verify no XFA/LiveCycle remains.</p></div>
+      </div>
+    </section>
+
+    <section class="card section split">
+      <div>
+        <h2>Visual proof</h2>
+        <p class="muted">A government-style form recreated as a normal AcroForm master. The real project would use the client’s exact PDF as the visual reference.</p>
+        <div class="tabs">
+          <button class="tab active" data-tab="blank">Master</button>
+          <button class="tab" data-tab="filled">Filled</button>
+          <button class="tab" data-tab="flat">Flattened</button>
+        </div>
+        <div class="pdf-preview">
+          <div class="paper" id="blank">
+            <h3>BASE PASS APPLICATION FORM</h3>
+            <div class="row"><div class="field"><small>Full legal name</small><strong>applicant.full_name</strong></div><div class="field"><small>ID / File number</small><strong>applicant.id_number</strong></div></div>
+            <div class="row"><div class="field wide"><small>Mailing address</small><strong>applicant.address</strong></div></div>
+            <div class="row"><div class="field"><small>Pass type</small><strong>application.pass_type</strong></div><div class="field"><small>Effective date</small><strong>application.effective_date</strong></div></div>
+            <div class="row"><div class="field"><small>Reviewing officer</small><strong>review.officer</strong></div><div class="field"><small>Approved</small><strong>review.approved</strong></div></div>
+            <div class="row"><div class="field wide"><small>Signature</small><strong>signature.applicant</strong></div></div>
+          </div>
+          <div class="paper hidden" id="filled">
+            <h3>BASE PASS APPLICATION FORM</h3>
+            <div class="row"><div class="field"><small>Full legal name</small><strong>Maria Johnson</strong></div><div class="field"><small>ID / File number</small><strong>GOV-2048-7712</strong></div></div>
+            <div class="row"><div class="field wide"><small>Mailing address</small><strong>1224 Cedar Ave, Blackwood, NJ 08012</strong></div></div>
+            <div class="row"><div class="field"><small>Pass type</small><strong>Annual Facility Pass</strong></div><div class="field"><small>Effective date</small><strong>2026-07-01</strong></div></div>
+            <div class="row"><div class="field"><small>Reviewing officer</small><strong>A. Collins</strong></div><div class="field"><small>Approved</small><strong>Yes</strong></div></div>
+            <div class="row"><div class="field wide"><small>Signature</small><strong>Maria Johnson — 2026-06-26</strong></div></div>
+          </div>
+          <div class="paper hidden" id="flat">
+            <h3>FINAL FLATTENED COPY</h3>
+            <p style="margin-top:80px;text-align:center;font-size:15px;color:#172033">Same visible data, but no editable form widgets remain.</p>
+            <p style="text-align:center;color:#66758a">Used for the locked/final SaaS-generated PDF after user review.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>JSON + field map</h2>
+        <pre class="code">{
+  "applicant.full_name": "Maria Johnson",
+  "applicant.id_number": "GOV-2048-7712",
+  "application.pass_type": "Annual Facility Pass",
+  "application.effective_date": "2026-07-01",
+  "employer.agency": "Department of Public Access",
+  "review.officer": "A. Collins",
+  "review.approved": "Yes",
+  "signature.applicant": "Maria Johnson"
+}</pre>
+        <div class="checks" style="margin-top:14px">
+          <div class="check"><b>✓ Field-name list</b><br><span class="muted">Stable names mapped to JSON paths.</span></div>
+          <div class="check"><b>✓ Editable review copy</b><br><span class="muted">User can open, review and adjust fields.</span></div>
+          <div class="check"><b>✓ SaaS-ready filling</b><br><span class="muted">Works from structured data, not manual typing.</span></div>
+          <div class="check"><b>✓ Final flatten</b><br><span class="muted">No remaining widgets in final PDF.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Downloadable proof assets</h2>
+      <div class="assets">
+        <a class="asset" href="assets/sample_acroform_master.pdf" target="_blank"><strong>Master AcroForm PDF</strong><span>fillable, no XFA</span></a>
+        <a class="asset" href="assets/field_name_map.json" target="_blank"><strong>Field-name map</strong><span>names + JSON paths</span></a>
+        <a class="asset" href="assets/sample_data.json" target="_blank"><strong>Sample JSON</strong><span>population payload</span></a>
+        <a class="asset" href="assets/sample_json_filled.pdf" target="_blank"><strong>Filled PDF</strong><span>editable review copy</span></a>
+        <a class="asset" href="assets/sample_flattened_final.pdf" target="_blank"><strong>Flattened final</strong><span>locked output</span></a>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Why this matches the job</h2>
+      <div class="flow">
+        <div class="step"><h3>No redesign</h3><p>The priority is visual parity with the old government form, not a new layout.</p></div>
+        <div class="step"><h3>No XFA</h3><p>The master is normal AcroForm so it can work with web apps, AI tools, Python, Node and SaaS workflows.</p></div>
+        <div class="step"><h3>Clear handoff</h3><p>Deliverables include master PDF, editable/source reference, field list, JSON sample, filled PDF and flattened final.</p></div>
+        <div class="step"><h3>Verification</h3><p>Before delivery I would run field-count, no-XFA and flatten checks so the result is testable, not subjective.</p></div>
+      </div>
+    </section>
+    <p class="footer">Built as a proof-of-approach for the Upwork job. Fictional sample form/data only. No client-private PDF is hosted here.</p>
+  </main>
+<script>
+  document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.paper').forEach(p=>p.classList.add('hidden'));
+    btn.classList.add('active'); document.getElementById(btn.dataset.tab).classList.remove('hidden');
+  }));
+</script>
+</body>
+</html>

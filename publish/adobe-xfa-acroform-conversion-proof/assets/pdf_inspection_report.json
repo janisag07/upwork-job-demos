@@ -1,0 +1,230 @@
+{
+  "master": {
+    "file": "sample_acroform_master.pdf",
+    "pages": 1,
+    "acroform_field_count": 13,
+    "field_names": [
+      "applicant.full_name",
+      "applicant.id_number",
+      "applicant.date_of_birth",
+      "applicant.address",
+      "application.pass_type",
+      "application.effective_date",
+      "application.expiration_date",
+      "employer.agency",
+      "employer.supervisor",
+      "review.officer",
+      "review.approved",
+      "signature.applicant",
+      "signature.date"
+    ],
+    "contains_xfa_marker": false,
+    "widgets": [
+      {
+        "page": 1,
+        "field_name": "applicant.full_name",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "applicant.id_number",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "applicant.date_of_birth",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "applicant.address",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "application.pass_type",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "application.effective_date",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "application.expiration_date",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "employer.agency",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "employer.supervisor",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "review.officer",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "review.approved",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "signature.applicant",
+        "field_type": "Text",
+        "value": ""
+      },
+      {
+        "page": 1,
+        "field_name": "signature.date",
+        "field_type": "Text",
+        "value": ""
+      }
+    ]
+  },
+  "filled": {
+    "file": "sample_json_filled.pdf",
+    "pages": 1,
+    "acroform_field_count": 13,
+    "field_names": [
+      "applicant.full_name",
+      "applicant.id_number",
+      "applicant.date_of_birth",
+      "applicant.address",
+      "application.pass_type",
+      "application.effective_date",
+      "application.expiration_date",
+      "employer.agency",
+      "employer.supervisor",
+      "review.officer",
+      "review.approved",
+      "signature.applicant",
+      "signature.date"
+    ],
+    "contains_xfa_marker": false,
+    "widgets": [
+      {
+        "page": 1,
+        "field_name": "applicant.full_name",
+        "field_type": "Text",
+        "value": "Maria Johnson"
+      },
+      {
+        "page": 1,
+        "field_name": "applicant.id_number",
+        "field_type": "Text",
+        "value": "GOV-2048-7712"
+      },
+      {
+        "page": 1,
+        "field_name": "applicant.date_of_birth",
+        "field_type": "Text",
+        "value": "1986-04-12"
+      },
+      {
+        "page": 1,
+        "field_name": "applicant.address",
+        "field_type": "Text",
+        "value": "1224 Cedar Ave, Blackwood, NJ 08012"
+      },
+      {
+        "page": 1,
+        "field_name": "application.pass_type",
+        "field_type": "Text",
+        "value": "Annual Facility Pass"
+      },
+      {
+        "page": 1,
+        "field_name": "application.effective_date",
+        "field_type": "Text",
+        "value": "2026-07-01"
+      },
+      {
+        "page": 1,
+        "field_name": "application.expiration_date",
+        "field_type": "Text",
+        "value": "2027-06-30"
+      },
+      {
+        "page": 1,
+        "field_name": "employer.agency",
+        "field_type": "Text",
+        "value": "Department of Public Access"
+      },
+      {
+        "page": 1,
+        "field_name": "employer.supervisor",
+        "field_type": "Text",
+        "value": "Daniel Reed"
+      },
+      {
+        "page": 1,
+        "field_name": "review.officer",
+        "field_type": "Text",
+        "value": "A. Collins"
+      },
+      {
+        "page": 1,
+        "field_name": "review.approved",
+        "field_type": "Text",
+        "value": "Yes"
+      },
+      {
+        "page": 1,
+        "field_name": "signature.applicant",
+        "field_type": "Text",
+        "value": "Maria Johnson"
+      },
+      {
+        "page": 1,
+        "field_name": "signature.date",
+        "field_type": "Text",
+        "value": "2026-06-26"
+      }
+    ]
+  },
+  "flattened": {
+    "file": "sample_flattened_final.pdf",
+    "pages": 1,
+    "acroform_field_count": 0,
+    "field_names": [],
+    "contains_xfa_marker": false,
+    "widgets": []
+  },
+  "completion_checks": [
+    {
+      "check": "Standard AcroForm fields exist in master",
+      "pass": true
+    },
+    {
+      "check": "No XFA/LiveCycle markers in master",
+      "pass": true
+    },
+    {
+      "check": "JSON values appear in filled PDF fields",
+      "pass": true
+    },
+    {
+      "check": "Flattened final has no remaining editable widgets",
+      "pass": true
+    }
+  ]
+}
