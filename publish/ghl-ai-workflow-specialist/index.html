@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GoHighLevel AI Automation Workflow Blueprint</title>
+  <style>
+    :root{--bg:#071015;--card:#0d1a23;--muted:#8fa6b6;--text:#eef8ff;--line:#1d3340;--green:#35d399;--blue:#73b7ff;--yellow:#ffd166;--red:#ff6b6b}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 15% 0%,#123044 0,#071015 36%,#04080b 100%);color:var(--text)}
+    .wrap{max-width:1120px;margin:0 auto;padding:42px 22px 70px}.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:rgba(13,26,35,.82);border-radius:999px;padding:8px 12px;color:#bfe2f7;font-size:13px}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 18px var(--green)}
+    h1{font-size:clamp(34px,6vw,72px);line-height:.96;margin:22px 0 16px;letter-spacing:-.06em}.lead{font-size:clamp(18px,2.5vw,24px);line-height:1.45;max-width:860px;color:#c7dbe8;margin:0 0 30px}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.card{background:linear-gradient(180deg,rgba(15,31,42,.92),rgba(10,20,27,.92));border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 22px 70px rgba(0,0,0,.28)}
+    h2{font-size:24px;margin:0 0 14px;letter-spacing:-.03em}.flow{display:grid;gap:12px}.step{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;padding:15px;border:1px solid #203847;border-radius:17px;background:#0a151d}.num{width:42px;height:42px;border-radius:14px;background:#102b3d;color:var(--blue);display:grid;place-items:center;font-weight:800}.step b{display:block;margin-bottom:5px}.step span{color:var(--muted);line-height:1.45}.pillrow{display:flex;flex-wrap:wrap;gap:10px}.pill{border:1px solid #27495b;background:#0a1820;border-radius:999px;padding:10px 12px;color:#cce8f6;font-size:14px}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.check{padding:14px;border-radius:16px;background:#09151d;border:1px solid #1d3441}.check strong{color:var(--green)}.mini{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.4}.timeline{display:grid;gap:10px}.tl{display:flex;gap:12px;align-items:flex-start;color:#c9deea}.bar{width:3px;align-self:stretch;background:linear-gradient(var(--green),var(--blue));border-radius:10px}.small{font-size:14px;color:var(--muted);line-height:1.55}.footer{margin-top:18px;color:#7894a5;font-size:13px}.warn{border-color:#4e3a13;background:#171205}.warn strong{color:var(--yellow)}
+    @media(max-width:860px){.grid,.checks{grid-template-columns:1fr}h1{letter-spacing:-.04em}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="badge"><span class="dot"></span> Proof-of-approach for a GoHighLevel AI Automation & Workflow Specialist role</div>
+    <h1>GHL AI Automation Command Center</h1>
+    <p class="lead">A practical blueprint for building, optimizing and documenting GoHighLevel automations: AI conversations, lead nurturing, booking follow-ups, pipelines, triggers, tags, fields, webhook integrations and QA checks.</p>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Core workflow map</h2>
+        <div class="flow">
+          <div class="step"><div class="num">1</div><div><b>Lead capture & pipeline routing</b><span>Forms, chats, missed calls or imported leads create/refresh the contact, apply source tags, select the correct pipeline stage and assign owner/tasks.</span></div></div>
+          <div class="step"><div class="num">2</div><div><b>AI conversation + qualification logic</b><span>GHL AI / chat flow asks qualification questions, handles common objections and routes hot leads to booking or human follow-up without overwriting important CRM data.</span></div></div>
+          <div class="step"><div class="num">3</div><div><b>Email/SMS nurture sequences</b><span>Segmented automations for new leads, no-shows, booked appointments, inactive contacts and onboarding — with suppression rules so people do not get duplicate messages.</span></div></div>
+          <div class="step"><div class="num">4</div><div><b>Webhook/API integrations</b><span>Zapier/Make/webhooks connect outside tools where needed, with payload logging, retry notes and a simple error queue for failed handoffs.</span></div></div>
+          <div class="step"><div class="num">5</div><div><b>Testing, cleanup and documentation</b><span>Every workflow gets a test contact path, trigger checklist, edge-case notes and a short handoff doc so the client can maintain the system.</span></div></div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2>First milestone</h2>
+        <div class="timeline">
+          <div class="tl"><div class="bar"></div><div><b>Audit current GHL setup</b><div class="small">Pipelines, triggers, workflows, tags, custom fields, calendars and existing campaigns.</div></div></div>
+          <div class="tl"><div class="bar"></div><div><b>Build/optimize the highest-value workflow</b><div class="small">Lead capture → AI qualification → nurture → booking/handoff.</div></div></div>
+          <div class="tl"><div class="bar"></div><div><b>Add QA + duplicate protection</b><div class="small">Test contacts, message suppression, failure logging, webhook checks.</div></div></div>
+          <div class="tl"><div class="bar"></div><div><b>Document the system</b><div class="small">Short Loom/doc-style handoff: what runs, when it triggers, how to edit safely.</div></div></div>
+        </div>
+        <div class="pillrow" style="margin-top:18px">
+          <span class="pill">GoHighLevel</span><span class="pill">AI Conversations</span><span class="pill">Lead Nurture</span><span class="pill">SMS/Email</span><span class="pill">Webhooks</span><span class="pill">Zapier/Make</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <h2>Reliability checks I would include</h2>
+      <div class="checks">
+        <div class="check"><strong>Trigger sanity</strong><div class="mini">Each workflow has one clear entry condition and avoids loops/re-triggering.</div></div>
+        <div class="check"><strong>Duplicate protection</strong><div class="mini">Tags/custom fields mark already-processed contacts and suppress repeated sequences.</div></div>
+        <div class="check"><strong>Human handoff</strong><div class="mini">Hot leads, unclear replies and failures create a task or notify the right person.</div></div>
+        <div class="check"><strong>Error visibility</strong><div class="mini">Webhook failures and missing fields are easy to find and fix instead of silently breaking.</div></div>
+      </div>
+      <p class="footer">Built with fictional/sample structure only. This is a client-safe proof-of-approach, not access to any real GHL account.</p>
+    </section>
+
+    <section class="card warn" style="margin-top:18px">
+      <strong>Operating principle:</strong> The goal is not just “more automation”. The goal is a clean GHL backend where leads are captured, qualified, followed up, booked and handed off without messy tags, duplicate texts or workflows nobody understands later.
+    </section>
+  </main>
+</body>
+</html>
