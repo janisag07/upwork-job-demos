@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Airtable + Softr Status Mapping Matrix</title>
+  <style>
+    :root{--bg:#071015;--card:#0e1d25;--line:#243f4f;--text:#f0f9ff;--muted:#9bb4c3;--green:#35d399;--blue:#73b7ff;--yellow:#ffd166;--red:#ff7a7a}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 12% 0%,#15384b 0,#071015 39%,#03070a 100%);color:var(--text)}.wrap{max-width:1120px;margin:0 auto;padding:42px 22px 72px}.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(14,29,37,.84);padding:8px 12px;border-radius:999px;color:#d2efff;font-size:13px}.dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 18px var(--green)}h1{font-size:clamp(34px,6vw,68px);line-height:.98;margin:20px 0 16px;letter-spacing:-.055em}.lead{font-size:clamp(18px,2.4vw,24px);line-height:1.45;color:#c9ddea;max-width:900px;margin:0 0 28px}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(16,32,42,.94),rgba(8,18,26,.94));border-radius:24px;padding:22px;box-shadow:0 22px 70px rgba(0,0,0,.27)}h2{margin:0 0 14px;font-size:24px;letter-spacing:-.03em}.matrix{display:grid;gap:10px}.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.cell{padding:14px;border:1px solid #213b49;background:#08151d;border-radius:16px;min-height:74px}.head .cell{background:#102738;color:#d8f2ff;font-weight:800}.cell strong{color:var(--green);display:block;margin-bottom:5px}.mini{font-size:13px;color:var(--muted);line-height:1.42}.flow{display:grid;gap:12px}.step{display:grid;grid-template-columns:42px 1fr;gap:14px;padding:15px;border:1px solid #203948;border-radius:18px;background:#0a1720}.num{width:42px;height:42px;border-radius:14px;background:#102b3e;display:grid;place-items:center;color:var(--blue);font-weight:800}.step b{display:block;margin-bottom:5px}.step span{color:var(--muted);line-height:1.48}.pillrow{display:flex;flex-wrap:wrap;gap:10px}.pill{border:1px solid #2a4d61;background:#091820;border-radius:999px;padding:10px 12px;color:#d1edf8;font-size:14px}.warn{border-color:#59451a;background:#181407}.warn strong{color:var(--yellow)}.footer{margin-top:14px;color:#7894a5;font-size:13px}@media(max-width:900px){.grid,.row{grid-template-columns:1fr}h1{letter-spacing:-.04em}.head{display:none}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="badge"><span class="dot"></span> Proof-of-approach for an Airtable + Softr clinic financing portal fix</div>
+    <h1>Status Mapping Matrix</h1>
+    <p class="lead">A focused blueprint for aligning Airtable status fields with the Softr partner-clinic progress bar so every clinic sees the correct financing application step, label and exception state.</p>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Airtable → Softr mapping</h2>
+        <div class="matrix">
+          <div class="row head"><div class="cell">Airtable status</div><div class="cell">Softr progress step</div><div class="cell">Portal label / rule</div></div>
+          <div class="row"><div class="cell"><strong>New / received</strong><div class="mini">Application created, required patient/clinic fields present.</div></div><div class="cell"><strong>Step 1</strong><div class="mini">Intake received</div></div><div class="cell"><strong>Show started</strong><div class="mini">Do not advance until validation fields are complete.</div></div></div>
+          <div class="row"><div class="cell"><strong>Under review</strong><div class="mini">Internal review or financing partner review in progress.</div></div><div class="cell"><strong>Step 2</strong><div class="mini">Review in progress</div></div><div class="cell"><strong>Show active review</strong><div class="mini">Prevent mismatch when Airtable has partial/old status text.</div></div></div>
+          <div class="row"><div class="cell"><strong>Missing info</strong><div class="mini">Patient/clinic document or field is missing.</div></div><div class="cell"><strong>Exception</strong><div class="mini">Action needed</div></div><div class="cell"><strong>Hold progress</strong><div class="mini">Progress bar pauses and displays the missing-info message.</div></div></div>
+          <div class="row"><div class="cell"><strong>Approved / refused</strong><div class="mini">Final financing outcome from partner/process.</div></div><div class="cell"><strong>Final step</strong><div class="mini">Decision available</div></div><div class="cell"><strong>Lock final label</strong><div class="mini">Clinic sees clear outcome, not an intermediate progress state.</div></div></div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2>Fix plan</h2>
+        <div class="flow">
+          <div class="step"><div class="num">1</div><div><b>Audit fields</b><span>List the Airtable status field(s), Softr conditional visibility rules and current progress-bar logic.</span></div></div>
+          <div class="step"><div class="num">2</div><div><b>Define source of truth</b><span>Choose one Airtable status/step model that Softr reads consistently.</span></div></div>
+          <div class="step"><div class="num">3</div><div><b>Remap portal states</b><span>Connect each Airtable status to exactly one Softr progress step and one clinic-facing label.</span></div></div>
+          <div class="step"><div class="num">4</div><div><b>Test sample records</b><span>Run a small set of test applications through every status, including missing-info and final decision paths.</span></div></div>
+        </div>
+        <div class="pillrow" style="margin-top:18px"><span class="pill">Airtable</span><span class="pill">Softr</span><span class="pill">Status logic</span><span class="pill">Progress bar</span><span class="pill">Clinic portal</span><span class="pill">QA checklist</span></div>
+      </aside>
+    </section>
+
+    <section class="card warn" style="margin-top:18px"><strong>Positioning:</strong> small but important fix — clean status logic first, then portal display. Fast, testable, and easy to hand off.</section>
+    <p class="footer">Fictional/sample statuses only. No real patient or clinic data is shown.</p>
+  </main>
+</body>
+</html>

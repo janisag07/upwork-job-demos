@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meta / WhatsApp Registration Debug Checklist</title>
+  <style>
+    :root{--bg:#071016;--card:#0d1b24;--card2:#101f29;--line:#24404f;--text:#eff8ff;--muted:#9bb4c5;--green:#35d399;--blue:#66b7ff;--yellow:#ffd166;--red:#ff7a7a}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 15% 0%,#17394a 0,#071016 38%,#03070a 100%);color:var(--text)}.wrap{max-width:1120px;margin:0 auto;padding:42px 22px 70px}.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(13,27,36,.84);padding:8px 12px;border-radius:999px;color:#cdeeff;font-size:13px}.dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 18px var(--green)}h1{font-size:clamp(34px,6vw,68px);line-height:.98;margin:20px 0 16px;letter-spacing:-.055em}.lead{font-size:clamp(18px,2.4vw,24px);line-height:1.45;color:#c7dce8;max-width:900px;margin:0 0 28px}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(16,31,41,.94),rgba(9,19,27,.94));border-radius:24px;padding:22px;box-shadow:0 22px 70px rgba(0,0,0,.27)}h2{margin:0 0 14px;font-size:24px;letter-spacing:-.03em}.flow{display:grid;gap:12px}.step{display:grid;grid-template-columns:46px 1fr;gap:14px;padding:15px;border:1px solid #203a49;border-radius:18px;background:#0a1720}.num{width:46px;height:46px;border-radius:15px;background:#112c3d;display:grid;place-items:center;color:var(--blue);font-weight:800}.step b{display:block;margin-bottom:5px}.step span,.small{color:var(--muted);line-height:1.48}.pillrow{display:flex;flex-wrap:wrap;gap:10px}.pill{border:1px solid #2b4f61;background:#0a1820;border-radius:999px;padding:10px 12px;color:#d2edf8;font-size:14px}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.check{padding:14px;border:1px solid #213b49;background:#08151d;border-radius:16px}.check strong{color:var(--green)}.mini{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.4}.warn{border-color:#59451a;background:#181407}.warn strong{color:var(--yellow)}.footer{margin-top:14px;color:#7894a5;font-size:13px}@media(max-width:860px){.grid,.checks{grid-template-columns:1fr}h1{letter-spacing:-.04em}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="badge"><span class="dot"></span> Proof-of-approach for a Meta / WhatsApp Business registration fix</div>
+    <h1>WhatsApp Registration Debug Board</h1>
+    <p class="lead">A compact diagnostic path for the exact issue: the phone number is added in Facebook Developer / Meta, but WhatsApp Business registration fails. The goal is to find whether the break is business verification, WABA ownership, phone-number status, app permissions, or webhook/test-message setup.</p>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Registration failure checklist</h2>
+        <div class="flow">
+          <div class="step"><div class="num">1</div><div><b>Business + app state</b><span>Confirm Meta Business verification, app mode, products enabled, correct Business Manager, and no hidden policy/account restriction.</span></div></div>
+          <div class="step"><div class="num">2</div><div><b>WABA and phone ownership</b><span>Check whether the WhatsApp Business Account is correctly linked, whether the number is owned/available, and whether it is already attached elsewhere.</span></div></div>
+          <div class="step"><div class="num">3</div><div><b>Registration error capture</b><span>Record the exact failed registration step, error text/code, screenshot state, and the Meta object IDs needed for support/escalation.</span></div></div>
+          <div class="step"><div class="num">4</div><div><b>Permissions + token path</b><span>Verify app permissions, system user/access token scope, phone_number_id, waba_id, callback URL, webhook subscription, and test endpoint access.</span></div></div>
+          <div class="step"><div class="num">5</div><div><b>Fix or escalation notes</b><span>Apply the obvious fix when possible; otherwise deliver the exact escalation path with IDs, screenshots, and action list for Meta support.</span></div></div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2>First milestone</h2>
+        <div class="flow">
+          <div class="check"><strong>Access review</strong><div class="mini">Read-only first: Business Manager, Developer App, WhatsApp product, WABA/phone status.</div></div>
+          <div class="check"><strong>Failure mapping</strong><div class="mini">Document exactly where registration breaks and what dependency blocks it.</div></div>
+          <div class="check"><strong>Repair path</strong><div class="mini">Fix configuration if it is account/app setup; otherwise prepare clean escalation package.</div></div>
+          <div class="check"><strong>Webhook sanity test</strong><div class="mini">If registration is restored, confirm webhook/test-message path without touching live customers.</div></div>
+        </div>
+        <div class="pillrow" style="margin-top:18px"><span class="pill">Meta Developer</span><span class="pill">WhatsApp Business</span><span class="pill">WABA</span><span class="pill">Phone Number ID</span><span class="pill">Webhooks</span><span class="pill">API Tokens</span></div>
+      </aside>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <h2>What I would not overpromise</h2>
+      <div class="checks">
+        <div class="check"><strong>No fake guarantee</strong><div class="mini">Some WhatsApp failures depend on Meta account policy, number ownership, or verification review.</div></div>
+        <div class="check"><strong>Client-provided accounts</strong><div class="mini">The work should happen in the client’s own Meta Business / Developer environment.</div></div>
+        <div class="check"><strong>Clear evidence trail</strong><div class="mini">Every finding is documented so the client knows what was checked and what remains blocked.</div></div>
+        <div class="check"><strong>Safe testing</strong><div class="mini">Test messages/webhooks only after registration and permissions are confirmed.</div></div>
+      </div>
+      <p class="footer">Fictional/sample structure only. No real Meta or WhatsApp account data is shown.</p>
+    </section>
+
+    <section class="card warn" style="margin-top:18px"><strong>Positioning:</strong> this is a diagnostic/fix sprint — fast, structured, and honest about dependencies inside Meta’s account state.</section>
+  </main>
+</body>
+</html>

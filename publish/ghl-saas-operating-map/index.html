@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GHL SaaS Mode Automation Operating Map</title>
+  <style>
+    :root{--bg:#061017;--card:#0e1c25;--line:#244050;--text:#eff9ff;--muted:#9ab2c2;--green:#35d399;--blue:#72b7ff;--purple:#a78bfa;--yellow:#ffd166}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0%,#183a55 0,#061017 40%,#030609 100%);color:var(--text)}.wrap{max-width:1140px;margin:0 auto;padding:42px 22px 72px}.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(14,28,37,.84);padding:8px 12px;border-radius:999px;color:#ccefff;font-size:13px}.dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 18px var(--green)}h1{font-size:clamp(34px,6vw,70px);line-height:.96;margin:20px 0 16px;letter-spacing:-.06em}.lead{font-size:clamp(18px,2.4vw,24px);line-height:1.45;color:#c8ddea;max-width:910px;margin:0 0 28px}.grid{display:grid;grid-template-columns:1.12fr .88fr;gap:18px}.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(16,31,42,.94),rgba(8,18,26,.94));border-radius:24px;padding:22px;box-shadow:0 22px 70px rgba(0,0,0,.28)}h2{margin:0 0 14px;font-size:24px;letter-spacing:-.03em}.flow{display:grid;gap:12px}.step{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:15px;border:1px solid #203948;border-radius:18px;background:#0a1720}.num{width:44px;height:44px;border-radius:15px;background:#102b3e;display:grid;place-items:center;color:var(--blue);font-weight:800}.step b{display:block;margin-bottom:5px}.step span,.small{color:var(--muted);line-height:1.48}.pillrow{display:flex;flex-wrap:wrap;gap:10px}.pill{border:1px solid #2b4d61;background:#091820;border-radius:999px;padding:10px 12px;color:#d1edf8;font-size:14px}.matrix{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.cell{padding:15px;border:1px solid #213b4b;border-radius:17px;background:#08151d}.cell strong{color:var(--green)}.cell:nth-child(2n) strong{color:var(--blue)}.cell:nth-child(3n) strong{color:var(--purple)}.mini{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.42}.warn{border-color:#59451a;background:#181407}.warn strong{color:var(--yellow)}.footer{margin-top:14px;color:#7894a5;font-size:13px}@media(max-width:900px){.grid,.matrix{grid-template-columns:1fr}h1{letter-spacing:-.04em}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="badge"><span class="dot"></span> Proof-of-approach for GHL SaaS Mode, snapshots, sub-accounts and automations</div>
+    <h1>GHL SaaS Operating Map</h1>
+    <p class="lead">A practical control map for building and managing a GoHighLevel SaaS setup: sub-account onboarding, snapshots, workflows, funnels, forms/calendars, CRM pipelines, webhooks and AI automation without creating a messy backend nobody can maintain.</p>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Build architecture</h2>
+        <div class="flow">
+          <div class="step"><div class="num">1</div><div><b>SaaS Mode foundation</b><span>Define account structure, sub-account template, snapshot scope, roles/permissions, onboarding steps and the repeatable client launch checklist.</span></div></div>
+          <div class="step"><div class="num">2</div><div><b>Snapshot + sub-account rollout</b><span>Package pipelines, custom fields, tags, forms, calendars, workflows and funnel pages into a clean deployment pattern for new clients.</span></div></div>
+          <div class="step"><div class="num">3</div><div><b>Lead pipeline + follow-up logic</b><span>Route form/chat/calendar leads into the correct pipeline stage, owner, tags, tasks, SMS/email follow-up and booking flow.</span></div></div>
+          <div class="step"><div class="num">4</div><div><b>Webhook/API automation layer</b><span>Use n8n/Make/Zapier/webhooks only where they add value: enrichment, external app sync, AI classification, reporting, or error capture.</span></div></div>
+          <div class="step"><div class="num">5</div><div><b>QA, docs and maintenance</b><span>Every workflow gets trigger rules, test contacts, duplicate protection, suppression rules, failure notes and short handoff documentation.</span></div></div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2>First 7-day sprint</h2>
+        <div class="flow">
+          <div class="cell"><strong>Audit</strong><div class="mini">Review current GHL SaaS/sub-account state, workflows, funnels, forms, calendars and pipelines.</div></div>
+          <div class="cell"><strong>Blueprint</strong><div class="mini">Map the reusable snapshot/sub-account template and the first lead-to-booking automation path.</div></div>
+          <div class="cell"><strong>Build</strong><div class="mini">Implement or clean the highest-value workflow with QA checks and test records.</div></div>
+          <div class="cell"><strong>Integrate</strong><div class="mini">Add n8n/Make/Zapier/webhooks only for the specific external handoffs needed.</div></div>
+          <div class="cell"><strong>Document</strong><div class="mini">Leave concise operating notes: triggers, fields, tags, test process and safe edit rules.</div></div>
+        </div>
+        <div class="pillrow" style="margin-top:18px"><span class="pill">GoHighLevel</span><span class="pill">SaaS Mode</span><span class="pill">Snapshots</span><span class="pill">Sub-Accounts</span><span class="pill">Funnels</span><span class="pill">Calendars</span><span class="pill">AI Workflows</span><span class="pill">n8n / Make / Zapier</span></div>
+      </aside>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <h2>Reliability matrix</h2>
+      <div class="matrix">
+        <div class="cell"><strong>Pipeline hygiene</strong><div class="mini">One source of truth for stage changes, owner assignment and lead status.</div></div>
+        <div class="cell"><strong>Suppression logic</strong><div class="mini">Avoid duplicate SMS/email sequences and accidental re-entry into workflows.</div></div>
+        <div class="cell"><strong>Snapshot versioning</strong><div class="mini">Know what belongs in the template and what should stay client-specific.</div></div>
+        <div class="cell"><strong>Webhook visibility</strong><div class="mini">Log payloads, missing fields and failed handoffs instead of silent breaks.</div></div>
+        <div class="cell"><strong>Human handoff</strong><div class="mini">Hot leads, unclear replies and errors notify the right user quickly.</div></div>
+        <div class="cell"><strong>Startup fit</strong><div class="mini">Fast iterations, clear communication, and practical build decisions instead of bloated architecture.</div></div>
+      </div>
+      <p class="footer">Fictional/sample structure only. This is a proof-of-approach, not access to a real GHL account.</p>
+    </section>
+
+    <section class="card warn" style="margin-top:18px"><strong>Positioning:</strong> I would start with a concrete audit/starter sprint and be transparent about experience rather than pretending every SaaS Mode edge case is already solved.</section>
+  </main>
+</body>
+</html>
