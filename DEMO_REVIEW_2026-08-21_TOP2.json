@@ -1,0 +1,15 @@
+{
+  "reviewed_at": "2026-08-21",
+  "reviewer": "fresh Claude Code Sonnet context",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "spec_misses": [],
+  "truthfulness_risks": [],
+  "copy_design_issues": [],
+  "suggestions": [
+    "Email demo environment tag could later be softened from staging to sample environment; non-blocking because the fictional-data disclaimer is directly visible.",
+    "Pipedrive card status does not automatically change when moving stages; non-blocking because status and stage are intentionally separate and no status-change interaction was required."
+  ],
+  "summary": "Both demos passed independent security, logic, specification, truthfulness, copy and design review."
+}
