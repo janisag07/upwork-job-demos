@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Construction Relationship &amp; Opportunity Control Center — Proof of Approach</title>
+<style>
+  :root{
+    --bg:#f6f2ea;
+    --panel:#fffdf8;
+    --panel-2:#faf5eb;
+    --border:#e3dbc9;
+    --border-soft:#ece5d6;
+    --navy:#182642;
+    --navy-2:#4b5975;
+    --navy-3:#78849b;
+    --amber:#c97a12;
+    --amber-strong:#a8630c;
+    --amber-dim:#f8e9cf;
+    --amber-line:#e2b568;
+    --green:#205c37;
+    --green-dim:#e1efe4;
+    --green-line:#a9cbb2;
+    --red:#8a2f1c;
+    --red-dim:#f6e1da;
+    --red-line:#d9a68f;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--navy);font-family:var(--sans);line-height:1.5;font-size:15px}
+  .wrap{max-width:1180px;margin:0 auto;padding:20px 20px 72px}
+  *:focus-visible{outline:2px solid var(--amber-strong);outline-offset:2px;border-radius:4px}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 0 16px;border-bottom:2px solid var(--navy)}
+  .brand{font-weight:800;font-size:16px;letter-spacing:-.01em}
+  .brand .tag{display:block;font-weight:600;font-size:11.5px;color:var(--navy-3);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+
+  .disclaimer{background:var(--amber-dim);border:1px solid var(--amber-line);border-left:3px solid var(--amber-strong);border-radius:8px;padding:11px 14px;font-size:13px;color:#5c3c0a;margin:18px 0 20px}
+
+  .hero{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:26px}
+  .eyebrow{color:var(--amber-strong);text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:800}
+  h1{font-size:clamp(24px,4vw,33px);line-height:1.14;letter-spacing:-.015em;margin:10px 0 12px}
+  .hero p.sub{color:var(--navy-2);max-width:700px;margin:0 0 18px}
+
+  .pipeline-toggle{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .toggle-btn{min-height:48px;flex:1 1 220px;border:1px solid var(--border);background:var(--panel-2);color:var(--navy);border-radius:12px;padding:0 18px;font-weight:700;font-size:14px;cursor:pointer;text-align:left;transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+  .toggle-btn small{display:block;font-weight:500;color:var(--navy-3);font-size:11.5px;margin-top:1px}
+  .toggle-btn[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fbf7ee}
+  .toggle-btn[aria-pressed="true"] small{color:#c8cedb}
+
+  .metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .metric{background:var(--panel-2);border:1px solid var(--border-soft);border-radius:10px;padding:13px 14px}
+  .metric b{display:block;font-size:22px;font-weight:800;letter-spacing:-.01em}
+  .metric span{color:var(--navy-3);font-size:11.5px}
+
+  section.panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;margin-top:18px}
+  section.panel h2{font-size:17px;margin:0 0 4px;letter-spacing:-.01em}
+  .panel-desc{color:var(--navy-2);font-size:13.5px;margin:0 0 16px;max-width:720px}
+  h3{font-size:14px;margin:0 0 6px}
+
+  .stage-rail{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+  .stage-chip{background:var(--panel-2);border:1px solid var(--border-soft);border-radius:10px;padding:9px 10px}
+  .stage-chip .n{font-family:var(--mono);font-size:10px;color:var(--amber-strong)}
+  .stage-chip .lbl{font-size:12px;font-weight:700;margin:2px 0 3px;line-height:1.25}
+  .stage-chip .cnt{font-size:11px;color:var(--navy-3)}
+
+  .filters-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:16px}
+  .filter-group label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--navy-3);margin-bottom:5px;font-weight:700}
+  select{min-height:44px;background:var(--panel-2);border:1px solid var(--border);color:var(--navy);border-radius:9px;padding:0 12px;font-size:13.5px;font-family:var(--sans);min-width:190px}
+  .chip-group{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{min-height:44px;display:inline-flex;align-items:center;border:1px solid var(--border);background:var(--panel-2);color:var(--navy-2);border-radius:999px;padding:0 14px;font-size:12.5px;font-weight:700;cursor:pointer;transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+  .chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fbf7ee}
+
+  .split{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
+  .card-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:640px;overflow-y:auto;padding-right:2px}
+  .card-row{width:100%;text-align:left;background:var(--panel-2);border:1px solid var(--border-soft);border-radius:11px;padding:12px 13px;cursor:pointer;display:block;transition:border-color .15s ease,background-color .15s ease,box-shadow .15s ease}
+  .card-row:hover{border-color:var(--amber-line)}
+  .card-row.selected{border-color:var(--navy);background:#f1ece0;box-shadow:inset 0 0 0 1px var(--navy)}
+  .cr-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .cr-org{font-weight:800;font-size:14px}
+  .cr-stage{font-size:11px;color:var(--navy-3);font-family:var(--mono)}
+  .cr-mid{color:var(--navy-2);font-size:12.5px;margin-top:2px}
+  .cr-bottom{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+
+  .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:800;white-space:nowrap;border:1px solid transparent}
+  .pill .dot{width:6px;height:6px;border-radius:50%}
+  .pill-good{background:var(--green-dim);color:var(--green);border-color:var(--green-line)}
+  .pill-good .dot{background:var(--green)}
+  .pill-warn{background:var(--amber-dim);color:var(--amber-strong);border-color:var(--amber-line)}
+  .pill-warn .dot{background:var(--amber-strong)}
+  .pill-bad{background:var(--red-dim);color:var(--red);border-color:var(--red-line)}
+  .pill-bad .dot{background:var(--red)}
+  .pill-neutral{background:#eceff5;color:var(--navy-2);border-color:#d7dce6}
+  .pill-neutral .dot{background:var(--navy-3)}
+
+  .detail{background:var(--panel-2);border:1px solid var(--border);border-radius:12px;padding:18px;position:sticky;top:14px}
+  .detail h3{font-size:16px;margin-bottom:2px}
+  .detail .who{color:var(--navy-3);font-size:12.5px;margin-bottom:12px}
+  .detail dl{margin:0 0 14px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px}
+  .detail dt{color:var(--navy-3);font-weight:700}
+  .detail dd{margin:0}
+  .detail .pillrow{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 14px}
+  .detail .field{margin-bottom:12px}
+  .detail label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--navy-3);margin-bottom:5px;font-weight:700}
+  .detail input[type="text"]{width:100%;min-height:44px;border:1px solid var(--border);border-radius:9px;padding:0 12px;font-size:13.5px;background:var(--panel);color:var(--navy);font-family:var(--sans)}
+  .detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--panel);border:1px solid var(--border);color:var(--navy);border-radius:9px;padding:0 16px;font-size:13.5px;font-weight:700;cursor:pointer;transition:background-color .15s ease,border-color .15s ease}
+  .btn:hover{border-color:var(--navy-3)}
+  .btn.primary{background:var(--amber);border-color:var(--amber);color:#221400}
+  .btn.primary:hover{background:var(--amber-strong)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .inline-msg{font-size:12px;color:var(--red);margin-top:6px;min-height:16px;font-weight:700}
+  .inline-msg.saved{color:var(--green)}
+  .empty-detail{color:var(--navy-3);font-size:13.5px}
+
+  .log{background:var(--panel-2);border:1px solid var(--border-soft);border-radius:12px;padding:4px 4px;max-height:280px;overflow-y:auto}
+  .log-entry{display:grid;grid-template-columns:74px 1fr;gap:10px;padding:9px 12px;border-bottom:1px solid var(--border-soft);font-size:12.5px}
+  .log-entry:last-child{border-bottom:0}
+  .log-entry .t{font-family:var(--mono);color:var(--navy-3)}
+  .log-entry .body{color:var(--navy)}
+
+  .table-scroll{overflow-x:auto;border:1px solid var(--border-soft);border-radius:11px}
+  table{width:100%;border-collapse:collapse;min-width:640px}
+  th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--navy-3);background:var(--panel-2);padding:9px 11px;border-bottom:1px solid var(--border);white-space:nowrap}
+  td{padding:9px 11px;border-bottom:1px solid var(--border-soft);font-size:13px;vertical-align:top}
+  tbody tr:last-child td{border-bottom:0}
+  .flag-ok{color:var(--green);font-weight:700}
+  .flag-issue{color:var(--red);font-weight:700}
+  .flag-pending{color:var(--navy-3)}
+
+  .qa-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+  .qa-summary .metric b{font-size:20px}
+  .qa-issues{background:var(--panel-2);border:1px solid var(--border-soft);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--navy-2);margin-top:10px}
+  .qa-issues ul{margin:6px 0 0;padding-left:18px}
+  .qa-issues li{margin:3px 0}
+
+  .coexist-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+  .coexist-card{background:var(--panel-2);border:1px solid var(--border-soft);border-radius:11px;padding:14px 15px}
+  .coexist-card h4{margin:0 0 6px;font-size:13.5px}
+  .coexist-card .tab-label{display:inline-block;font-family:var(--mono);font-size:11px;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:2px 7px;margin-bottom:8px}
+  .coexist-card p{margin:0;color:var(--navy-2);font-size:12.5px}
+  .discovery-list{margin:0;padding-left:18px;color:var(--navy-2);font-size:13px}
+  .discovery-list li{margin:5px 0}
+
+  .milestone-callout{border:2px solid var(--navy);border-radius:12px;padding:18px 20px;background:var(--panel-2)}
+  .milestone-callout .m-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--amber-strong)}
+  .milestone-callout h3{font-size:17px;margin:6px 0 10px}
+  .milestone-callout ol{margin:0 0 12px;padding-left:20px;font-size:13.5px;color:var(--navy-2)}
+  .milestone-callout li{margin:4px 0}
+  .accept-box{border-top:1px solid var(--border);padding-top:10px;font-size:13px;color:var(--navy-2)}
+  .accept-box b{display:block;color:var(--navy);margin-bottom:4px}
+
+  .noscript-fallback{display:none}
+  footer{color:var(--navy-3);font-size:12.5px;margin-top:26px;padding-top:16px;border-top:1px solid var(--border)}
+
+  @media(max-width:900px){
+    .split{grid-template-columns:1fr}
+    .detail{position:static}
+    .metrics-row{grid-template-columns:repeat(2,1fr)}
+    .stage-rail{grid-template-columns:repeat(2,1fr)}
+    .coexist-grid{grid-template-columns:1fr}
+    .qa-summary{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:480px){
+    .wrap{padding:14px 12px 60px}
+    .hero{padding:18px 16px}
+    .metrics-row{grid-template-columns:1fr 1fr}
+    .qa-summary{grid-template-columns:1fr}
+    .detail dl{grid-template-columns:1fr}
+    .detail dt{margin-top:6px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topbar">
+    <div class="brand">Construction Relationship &amp; Opportunity Control Center<span class="tag">Pipedrive implementation workspace</span></div>
+  </header>
+
+  <p class="disclaimer">Proof of approach using fictional sample data. No client systems or data are connected.</p>
+
+  <section class="hero">
+    <span class="eyebrow">Pipedrive CRM implementation</span>
+    <h1>Two connected pipelines for a construction relationship-to-bid workflow</h1>
+    <p class="sub">This workspace maps how a commercial construction team moves an account from first contact to a qualified opportunity, then carries that opportunity through estimating and award — while the backlog and active-project tabs stay in the existing spreadsheet until there is a real reason to move them.</p>
+
+    <div class="pipeline-toggle" role="group" aria-label="Select pipeline">
+      <button class="toggle-btn" id="btnRelationship" type="button" aria-pressed="true">Pipeline 1 — Relationship Development<small>Target → qualified opportunity</small></button>
+      <button class="toggle-btn" id="btnOpportunity" type="button" aria-pressed="false">Pipeline 2 — Project Opportunities<small>Identified → awarded / lost / deferred</small></button>
+    </div>
+
+    <div class="metrics-row" id="metricsRow"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="board-h">
+    <h2 id="board-h">Pipeline board</h2>
+    <p class="panel-desc" id="boardDesc"></p>
+
+    <div class="stage-rail" id="stageRail"></div>
+
+    <div class="filters-row">
+      <div class="filter-group">
+        <label for="ownerFilter">Owner</label>
+        <select id="ownerFilter" aria-label="Filter by owner">
+          <option value="all">All owners</option>
+          <option value="Dana Ruiz">Dana Ruiz</option>
+          <option value="Marcus Yates">Marcus Yates</option>
+          <option value="Priya Chandra">Priya Chandra</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label id="riskFilterLabel">Risk</label>
+        <div class="chip-group" id="riskFilters" role="group" aria-labelledby="riskFilterLabel">
+          <button class="chip" data-risk="all" aria-pressed="true" type="button">All</button>
+          <button class="chip" data-risk="On track" aria-pressed="false" type="button">On track</button>
+          <button class="chip" data-risk="Due soon" aria-pressed="false" type="button">Due soon</button>
+          <button class="chip" data-risk="Overdue" aria-pressed="false" type="button">Overdue</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <label id="statusFilterLabel">Status</label>
+        <div class="chip-group" id="statusFilters" role="group" aria-labelledby="statusFilterLabel"></div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="js-render">
+        <ul class="card-list" id="cardList" aria-label="Pipeline cards"></ul>
+      </div>
+      <div class="detail js-render" id="detailPanel" aria-live="polite"></div>
+    </div>
+    <div class="noscript-fallback">
+      <p>Sample relationship cards include Foundry Row Development (qualified opportunity created, owner Dana Ruiz) and Cedarbrook Senior Living (introduction requested, overdue follow-up, owner Marcus Yates). Selecting a card in the live version opens a detail panel with next-action tracking and stage advancement.</p>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="log-h">
+    <h2 id="log-h">Activity log</h2>
+    <p class="panel-desc">Every stage move, next-action update, and migration check is recorded here — the same accountability trail a manager would see in Pipedrive's activity feed.</p>
+    <div class="log" id="activityLog" aria-live="polite" aria-label="Workspace activity log">
+      <div class="log-entry"><span class="t">Session</span><span class="body">Workspace loaded with fictional sample data across both pipelines. No changes made yet.</span></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="qa-h">
+    <h2 id="qa-h">Migration QA — 25-row test batch</h2>
+    <p class="panel-desc">Before any bulk import, a small batch is scanned for the mistakes that make CRM data unusable: duplicate organizations, rows with no owner, and rows with no next action. This is what "Run migration check" recomputes below.</p>
+
+    <h3>Field mapping</h3>
+    <div class="table-scroll" style="margin-bottom:18px">
+      <table>
+        <thead><tr><th>Spreadsheet column</th><th>Pipedrive field</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Organization</td><td>Organization</td><td>Normalized on import (trim, case, whitespace) to catch near-duplicates</td></tr>
+          <tr><td>Contact</td><td>Person, linked to Organization</td><td>One person per row for this test batch</td></tr>
+          <tr><td>Owner</td><td>Deal / Person owner</td><td>Required — rows without an owner are held for manual assignment</td></tr>
+          <tr><td>Next action</td><td>Next activity (task)</td><td>Required — rows without one are held rather than imported silently</td></tr>
+          <tr><td>Tab position</td><td>Pipeline stage</td><td>Derived from which spreadsheet tab/section the row came from</td></tr>
+          <tr><td>Bid value</td><td>Deal value</td><td>Project Opportunities rows only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="toolbar" style="margin-bottom:14px">
+      <button class="btn primary" id="btnRunCheck" type="button">Run migration check</button>
+    </div>
+
+    <div class="qa-summary" id="qaSummary">
+      <div class="metric"><b id="qaAccepted">—</b><span>accepted, ready to import</span></div>
+      <div class="metric"><b id="qaRejected">—</b><span>held for review</span></div>
+      <div class="metric"><b id="qaDuplicates">—</b><span>duplicate rows found</span></div>
+    </div>
+    <div class="qa-issues" id="qaIssues">Run the check to see duplicate, missing-owner, and missing-next-action rows from this batch.</div>
+
+    <div class="table-scroll js-render" style="margin-top:16px">
+      <table>
+        <thead><tr><th>#</th><th>Organization (as entered)</th><th>Contact</th><th>Owner</th><th>Next action</th><th>Result</th></tr></thead>
+        <tbody id="qaSourceBody"></tbody>
+      </table>
+    </div>
+    <div class="noscript-fallback">
+      <p>The full test batch is 25 rows drawn from the existing multi-tab spreadsheet, including two duplicate organization entries and several rows missing an owner or next action — used to size how much manual cleanup a full migration would need.</p>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="coexist-h">
+    <h2 id="coexist-h">Spreadsheet coexistence</h2>
+    <p class="panel-desc">Not everything moves to Pipedrive on day one. Two tabs stay exactly where they are until the pipelines above have proven themselves.</p>
+    <div class="coexist-grid">
+      <div class="coexist-card">
+        <span class="tab-label">Sheet tab: Backlog</span>
+        <h4>Stays in the spreadsheet</h4>
+        <p>Long-running backlog reporting already works for the team and isn't blocking anything. Moving it before the pipelines are trusted would just create a second source of truth.</p>
+      </div>
+      <div class="coexist-card">
+        <span class="tab-label">Sheet tab: Active Projects</span>
+        <h4>Stays in the spreadsheet</h4>
+        <p>Active-project tracking has its own reporting shape the office already relies on. It migrates later, once relationship and opportunity data is clean and the team is comfortable in Pipedrive.</p>
+      </div>
+    </div>
+    <h3>Microsoft, email &amp; security discovery</h3>
+    <ul class="discovery-list">
+      <li>Confirm Microsoft 365 tenant admin access and who can approve a new connected app.</li>
+      <li>Check mailbox permissions needed for two-way email sync per user (3 initial seats).</li>
+      <li>Confirm whether conditional access or SSO policy restricts third-party app connections.</li>
+      <li>Agree on a shared inbox vs. individual sync approach before turning on email tracking.</li>
+    </ul>
+    <h3 style="margin-top:16px">Training &amp; handoff</h3>
+    <ul class="discovery-list">
+      <li>One recorded walkthrough per pipeline, under 10 minutes each.</li>
+      <li>A one-page quick reference per stage: what belongs here, what to do next.</li>
+      <li>Two live training sessions for the three initial users, scheduled around field/site availability.</li>
+      <li>A shared runbook document covering field mapping, import decisions, and known limitations.</li>
+    </ul>
+    <p style="color:var(--navy-2);font-size:13px;margin-top:14px">This workspace is built to be delivered under white-label coordination with Accredited AI — client-facing communication and handoff documents follow their process, not a third-party brand.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="ms-h">
+    <h2 id="ms-h">The safe first step</h2>
+    <div class="milestone-callout">
+      <span class="m-eyebrow">Milestone 1 of the $2,000 engagement</span>
+      <h3>Discovery, field map, and a 25-row test migration</h3>
+      <ol>
+        <li>Discovery call: walk the live spreadsheet tab by tab with the team.</li>
+        <li>Field map: document exactly how each column becomes a Pipedrive field (see mapping table above).</li>
+        <li>Build both pipelines with the exact stage labels used today, not generic CRM defaults.</li>
+        <li>Run a 25-row test migration and review every accepted and rejected row with the client.</li>
+      </ol>
+      <div class="accept-box">
+        <b>Acceptance criteria before committing to a full migration</b>
+        Field map signed off by the client; test batch accepted/rejected counts reviewed together; duplicate and missing-data handling agreed in writing; backlog and active-project tabs explicitly confirmed to stay in Sheets for this phase.
+      </div>
+    </div>
+  </section>
+
+  <noscript>
+    <style>.js-render{display:none}.noscript-fallback{display:block!important;color:var(--navy-2);font-size:13px;padding:12px 2px 2px}</style>
+  </noscript>
+
+  <footer>
+    <p>Demo slug: pipedrive-construction-relationship-ops. Prepared by Janis Agic as a proof of approach for a Pipedrive CRM implementation.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STAGES = {
+    relationship:["Target identified","Research completed","Introduction requested","Initial contact","Meeting scheduled","Relationship nurturing","Added to bidder list","Qualified opportunity created"],
+    opportunity:["Opportunity identified","Budget or preconstruction","Bid/no-bid review","Estimating","Proposal submitted","Client decision pending","Funding or design pending","Awarded / Lost / Deferred"]
+  };
+
+  var relationshipCards = [
+    {id:"r1",org:"Meridian Rail Yard",contact:"Gwen Farris",owner:"Priya Chandra",strength:"Cold",lastContact:"No contact yet",nextAction:"Research the account",risk:"On track",status:"Active",stage:0},
+    {id:"r2",org:"Northgate Business Park",contact:"Wes Talbot",owner:"Dana Ruiz",strength:"Cold",lastContact:"2026-08-10",nextAction:"Request warm introduction",risk:"Due soon",status:"Active",stage:1},
+    {id:"r3",org:"Cedarbrook Senior Living",contact:"Walt Guillory",owner:"Marcus Yates",strength:"Developing",lastContact:"2026-06-02",nextAction:"Follow up on intro request",risk:"Overdue",status:"Stalled",stage:2},
+    {id:"r4",org:"Prairie Ridge Municipal",contact:"Ana Delgado",owner:"Priya Chandra",strength:"Developing",lastContact:"2026-08-01",nextAction:"Schedule discovery call",risk:"On track",status:"Active",stage:3},
+    {id:"r5",org:"Solaris Medical Park",contact:"Todd Kessler",owner:"Marcus Yates",strength:"Strong",lastContact:"2026-08-14",nextAction:"Confirm walkthrough logistics",risk:"On track",status:"Active",stage:4},
+    {id:"r6",org:"Bramwell County Schools",contact:"Denise Ortiz",owner:"Dana Ruiz",strength:"Developing",lastContact:"2026-07-28",nextAction:"Send capability statement",risk:"Due soon",status:"Active",stage:5},
+    {id:"r7",org:"Harborline Logistics",contact:"Iris Novak",owner:"Dana Ruiz",strength:"Strong",lastContact:"2026-08-16",nextAction:"Confirm bidder list placement",risk:"On track",status:"Active",stage:6},
+    {id:"r8",org:"Foundry Row Development",contact:"Casper Lindqvist",owner:"Dana Ruiz",strength:"Strong",lastContact:"2026-08-18",nextAction:"Hand off to preconstruction",risk:"On track",status:"Converted",stage:7}
+  ];
+
+  var opportunityCards = [
+    {id:"o1",org:"Union Freight Terminal",project:"Dock Expansion",value:3400000,dateLabel:"Expected bid",date:"2026-10-20",funding:"Budget under internal review",source:"Cold outreach — no linked relationship record",owner:"Priya Chandra",nextAction:"Confirm decision-maker before budget call",risk:"On track",status:"Open",stage:0},
+    {id:"o2",org:"Prairie Ridge Municipal",project:"Public Works Yard",value:1250000,dateLabel:"Expected bid",date:"2026-09-22",funding:"Municipal budget approved",source:"Relationship pipeline — Prairie Ridge Municipal",owner:"Priya Chandra",nextAction:"Submit estimate for internal review",risk:"On track",status:"Open",stage:1},
+    {id:"o3",org:"Cedarbrook Senior Living",project:"Memory Care Renovation",value:980000,dateLabel:"Expected bid",date:"2026-09-08",funding:"Funded, permits in review",source:"Relationship pipeline — Cedarbrook Senior Living",owner:"Marcus Yates",nextAction:"Finalize bid/no-bid recommendation",risk:"Due soon",status:"Open",stage:2},
+    {id:"o4",org:"Bramwell County Schools",project:"HVAC Replacement Package",value:1850000,dateLabel:"Expected bid",date:"2026-09-15",funding:"Bond funding pending voter approval",source:"Relationship pipeline — Bramwell County Schools",owner:"Dana Ruiz",nextAction:"Complete estimate and reviewed pricing",risk:"Due soon",status:"Open",stage:3},
+    {id:"o5",org:"Solaris Medical Park",project:"Outpatient Wing Expansion",value:6200000,dateLabel:"Expected decision",date:"2026-09-02",funding:"Owner-financed, permits issued",source:"Relationship pipeline — Solaris Medical Park",owner:"Marcus Yates",nextAction:"Follow up on proposal questions",risk:"Due soon",status:"Open",stage:4},
+    {id:"o6",org:"Foundry Row Development",project:"Mixed-Use Phase 2",value:9750000,dateLabel:"Expected decision",date:"2026-08-29",funding:"Private financing closed",source:"Relationship pipeline — Foundry Row Development",owner:"Dana Ruiz",nextAction:"Confirm client decision timeline",risk:"Due soon",status:"Open",stage:5},
+    {id:"o7",org:"Harborline Logistics",project:"Cold Storage Addition",value:2100000,dateLabel:"Expected decision",date:"2026-08-05 (passed)",funding:"Awaiting design-development approval",source:"Relationship pipeline — Harborline Logistics",owner:"Dana Ruiz",nextAction:"Escalate overdue design approval",risk:"Overdue",status:"Open",stage:6},
+    {id:"o8",org:"Whitmarsh Logistics Park",project:"Distribution Hub",value:4600000,dateLabel:"Outcome",date:"Deferred — client paused Q1 2027",funding:"Financing delayed",source:"Cold outreach — no linked relationship record",owner:"Marcus Yates",nextAction:"Log deferred reason and revisit Q2 2027",risk:"Deferred",status:"Deferred",stage:7}
+  ];
+
+  var sourceRows = [
+    {org:"Bramwell County Schools",contact:"Denise Ortiz",owner:"Dana Ruiz",nextAction:"Send capability statement"},
+    {org:"Solaris Medical Park",contact:"Todd Kessler",owner:"Marcus Yates",nextAction:"Confirm walkthrough logistics"},
+    {org:"Cedarbrook Senior Living",contact:"Walt Guillory",owner:"Marcus Yates",nextAction:"Follow up on intro request"},
+    {org:"Prairie Ridge Municipal",contact:"Ana Delgado",owner:"Priya Chandra",nextAction:"Schedule discovery call"},
+    {org:"Foundry Row Development",contact:"Casper Lindqvist",owner:"Dana Ruiz",nextAction:"Hand off to preconstruction"},
+    {org:"Harborline Logistics",contact:"Iris Novak",owner:"Dana Ruiz",nextAction:"Confirm bidder list placement"},
+    {org:"Northgate Business Park",contact:"Wes Talbot",owner:"Dana Ruiz",nextAction:"Request warm introduction"},
+    {org:"Meridian Rail Yard",contact:"Gwen Farris",owner:"Priya Chandra",nextAction:"Research the account"},
+    {org:"Union Freight Terminal",contact:"Elena Marsh",owner:"Priya Chandra",nextAction:"Re-engage: intro call"},
+    {org:"Whitmarsh Logistics Park",contact:"Rosa Kilbane",owner:"",nextAction:"Confirm deferred timeline"},
+    {org:"Sable Point Marina",contact:"Owen Trask",owner:"Marcus Yates",nextAction:""},
+    {org:"Kestrel County Airport Auth.",contact:"Nadia Brun",owner:"",nextAction:"Schedule pre-bid meeting"},
+    {org:"UNION FREIGHT TERMINAL",contact:"Elena Marsh",owner:"Priya Chandra",nextAction:"Re-engage: intro call"},
+    {org:"Thistledown Retail Group",contact:"Marco Ibsen",owner:"Priya Chandra",nextAction:"Send qualifications package"},
+    {org:"Ashgrove Health Partners",contact:"Callie Stern",owner:"Marcus Yates",nextAction:""},
+    {org:"Dunmore Rail Terminal",contact:"Faisal Rahman",owner:"Dana Ruiz",nextAction:"Confirm site access"},
+    {org:"Bramwell County Schools",contact:"Denise Ortiz",owner:"Dana Ruiz",nextAction:"Send capability statement"},
+    {org:"Larkspur Distribution Co.",contact:"Tania Ude",owner:"",nextAction:"Log initial contact"},
+    {org:"Copperfield Municipal Utilities",contact:"Brent Salloway",owner:"Marcus Yates",nextAction:"Confirm bid docs received"},
+    {org:"Ridgemont Logistics Park",contact:"Yuki Tanaka",owner:"Priya Chandra",nextAction:"Schedule site walk"},
+    {org:"Ferro Industrial Park",contact:"Dwight Cassel",owner:"Dana Ruiz",nextAction:"Add to bidder list"},
+    {org:"Larkridge School District",contact:"Monica Feld",owner:"Marcus Yates",nextAction:"Send capability statement"},
+    {org:"Osprey Point Marina",contact:"Julian Vance",owner:"Priya Chandra",nextAction:"Confirm meeting time"},
+    {org:"Copper Kettle Brewing Distribution",contact:"Hana Csik",owner:"Dana Ruiz",nextAction:"Log research notes"},
+    {org:"Vantage Rail & Intermodal",contact:"Otto Berglund",owner:"Priya Chandra",nextAction:"Schedule discovery call"}
+  ];
+
+  var currentPipeline = "relationship";
+  var selectedId = null;
+  var ownerFilter = "all";
+  var riskFilter = "all";
+  var statusFilter = "all";
+  var qaChecked = false;
+
+  function byId(id){return document.getElementById(id);}
+  function clear(node){ while(node.firstChild) node.removeChild(node.firstChild); }
+  function el(tag,cls,text){
+    var e = document.createElement(tag);
+    if(cls) e.className = cls;
+    if(text !== undefined && text !== null) e.textContent = text;
+    return e;
+  }
+  function pad(n){return n<10?"0"+n:""+n;}
+  function nowTime(){
+    var d = new Date();
+    return pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds());
+  }
+  function money(n){
+    return "$" + n.toLocaleString("en-US");
+  }
+  function currentCards(){
+    return currentPipeline === "relationship" ? relationshipCards : opportunityCards;
+  }
+  function cardById(id){
+    var list = currentCards();
+    for(var i=0;i<list.length;i++) if(list[i].id===id) return list[i];
+    return null;
+  }
+  function riskPillClass(r){
+    if(r==="Overdue") return "pill-bad";
+    if(r==="Due soon") return "pill-warn";
+    if(r==="On track") return "pill-good";
+    return "pill-neutral";
+  }
+  function statusPillClass(s){
+    if(s==="Stalled"||s==="Lost") return "pill-bad";
+    if(s==="Converted"||s==="Awarded") return "pill-good";
+    if(s==="Deferred") return "pill-warn";
+    return "pill-neutral";
+  }
+  function pill(text,cls){
+    var span = el("span","pill "+cls);
+    span.appendChild(el("span","dot"));
+    span.appendChild(document.createTextNode(text));
+    return span;
+  }
+  function logActivity(text){
+    var log = byId("activityLog");
+    var row = el("div","log-entry");
+    row.appendChild(el("span","t",nowTime()));
+    row.appendChild(el("span","body",text));
+    log.insertBefore(row, log.firstChild);
+  }
+
+  function distinctStatuses(){
+    var seen = {}, out = [];
+    currentCards().forEach(function(c){ if(!seen[c.status]){ seen[c.status]=true; out.push(c.status); } });
+    return out;
+  }
+
+  function renderStatusFilters(){
+    var host = byId("statusFilters");
+    clear(host);
+    var all = el("button","chip","All");
+    all.type = "button";
+    all.setAttribute("data-status","all");
+    all.setAttribute("aria-pressed", statusFilter==="all" ? "true":"false");
+    host.appendChild(all);
+    distinctStatuses().forEach(function(s){
+      var b = el("button","chip",s);
+      b.type = "button";
+      b.setAttribute("data-status",s);
+      b.setAttribute("aria-pressed", statusFilter===s ? "true":"false");
+      host.appendChild(b);
+    });
+  }
+
+  function renderStageRail(){
+    var host = byId("stageRail");
+    clear(host);
+    var stages = STAGES[currentPipeline];
+    var cards = currentCards();
+    stages.forEach(function(label, idx){
+      var count = cards.filter(function(c){ return c.stage===idx; }).length;
+      var chip = el("div","stage-chip");
+      chip.appendChild(el("span","n","Stage "+(idx+1)));
+      chip.appendChild(el("div","lbl",label));
+      chip.appendChild(el("div","cnt",count+(count===1?" card":" cards")));
+      host.appendChild(chip);
+    });
+  }
+
+  function renderMetrics(){
+    var host = byId("metricsRow");
+    clear(host);
+    var cards = currentCards();
+    var overdue = cards.filter(function(c){return c.risk==="Overdue";}).length;
+    if(currentPipeline==="relationship"){
+      var active = cards.filter(function(c){return c.status==="Active";}).length;
+      var stalled = cards.filter(function(c){return c.status==="Stalled";}).length;
+      var converted = cards.filter(function(c){return c.status==="Converted";}).length;
+      addMetric(host, cards.length, "relationships tracked");
+      addMetric(host, active, "active");
+      addMetric(host, stalled, "stalled");
+      addMetric(host, overdue, "overdue follow-up");
+    } else {
+      var total = cards.reduce(function(sum,c){return sum + (c.status!=="Deferred" ? c.value : 0);},0);
+      addMetric(host, cards.length, "opportunities tracked");
+      addMetric(host, money(total), "open pipeline value");
+      addMetric(host, overdue, "overdue decisions");
+      addMetric(host, cards.filter(function(c){return c.stage===7;}).length, "at final stage");
+    }
+    byId("boardDesc").textContent = currentPipeline==="relationship"
+      ? "Every account moving from cold target through to a qualified, bid-ready opportunity."
+      : "Every live project opportunity from first identification through award, loss, or deferral.";
+  }
+  function addMetric(host, value, label){
+    var m = el("div","metric");
+    m.appendChild(el("b",null,String(value)));
+    m.appendChild(el("span",null,label));
+    host.appendChild(m);
+  }
+
+  function matchesFilters(c){
+    if(ownerFilter!=="all" && c.owner!==ownerFilter) return false;
+    if(riskFilter!=="all" && c.risk!==riskFilter) return false;
+    if(statusFilter!=="all" && c.status!==statusFilter) return false;
+    return true;
+  }
+
+  function renderCardList(){
+    var host = byId("cardList");
+    clear(host);
+    var stages = STAGES[currentPipeline];
+    var rows = currentCards().filter(matchesFilters);
+    if(rows.length===0){
+      var li = el("li",null,null);
+      li.appendChild(el("p","empty-detail","No cards match the current filters."));
+      host.appendChild(li);
+      return;
+    }
+    rows.forEach(function(c){
+      var li = el("li");
+      var btn = el("button","card-row");
+      btn.type = "button";
+      btn.setAttribute("data-id", c.id);
+      if(c.id === selectedId) btn.className += " selected";
+
+      var top = el("span","cr-top");
+      top.appendChild(el("span","cr-org", currentPipeline==="relationship" ? c.org : c.org + " — " + c.project));
+      top.appendChild(el("span","cr-stage","Stage "+(c.stage+1)+"/8"));
+      btn.appendChild(top);
+
+      var mid = el("span","cr-mid", stages[c.stage]);
+      btn.appendChild(mid);
+
+      var mid2 = el("span","cr-mid", currentPipeline==="relationship" ? ("Owner: "+c.owner+" · Next: "+c.nextAction) : (money(c.value)+" · "+c.dateLabel+": "+c.date));
+      btn.appendChild(mid2);
+
+      var bottom = el("span","cr-bottom");
+      bottom.appendChild(pill(c.risk, riskPillClass(c.risk)));
+      bottom.appendChild(pill(c.status, statusPillClass(c.status)));
+      btn.appendChild(bottom);
+
+      li.appendChild(btn);
+      host.appendChild(li);
+    });
+  }
+
+  function renderDetail(){
+    var host = byId("detailPanel");
+    clear(host);
+    var c = selectedId ? cardById(selectedId) : null;
+    if(!c){
+      host.appendChild(el("p","empty-detail","Select a card from the list to see full relationship or opportunity detail, update its next action, or move it to the next stage."));
+      return;
+    }
+    var stages = STAGES[currentPipeline];
+    host.appendChild(el("h3",null, currentPipeline==="relationship" ? c.org : c.project));
+    host.appendChild(el("p","who", currentPipeline==="relationship" ? (c.contact+" · "+c.org) : (c.org+" · owner "+c.owner)));
+
+    var dl = el("dl");
+    function row(k,v){ dl.appendChild(el("dt",null,k)); dl.appendChild(el("dd",null,v)); }
+    if(currentPipeline==="relationship"){
+      row("Owner", c.owner);
+      row("Relationship strength", c.strength);
+      row("Last meaningful contact", c.lastContact);
+      row("Current stage", stages[c.stage] + " (stage "+(c.stage+1)+" of 8)");
+    } else {
+      row("Project value", money(c.value));
+      row(c.dateLabel, c.date);
+      row("Funding / permitting", c.funding);
+      row("Source", c.source);
+      row("Current stage", stages[c.stage] + " (stage "+(c.stage+1)+" of 8)");
+    }
+    host.appendChild(dl);
+
+    var pr = el("div","pillrow");
+    pr.appendChild(pill(c.risk, riskPillClass(c.risk)));
+    pr.appendChild(pill(c.status, statusPillClass(c.status)));
+    host.appendChild(pr);
+
+    var field = el("div","field");
+    var label = el("label",null,"Next required action");
+    label.setAttribute("for","nextActionInput");
+    field.appendChild(label);
+    var input = document.createElement("input");
+    input.type = "text";
+    input.id = "nextActionInput";
+    input.value = c.nextAction;
+    field.appendChild(input);
+    host.appendChild(field);
+
+    var msg = el("p","inline-msg","");
+    msg.id = "detailMsg";
+
+    var actions = el("div","detail-actions");
+    var updateBtn = el("button","btn","Update next action");
+    updateBtn.type = "button";
+    updateBtn.addEventListener("click", function(){
+      var val = input.value.trim();
+      if(!val){
+        msg.className = "inline-msg";
+        msg.textContent = "Enter a next action before saving.";
+        return;
+      }
+      c.nextAction = val;
+      msg.className = "inline-msg saved";
+      msg.textContent = "Saved — next action updated.";
+      logActivity((currentPipeline==="relationship"?c.org:c.project+" — "+c.org) + ": next action updated to “"+val+"”.");
+      renderCardList();
+    });
+    actions.appendChild(updateBtn);
+
+    var nextBtn = el("button","btn primary", c.stage < 7 ? "Move to next stage" : "Final stage reached");
+    nextBtn.type = "button";
+    if(c.stage >= 7){
+      nextBtn.disabled = true;
+    } else {
+      nextBtn.addEventListener("click", function(){
+        var from = stages[c.stage];
+        c.stage += 1;
+        var to = stages[c.stage];
+        logActivity((currentPipeline==="relationship"?c.org:c.project+" — "+c.org) + ": moved from “"+from+"” to “"+to+"”.");
+        renderStageRail();
+        renderCardList();
+        renderDetail();
+      });
+    }
+    actions.appendChild(nextBtn);
+
+    host.appendChild(actions);
+    host.appendChild(msg);
+  }
+
+  function renderAll(){
+    renderStageRail();
+    renderMetrics();
+    renderStatusFilters();
+    renderCardList();
+    renderDetail();
+  }
+
+  function normalizeOrg(s){
+    return s.trim().toLowerCase().replace(/\s+/g," ");
+  }
+
+  function renderSourceRows(){
+    var body = byId("qaSourceBody");
+    clear(body);
+    var seen = {};
+    var results = [];
+    sourceRows.forEach(function(row, idx){
+      var flags = [];
+      var norm = normalizeOrg(row.org);
+      if(seen[norm] !== undefined){
+        flags.push("duplicate of row "+(seen[norm]+1));
+      } else {
+        seen[norm] = idx;
+      }
+      if(!row.owner || row.owner.trim()==="") flags.push("missing owner");
+      if(!row.nextAction || row.nextAction.trim()==="") flags.push("missing next action");
+      results.push({row:row, idx:idx, flags:flags});
+    });
+
+    results.forEach(function(r){
+      var tr = el("tr");
+      tr.appendChild(el("td",null,String(r.idx+1)));
+      tr.appendChild(el("td",null,r.row.org));
+      tr.appendChild(el("td",null,r.row.contact));
+      tr.appendChild(el("td",null, r.row.owner || "—"));
+      tr.appendChild(el("td",null, r.row.nextAction || "—"));
+
+      var tdFlag = el("td");
+      if(!qaChecked){
+        tdFlag.appendChild(el("span","flag-pending","Not yet checked"));
+      } else if(r.flags.length===0){
+        tdFlag.appendChild(el("span","flag-ok","Accepted"));
+      } else {
+        tdFlag.appendChild(el("span","flag-issue", r.flags.join("; ")));
+      }
+      tr.appendChild(tdFlag);
+      body.appendChild(tr);
+    });
+
+    return results;
+  }
+
+  function runMigrationCheck(){
+    qaChecked = true;
+    var results = renderSourceRows();
+    var rejected = results.filter(function(r){return r.flags.length>0;});
+    var accepted = results.length - rejected.length;
+    var duplicateRows = results.filter(function(r){ return r.flags.some(function(f){return f.indexOf("duplicate")===0;}); });
+    var missingOwnerRows = results.filter(function(r){ return r.flags.indexOf("missing owner")!==-1; });
+    var missingActionRows = results.filter(function(r){ return r.flags.indexOf("missing next action")!==-1; });
+
+    byId("qaAccepted").textContent = accepted;
+    byId("qaRejected").textContent = rejected.length;
+    byId("qaDuplicates").textContent = duplicateRows.length;
+
+    var issuesHost = byId("qaIssues");
+    clear(issuesHost);
+    issuesHost.appendChild(el("div",null, results.length+" rows scanned — "+accepted+" accepted, "+rejected.length+" held for review."));
+    var ul = el("ul");
+    duplicateRows.forEach(function(r){
+      ul.appendChild(el("li",null,"Row "+(r.idx+1)+" (“"+r.row.org+"”) — "+r.flags.filter(function(f){return f.indexOf("duplicate")===0;})[0]));
+    });
+    if(missingOwnerRows.length){
+      ul.appendChild(el("li",null,"Missing owner: rows "+missingOwnerRows.map(function(r){return r.idx+1;}).join(", ")));
+    }
+    if(missingActionRows.length){
+      ul.appendChild(el("li",null,"Missing next action: rows "+missingActionRows.map(function(r){return r.idx+1;}).join(", ")));
+    }
+    issuesHost.appendChild(ul);
+
+    logActivity("Migration check run: "+results.length+" rows scanned, "+accepted+" accepted, "+rejected.length+" held ("+duplicateRows.length+" duplicate, "+missingOwnerRows.length+" missing owner, "+missingActionRows.length+" missing next action).");
+  }
+
+  function wirePipelineToggle(){
+    byId("btnRelationship").addEventListener("click", function(){
+      if(currentPipeline==="relationship") return;
+      currentPipeline = "relationship";
+      selectedId = null; ownerFilter="all"; riskFilter="all"; statusFilter="all";
+      byId("ownerFilter").value = "all";
+      document.querySelectorAll("#riskFilters .chip").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-risk")==="all"?"true":"false"); });
+      byId("btnRelationship").setAttribute("aria-pressed","true");
+      byId("btnOpportunity").setAttribute("aria-pressed","false");
+      renderAll();
+    });
+    byId("btnOpportunity").addEventListener("click", function(){
+      if(currentPipeline==="opportunity") return;
+      currentPipeline = "opportunity";
+      selectedId = null; ownerFilter="all"; riskFilter="all"; statusFilter="all";
+      byId("ownerFilter").value = "all";
+      document.querySelectorAll("#riskFilters .chip").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-risk")==="all"?"true":"false"); });
+      byId("btnOpportunity").setAttribute("aria-pressed","true");
+      byId("btnRelationship").setAttribute("aria-pressed","false");
+      renderAll();
+    });
+  }
+
+  function wireFilters(){
+    byId("ownerFilter").addEventListener("change", function(){
+      ownerFilter = this.value;
+      renderCardList();
+    });
+    byId("riskFilters").addEventListener("click", function(e){
+      var btn = e.target.closest("[data-risk]");
+      if(!btn) return;
+      riskFilter = btn.getAttribute("data-risk");
+      document.querySelectorAll("#riskFilters .chip").forEach(function(b){ b.setAttribute("aria-pressed", b===btn?"true":"false"); });
+      renderCardList();
+    });
+    byId("statusFilters").addEventListener("click", function(e){
+      var btn = e.target.closest("[data-status]");
+      if(!btn) return;
+      statusFilter = btn.getAttribute("data-status");
+      document.querySelectorAll("#statusFilters .chip").forEach(function(b){ b.setAttribute("aria-pressed", b===btn?"true":"false"); });
+      renderCardList();
+    });
+  }
+
+  function wireCardSelection(){
+    byId("cardList").addEventListener("click", function(e){
+      var btn = e.target.closest("[data-id]");
+      if(!btn) return;
+      selectedId = btn.getAttribute("data-id");
+      renderCardList();
+      renderDetail();
+    });
+  }
+
+  function wireQa(){
+    byId("btnRunCheck").addEventListener("click", runMigrationCheck);
+  }
+
+  function init(){
+    wirePipelineToggle();
+    wireFilters();
+    wireCardSelection();
+    wireQa();
+    renderAll();
+    renderSourceRows();
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>

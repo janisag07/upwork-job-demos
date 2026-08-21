@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Email Delivery Control Center — Proof of Approach</title>
+<style>
+  :root{
+    --bg:#0e1012;
+    --panel:#16181b;
+    --panel-2:#1c1f23;
+    --border:#2a2d31;
+    --border-soft:#232629;
+    --text:#e9ebee;
+    --muted:#9aa1ab;
+    --muted-2:#6f7680;
+    --accent:#2fd480;
+    --accent-dim:rgba(47,212,128,.14);
+    --accent-line:rgba(47,212,128,.4);
+    --amber:#e2a53d;
+    --amber-dim:rgba(226,165,61,.14);
+    --red:#e5637a;
+    --red-dim:rgba(229,99,122,.14);
+    --blue:#6ea3d6;
+    --blue-dim:rgba(110,163,214,.14);
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.5;
+    font-size:15px;
+  }
+  a{color:var(--accent)}
+  .wrap{max-width:1180px;margin:0 auto;padding:20px 20px 72px}
+  *:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 0}
+  .brand{display:flex;align-items:baseline;gap:10px;font-weight:700;font-size:16px;letter-spacing:-.01em}
+  .brand-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block;box-shadow:0 0 0 3px var(--accent-dim)}
+  .env-tag{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:3px 7px;letter-spacing:.02em}
+
+  .disclaimer{
+    background:var(--panel-2);border:1px solid var(--border);border-left:3px solid var(--amber);
+    border-radius:8px;padding:11px 14px;font-size:13px;color:#f0dcb0;margin:0 0 20px;
+  }
+
+  .hero{
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border);border-radius:16px;padding:28px 26px;margin-bottom:20px;
+  }
+  .eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:700}
+  h1{font-size:clamp(26px,4vw,36px);line-height:1.12;letter-spacing:-.02em;margin:10px 0 12px}
+  .hero p.sub{color:var(--muted);max-width:680px;margin:0 0 20px;font-size:15px}
+  .metrics-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .metric{background:var(--panel);border:1px solid var(--border-soft);border-radius:12px;padding:14px 14px}
+  .metric b{display:block;font-size:24px;font-weight:700;letter-spacing:-.02em}
+  .metric span{color:var(--muted-2);font-size:12px}
+
+  section.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:22px 22px 24px;margin-bottom:18px}
+  section.panel h2{font-size:18px;margin:0 0 4px;letter-spacing:-.01em}
+  .panel-desc{color:var(--muted);font-size:13.5px;margin:0 0 18px;max-width:720px}
+  h3{font-size:14px;margin:0 0 6px}
+
+  /* sequence flow */
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+  .flow-step{position:relative;background:var(--panel-2);border:1px solid var(--border);border-radius:12px;padding:14px 14px 12px;min-height:96px}
+  .flow-step .idx{font-family:var(--mono);font-size:11px;color:var(--muted-2)}
+  .flow-step .label{font-weight:700;margin:6px 0 4px;font-size:14px}
+  .flow-step .detail{color:var(--muted);font-size:12.5px}
+  .flow-step:after{content:"→";position:absolute;right:-16px;top:50%;transform:translateY(-50%);color:var(--muted-2);font-weight:700}
+  .flow-step:last-child:after{display:none}
+  .flow-step.active{border-color:var(--accent-line);background:var(--accent-dim)}
+  .flow-step.active .label{color:var(--accent)}
+  .branch-note{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+  .branch-pill{font-size:12px;border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--muted)}
+  #seqActivityText{font-size:13.5px;color:var(--muted);border-top:1px solid var(--border-soft);padding-top:14px;margin-top:4px}
+  #seqActivityText strong{color:var(--text)}
+
+  /* toolbar / filters */
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+  .btn{
+    min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    background:var(--panel-2);border:1px solid var(--border);color:var(--text);
+    border-radius:10px;padding:0 16px;font-size:13.5px;font-weight:600;cursor:pointer;
+  }
+  .btn:hover{border-color:var(--muted-2)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#08130d}
+  .btn.primary:hover{background:#3ee08e}
+  .btn.warn{border-color:var(--red);color:var(--red)}
+  .btn.warn:hover{background:var(--red-dim)}
+  .btn.ghost{background:transparent}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  select{
+    min-height:44px;background:var(--panel-2);border:1px solid var(--border);color:var(--text);
+    border-radius:10px;padding:0 12px;font-size:13.5px;max-width:280px;font-family:var(--sans)
+  }
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .chip{
+    min-height:44px;display:inline-flex;align-items:center;border:1px solid var(--border);
+    background:var(--panel-2);color:var(--muted);border-radius:999px;padding:0 13px;font-size:12.5px;
+    font-weight:600;cursor:pointer;
+  }
+  .chip[aria-pressed="true"]{background:var(--accent-dim);border-color:var(--accent-line);color:var(--accent)}
+
+  /* provider switch */
+  .provider-switch{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .provider-btn{
+    min-height:44px;border:1px solid var(--border);background:var(--panel-2);color:var(--text);
+    border-radius:10px;padding:0 16px;font-weight:700;font-size:13.5px;cursor:pointer;
+  }
+  .provider-btn[aria-pressed="true"]{border-color:var(--accent-line);background:var(--accent-dim);color:var(--accent)}
+  .provider-info{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+  .provider-info div{background:var(--panel-2);border:1px solid var(--border-soft);border-radius:10px;padding:12px 13px}
+  .provider-info .k{color:var(--muted-2);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+  .provider-info .v{font-size:13.5px}
+
+  /* tables */
+  .table-scroll{overflow-x:auto;border:1px solid var(--border-soft);border-radius:12px}
+  table{width:100%;border-collapse:collapse;min-width:640px}
+  th{
+    text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-2);
+    background:var(--panel-2);padding:10px 12px;border-bottom:1px solid var(--border);white-space:nowrap;
+  }
+  td{padding:11px 12px;border-bottom:1px solid var(--border-soft);font-size:13.5px;vertical-align:top}
+  tbody tr:last-child td{border-bottom:0}
+  .id-mono{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .name-cell b{display:block;font-size:13.5px}
+  .name-cell span{display:block;color:var(--muted-2);font-size:11.5px;font-family:var(--mono)}
+  .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:11.5px;font-weight:700;white-space:nowrap}
+  .pill .dot{width:6px;height:6px;border-radius:50%}
+  .pill.active,.pill.sent,.pill.delivered,.pill.processed{background:var(--accent-dim);color:var(--accent)}
+  .pill.active .dot,.pill.sent .dot,.pill.delivered .dot,.pill.processed .dot{background:var(--accent)}
+  .pill.scheduled,.pill.blue{background:var(--blue-dim);color:var(--blue)}
+  .pill.scheduled .dot,.pill.blue .dot{background:var(--blue)}
+  .pill.running{background:var(--accent-dim);color:var(--accent)}
+  .pill.running .dot{background:var(--accent)}
+  .pill.retry{background:var(--amber-dim);color:var(--amber)}
+  .pill.retry .dot{background:var(--amber)}
+  .pill.dead-letter,.pill.bounced{background:var(--red-dim);color:var(--red)}
+  .pill.dead-letter .dot,.pill.bounced .dot{background:var(--red)}
+  .pill.cancelled,.pill.unsubscribed{background:rgba(154,161,171,.14);color:var(--muted)}
+  .pill.cancelled .dot,.pill.unsubscribed .dot{background:var(--muted-2)}
+  .row-action-btn{min-height:44px;font-size:12px;padding:0 11px;border-radius:8px;border:1px solid var(--border);background:var(--panel);color:var(--text);cursor:pointer;font-weight:600}
+  .row-action-btn:hover{border-color:var(--muted-2)}
+  .row-note{color:var(--muted-2);font-size:12px}
+  .tag-list{display:flex;flex-wrap:wrap;gap:4px}
+  .tag{font-size:10.5px;border:1px solid var(--border);border-radius:6px;padding:2px 6px;color:var(--muted)}
+
+  @media(prefers-reduced-motion:no-preference){
+    tr.just-added{animation:flashRow 1.1s ease-out}
+    @keyframes flashRow{from{background:var(--accent-dim)}to{background:transparent}}
+  }
+
+  /* webhook log */
+  .log{background:var(--panel-2);border:1px solid var(--border-soft);border-radius:12px;padding:6px 4px;max-height:340px;overflow-y:auto}
+  .log-entry{display:grid;grid-template-columns:74px 96px 1fr 60px;gap:10px;padding:9px 12px;border-bottom:1px solid var(--border-soft);font-size:12.5px;align-items:baseline}
+  .log-entry:last-child{border-bottom:0}
+  .log-entry .t{font-family:var(--mono);color:var(--muted-2)}
+  .log-entry .type{font-weight:700}
+  .log-entry .type.delivered,.log-entry .type.sent{color:var(--accent)}
+  .log-entry .type.bounced{color:var(--red)}
+  .log-entry .type.unsubscribed{color:var(--muted)}
+  .log-entry .type.complained{color:var(--amber)}
+  .log-entry .type.note{color:var(--blue)}
+  .log-entry .body{color:var(--text)}
+  .log-entry .dedup{text-align:right;font-family:var(--mono);font-size:11px;color:var(--muted-2)}
+  .log-entry .dedup.dupe{color:var(--amber)}
+
+  /* architecture */
+  .arch{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+  .arch-box{position:relative;background:var(--panel-2);border:1px solid var(--border);border-radius:12px;padding:14px 12px;min-height:120px}
+  .arch-box .n{font-family:var(--mono);font-size:10.5px;color:var(--accent);display:block;margin-bottom:6px}
+  .arch-box h4{margin:0 0 6px;font-size:13.5px}
+  .arch-box p{margin:0;color:var(--muted);font-size:12px}
+  .arch-box:after{content:"→";position:absolute;right:-15px;top:50%;transform:translateY(-50%);color:var(--muted-2)}
+  .arch-box:last-child:after{display:none}
+  .arch-note{background:var(--panel-2);border:1px solid var(--border-soft);border-radius:10px;padding:14px 16px;color:var(--muted);font-size:13px}
+  .arch-note strong{color:var(--text)}
+
+  /* qa */
+  .qa-table td{color:var(--muted)}
+  .qa-table td:first-child{color:var(--text);font-weight:600;white-space:nowrap}
+
+  /* milestones */
+  .milestones{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .milestone{background:var(--panel-2);border:1px solid var(--border);border-radius:12px;padding:16px 16px 18px}
+  .milestone .m-idx{font-family:var(--mono);font-size:11px;color:var(--accent)}
+  .milestone h3{margin:8px 0 10px;font-size:15px}
+  .milestone ul{margin:0 0 12px;padding-left:18px;color:var(--muted);font-size:12.5px}
+  .milestone li{margin:4px 0}
+  .milestone .accept{border-top:1px solid var(--border-soft);padding-top:10px}
+  .milestone .accept b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-2);margin-bottom:5px}
+
+  .noscript-fallback{display:none}
+  footer{color:var(--muted-2);font-size:12.5px;margin-top:26px;padding-top:16px;border-top:1px solid var(--border-soft)}
+  footer p{margin:4px 0}
+
+  @media(max-width:900px){
+    .metrics-row{grid-template-columns:repeat(2,1fr)}
+    .flow{grid-template-columns:1fr}
+    .flow-step:after{display:none}
+    .provider-info{grid-template-columns:repeat(2,1fr)}
+    .arch{grid-template-columns:1fr}
+    .arch-box:after{display:none}
+    .milestones{grid-template-columns:1fr}
+    .log-entry{grid-template-columns:1fr;gap:3px}
+    .log-entry .dedup{text-align:left}
+  }
+  @media(max-width:480px){
+    .wrap{padding:14px 12px 60px}
+    .hero{padding:20px 16px}
+    .metrics-row{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topbar">
+    <div class="brand"><span class="brand-dot" aria-hidden="true"></span> Delivery Control Center <span class="env-tag">self-hosted · staging</span></div>
+  </header>
+
+  <p class="disclaimer">Proof of approach using fictional sample data. No client systems or data are connected.</p>
+
+  <section class="hero">
+    <span class="eyebrow">Email automation &amp; drip campaign platform</span>
+    <h1>An operator console for durable email drip sequences</h1>
+    <p class="sub">This is the operator view of a self-hosted sending platform: a subscriber enters a sequence, jobs sit in a durable Redis/Celery queue until their scheduled time, a provider (SES, SendGrid, or Mailgun) sends the message, and delivery/bounce/unsubscribe webhooks feed back into contact state — with idempotency keys and retry/backoff so nothing silently duplicates or gets lost.</p>
+    <div class="metrics-row">
+      <div class="metric"><b id="metricContacts">0</b><span>contacts on file</span></div>
+      <div class="metric"><b id="metricActive">0</b><span>active, sendable</span></div>
+      <div class="metric"><b id="metricSuppressed">0</b><span>suppressed (bounced/unsub)</span></div>
+      <div class="metric"><b id="metricQueued">0</b><span>jobs scheduled/running/retry</span></div>
+      <div class="metric"><b id="metricDeadLetter">0</b><span>dead-letter, needs review</span></div>
+    </div>
+  </section>
+
+  <!-- SEQUENCE DESIGNER -->
+  <section class="panel" aria-labelledby="seq-h">
+    <h2 id="seq-h">Sequence blueprint — New Subscriber Nurture</h2>
+    <p class="panel-desc">The sequence definition that every new signup is enrolled into. Highlighting below reflects the most recently simulated contact, not a literal running animation.</p>
+    <div class="flow">
+      <div class="flow-step" id="seqStep0"><span class="idx">Step 1</span><div class="label">Email A — immediate</div><div class="detail">Sent the moment a contact confirms signup.</div></div>
+      <div class="flow-step" id="seqStep1"><span class="idx">Step 2</span><div class="label">Wait 3 days</div><div class="detail">Durable delay held in Redis, survives worker restarts.</div></div>
+      <div class="flow-step" id="seqStep2"><span class="idx">Step 3</span><div class="label">Email B</div><div class="detail">Sent only if the contact is still active (not bounced/unsubscribed).</div></div>
+      <div class="flow-step" id="seqStep3"><span class="idx">Step 4</span><div class="label">Conditional branch</div>
+        <div class="branch-note">
+          <span class="branch-pill">Opened/clicked → nurture track</span>
+          <span class="branch-pill">No engagement → re-permission ping</span>
+        </div>
+      </div>
+    </div>
+    <p id="seqActivityText">No simulation run yet this session. Use <strong>Simulate signup</strong> below to trace a new subscriber through the sequence.</p>
+  </section>
+
+  <!-- QUEUE MONITOR -->
+  <section class="panel" aria-labelledby="queue-h">
+    <h2 id="queue-h">Durable queue monitor</h2>
+    <p class="panel-desc">Every send is a Celery task with a UUID idempotency key, stored in Postgres before the provider API is called. Retries use exponential backoff; jobs that exhaust retries land in a dead-letter state for manual review rather than failing silently.</p>
+
+    <h3>Provider</h3>
+    <div class="provider-switch" role="group" aria-label="Active email provider">
+      <button class="provider-btn" data-provider="ses" aria-pressed="true">Amazon SES</button>
+      <button class="provider-btn" data-provider="sendgrid" aria-pressed="false">SendGrid</button>
+      <button class="provider-btn" data-provider="mailgun" aria-pressed="false">Mailgun</button>
+    </div>
+    <div class="provider-info">
+      <div><div class="k">Webhook signing</div><div class="v" id="providerSigning">—</div></div>
+      <div><div class="k">Send latency</div><div class="v" id="providerLatency">—</div></div>
+      <div><div class="k">Quota</div><div class="v" id="providerQuota">—</div></div>
+      <div><div class="k">Cost</div><div class="v" id="providerCost">—</div></div>
+    </div>
+
+    <h3>Queue state</h3>
+    <div class="filters" id="queueFilters" role="group" aria-label="Filter queue by state">
+      <button class="chip" data-qfilter="all" aria-pressed="true">All</button>
+      <button class="chip" data-qfilter="scheduled" aria-pressed="false">Scheduled</button>
+      <button class="chip" data-qfilter="running" aria-pressed="false">Running</button>
+      <button class="chip" data-qfilter="retry" aria-pressed="false">Retry</button>
+      <button class="chip" data-qfilter="dead-letter" aria-pressed="false">Dead-letter</button>
+      <button class="chip" data-qfilter="sent" aria-pressed="false">Sent</button>
+      <button class="chip" data-qfilter="cancelled" aria-pressed="false">Cancelled</button>
+    </div>
+    <div class="table-scroll js-render">
+      <table>
+        <caption class="sr-only" style="position:absolute;left:-9999px">Queued and completed send jobs</caption>
+        <thead><tr><th>Job / idempotency key</th><th>Contact</th><th>Template</th><th>Provider</th><th>State</th><th>Schedule</th><th>Note</th><th>Action</th></tr></thead>
+        <tbody id="queueTableBody"></tbody>
+      </table>
+    </div>
+    <div class="noscript-fallback">
+      <p>Sample queue jobs: Email B scheduled for Priya Anand (Amazon SES); Email A running for Grace Whitfield (SendGrid); a re-engagement branch job in retry for Owen Castillo; and an Email A job in dead-letter for Isla Petrov after three SMTP timeouts.</p>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section class="panel" aria-labelledby="contacts-h">
+    <h2 id="contacts-h">Contact state &amp; suppression</h2>
+    <p class="panel-desc">A contact that bounces or unsubscribes is marked suppressed and every one of their pending queue jobs is cancelled — suppression is enforced centrally, not per-sequence.</p>
+
+    <div class="toolbar">
+      <label for="targetContact" style="font-size:13px;color:var(--muted)">Target contact</label>
+      <select id="targetContact" aria-label="Select target contact for simulated actions"></select>
+      <button class="btn primary" id="btnSignup" type="button">Simulate signup</button>
+      <button class="btn warn" id="btnBounce" type="button">Simulate bounce</button>
+      <button class="btn ghost" id="btnUnsub" type="button">Simulate unsubscribe</button>
+    </div>
+
+    <div class="filters" id="contactFilters" role="group" aria-label="Filter contacts by status">
+      <button class="chip" data-cfilter="all" aria-pressed="true">All</button>
+      <button class="chip" data-cfilter="active" aria-pressed="false">Active</button>
+      <button class="chip" data-cfilter="bounced" aria-pressed="false">Bounced</button>
+      <button class="chip" data-cfilter="unsubscribed" aria-pressed="false">Unsubscribed</button>
+    </div>
+
+    <div class="table-scroll js-render">
+      <table>
+        <thead><tr><th>Contact</th><th>Company</th><th>Tags</th><th>Status</th><th>Sequence step</th></tr></thead>
+        <tbody id="contactsTableBody"></tbody>
+      </table>
+    </div>
+    <div class="noscript-fallback">
+      <p>Sample contacts: Priya Anand (active, Kestrel Robotics), Lena Brandt (bounced, Verity Legal), Samuel Okafor (unsubscribed, Palisade Foods), and five others across active, bounced, and unsubscribed states.</p>
+    </div>
+  </section>
+
+  <!-- WEBHOOKS -->
+  <section class="panel" aria-labelledby="webhook-h">
+    <h2 id="webhook-h">Provider webhook event stream</h2>
+    <p class="panel-desc">Each webhook payload carries a provider event ID. Before touching contact state, the worker checks whether that ID has already been processed — providers routinely redeliver the same event, and without this check a single bounce could be recorded twice.</p>
+    <div class="toolbar" style="margin-bottom:12px">
+      <button class="btn ghost" id="btnReplay" type="button">Replay last webhook event</button>
+    </div>
+    <div class="log" id="eventLog" aria-live="polite" aria-label="Webhook event log">
+      <div class="log-entry"><span class="t">09:14:02</span><span class="type delivered">delivered</span><span class="body">Owen Castillo — Email B delivered via SendGrid.</span><span class="dedup">evt_1001</span></div>
+      <div class="log-entry"><span class="t">09:22:41</span><span class="type bounced">bounced</span><span class="body">Lena Brandt — hard bounce via Amazon SES. Contact suppressed, pending sends cancelled.</span><span class="dedup">evt_1002</span></div>
+      <div class="log-entry"><span class="t">09:31:07</span><span class="type unsubscribed">unsubscribed</span><span class="body">Samuel Okafor — unsubscribe link clicked via Mailgun. Contact suppressed.</span><span class="dedup">evt_1003</span></div>
+      <div class="log-entry"><span class="t">09:47:19</span><span class="type complained">complained</span><span class="body">Farah Bloom — spam complaint via SendGrid. Auto-unsubscribed per complaint policy.</span><span class="dedup">evt_1004</span></div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="panel" aria-labelledby="arch-h">
+    <h2 id="arch-h">Architecture</h2>
+    <p class="panel-desc">The moving parts, in the order a message travels through them.</p>
+    <div class="arch">
+      <div class="arch-box"><span class="n">01</span><h4>FastAPI</h4><p>Auth, validation, REST endpoints for contacts, sequences, and admin actions.</p></div>
+      <div class="arch-box"><span class="n">02</span><h4>PostgreSQL</h4><p>Source of truth: contacts, tags, custom fields, sequence steps, jobs, events.</p></div>
+      <div class="arch-box"><span class="n">03</span><h4>Redis + Celery</h4><p>Durable delayed jobs, beat schedule, retry/backoff, dead-letter handling.</p></div>
+      <div class="arch-box"><span class="n">04</span><h4>Provider + webhooks</h4><p>SES / SendGrid / Mailgun adapters behind one interface; signed webhook intake.</p></div>
+      <div class="arch-box"><span class="n">05</span><h4>Docker Compose</h4><p>api, worker, beat, redis, postgres, nginx — one command to run the stack.</p></div>
+    </div>
+    <p class="arch-note"><strong>Idempotency:</strong> every scheduled send carries a UUID idempotency key written to Postgres before the Celery task calls the provider API, so a retried task can never cause a duplicate send. <strong>Suppression:</strong> the worker checks contact status immediately before sending, not only at enrollment time, so a bounce recorded mid-sequence stops every later step.</p>
+  </section>
+
+  <!-- QA -->
+  <section class="panel" aria-labelledby="qa-h">
+    <h2 id="qa-h">Test plan</h2>
+    <p class="panel-desc">What gets tested before this ships, and what each test is meant to catch.</p>
+    <div class="table-scroll">
+      <table class="qa-table">
+        <thead><tr><th>Type</th><th>Proves</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Unit</td><td>Idempotency key generation, backoff calculator</td><td>Retrying the same job never produces two different keys</td></tr>
+          <tr><td>Integration</td><td>Webhook signature verification per provider</td><td>A forged SendGrid payload with an invalid HMAC signature is rejected</td></tr>
+          <tr><td>Integration</td><td>Duplicate event handling</td><td>A redelivered webhook with a known event ID is logged and ignored, not double-applied</td></tr>
+          <tr><td>End-to-end</td><td>Full sequence timing</td><td>Signup → Email A → 3-day wait → Email B → branch, run with wait times shortened to seconds in test mode</td></tr>
+          <tr><td>Failure injection</td><td>Retry/backoff/dead-letter path</td><td>Simulated provider 5xx triggers retries on an exponential schedule, then dead-letter after the max attempt count</td></tr>
+          <tr><td>Manual QA</td><td>Cross-sequence suppression</td><td>A bounced or unsubscribed contact is confirmed excluded from every active sequence, not only the one that triggered suppression</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- MILESTONES -->
+  <section class="panel" aria-labelledby="ms-h">
+    <h2 id="ms-h">Three milestones</h2>
+    <div class="milestones">
+      <div class="milestone">
+        <span class="m-idx">Milestone 1</span>
+        <h3>Architecture &amp; data model</h3>
+        <ul>
+          <li>Postgres schema: contacts, tags, custom fields, sequences, steps, jobs, events</li>
+          <li>FastAPI scaffolding and contact CRUD</li>
+          <li>Docker Compose skeleton (api, worker, redis, postgres)</li>
+        </ul>
+        <div class="accept"><b>Acceptance criteria</b>docker compose up boots every service; contact CRUD endpoints pass their tests; schema reviewed against the required custom fields and tags.</div>
+      </div>
+      <div class="milestone">
+        <span class="m-idx">Milestone 2</span>
+        <h3>Sending engine &amp; webhooks</h3>
+        <ul>
+          <li>Celery beat schedule for delayed sequence steps</li>
+          <li>Provider adapter interface (SES / SendGrid / Mailgun)</li>
+          <li>Signed webhook intake, idempotency enforcement, dead-letter after max retries</li>
+        </ul>
+        <div class="accept"><b>Acceptance criteria</b>a seeded sequence sends correctly across a compressed 3-day delay; a replayed webhook does not double-count; bounced/unsubscribed contacts receive nothing further.</div>
+      </div>
+      <div class="milestone">
+        <span class="m-idx">Milestone 3</span>
+        <h3>Operator UI, deployment &amp; handoff</h3>
+        <ul>
+          <li>Dashboard: contacts, queue, events, provider config</li>
+          <li>Production Compose profile, operator login</li>
+          <li>Automated tests, README runbook, handoff walkthrough</li>
+        </ul>
+        <div class="accept"><b>Acceptance criteria</b>test suite passes in CI; production compose profile deploys behind Nginx/TLS; client can operate the dashboard from the README alone.</div>
+      </div>
+    </div>
+  </section>
+
+  <noscript>
+    <style>.js-render{display:none}.noscript-fallback{display:block!important;color:var(--muted);font-size:13px;padding:14px 2px 2px}</style>
+  </noscript>
+
+  <footer>
+    <p>Demo slug: email-drip-delivery-control-center. Prepared by Janis Agic as a proof of approach for an email automation &amp; drip campaign build.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var providers = {
+    ses:{label:"Amazon SES",signing:"SNS message signature (SHA-256)",latency:"~180ms avg send API call",quota:"50,000 msgs/day, production access",cost:"$0.10 per 1,000 emails"},
+    sendgrid:{label:"SendGrid",signing:"HMAC event webhook signature (ECDSA)",latency:"~140ms avg send API call",quota:"40,000 msgs/day, Pro plan",cost:"$1.25 per 1,000 emails"},
+    mailgun:{label:"Mailgun",signing:"HMAC-SHA256 (timestamp + token)",latency:"~165ms avg send API call",quota:"25,000 msgs/month, starter plan",cost:"$0.80 per 1,000 emails"}
+  };
+  var currentProvider = "ses";
+
+  var contactIdSeq = 9;
+  var contacts = [
+    {id:"c1",name:"Priya Anand",email:"priya.anand@sample-inbox.test",company:"Kestrel Robotics",plan:"Trial",tags:["trial","webinar-attendee"],status:"active",step:"Email A sent · Email B scheduled",seqIndex:1},
+    {id:"c2",name:"Owen Castillo",email:"owen.castillo@sample-inbox.test",company:"Northfield Logistics",plan:"Growth",tags:["customer","upsell"],status:"active",step:"Email B sent · branch: engaged",seqIndex:3},
+    {id:"c3",name:"Lena Brandt",email:"lena.brandt@sample-inbox.test",company:"Verity Legal",plan:"Trial",tags:["trial"],status:"bounced",step:"Suppressed after hard bounce",seqIndex:-1},
+    {id:"c4",name:"Samuel Okafor",email:"samuel.okafor@sample-inbox.test",company:"Palisade Foods",plan:"Free",tags:["newsletter"],status:"unsubscribed",step:"Suppressed after unsubscribe",seqIndex:-1},
+    {id:"c5",name:"Grace Whitfield",email:"grace.whitfield@sample-inbox.test",company:"Anchor Point Realty",plan:"Trial",tags:["trial"],status:"active",step:"Email A running",seqIndex:0},
+    {id:"c6",name:"Devon Marsh",email:"devon.marsh@sample-inbox.test",company:"Cedarline Freight",plan:"Growth",tags:["customer"],status:"active",step:"Email B scheduled (wait 3d)",seqIndex:1},
+    {id:"c7",name:"Isla Petrov",email:"isla.petrov@sample-inbox.test",company:"Foundry Metalworks",plan:"Trial",tags:["trial"],status:"active",step:"Email A dead-letter — pending review",seqIndex:0},
+    {id:"c8",name:"Farah Bloom",email:"farah.bloom@sample-inbox.test",company:"Meridian Textiles",plan:"Free",tags:["newsletter"],status:"unsubscribed",step:"Suppressed after spam complaint",seqIndex:-1}
+  ];
+
+  var queueIdSeq = 9;
+  var queue = [
+    {id:"q1",contactId:"c1",template:"Email A",provider:"ses",state:"sent",schedule:"sent 3d ago",attempts:1,key:"seq-c1-emaila-01",note:"—"},
+    {id:"q2",contactId:"c1",template:"Email B",provider:"ses",state:"scheduled",schedule:"in 1d 4h",attempts:0,key:"seq-c1-emailb-01",note:"—"},
+    {id:"q3",contactId:"c5",template:"Email A",provider:"sendgrid",state:"running",schedule:"sending now",attempts:1,key:"seq-c5-emaila-01",note:"—"},
+    {id:"q4",contactId:"c6",template:"Email B",provider:"mailgun",state:"scheduled",schedule:"in 2d 11h",attempts:0,key:"seq-c6-emailb-01",note:"—"},
+    {id:"q5",contactId:"c2",template:"Branch: re-engagement",provider:"ses",state:"retry",schedule:"retry in 12m",attempts:2,key:"seq-c2-branch-01",note:"SMTP 450 (temporary)"},
+    {id:"q6",contactId:"c7",template:"Email A",provider:"ses",state:"dead-letter",schedule:"failed 3x — held",attempts:3,key:"seq-c7-emaila-01",note:"SMTP 421 timeout ×3"},
+    {id:"q7",contactId:"c4",template:"Email B",provider:"mailgun",state:"cancelled",schedule:"cancelled before send",attempts:0,key:"seq-c4-emailb-01",note:"Suppressed: contact unsubscribed"},
+    {id:"q8",contactId:"c8",template:"Email B",provider:"sendgrid",state:"cancelled",schedule:"cancelled before send",attempts:0,key:"seq-c8-emailb-01",note:"Suppressed: spam complaint"}
+  ];
+
+  var eventIdSeq = 1005;
+  var processedEventIds = {evt_1001:true,evt_1002:true,evt_1003:true,evt_1004:true};
+  var lastEvent = {id:"evt_1004",type:"complained",summary:"Farah Bloom — spam complaint via SendGrid."};
+
+  var queueFilter = "all";
+  var contactFilter = "all";
+
+  function byId(id){return document.getElementById(id);}
+  function clear(el){ while(el.firstChild) el.removeChild(el.firstChild); }
+  function el(tag,cls,text){
+    var e = document.createElement(tag);
+    if(cls) e.className = cls;
+    if(text !== undefined && text !== null) e.textContent = text;
+    return e;
+  }
+  function pad(n){return n<10?"0"+n:""+n;}
+  function nowTime(){
+    var d = new Date();
+    return pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds());
+  }
+  function contactById(id){
+    for(var i=0;i<contacts.length;i++) if(contacts[i].id===id) return contacts[i];
+    return null;
+  }
+
+  function pill(text,cls){
+    var span = el("span","pill "+cls);
+    var dot = el("span","dot");
+    span.appendChild(dot);
+    span.appendChild(document.createTextNode(text));
+    return span;
+  }
+
+  function renderProvider(){
+    var p = providers[currentProvider];
+    byId("providerSigning").textContent = p.signing;
+    byId("providerLatency").textContent = p.latency;
+    byId("providerQuota").textContent = p.quota;
+    byId("providerCost").textContent = p.cost;
+    var btns = document.querySelectorAll(".provider-btn");
+    for(var i=0;i<btns.length;i++){
+      var pressed = btns[i].getAttribute("data-provider") === currentProvider;
+      btns[i].setAttribute("aria-pressed", pressed ? "true" : "false");
+    }
+  }
+
+  function renderMetrics(){
+    var total = contacts.length;
+    var active = contacts.filter(function(c){return c.status==="active";}).length;
+    var suppressed = total - active;
+    var queued = queue.filter(function(j){return j.state==="scheduled"||j.state==="running"||j.state==="retry";}).length;
+    var deadLetter = queue.filter(function(j){return j.state==="dead-letter";}).length;
+    byId("metricContacts").textContent = total;
+    byId("metricActive").textContent = active;
+    byId("metricSuppressed").textContent = suppressed;
+    byId("metricQueued").textContent = queued;
+    byId("metricDeadLetter").textContent = deadLetter;
+  }
+
+  function renderTargetSelect(){
+    var sel = byId("targetContact");
+    var prev = sel.value;
+    clear(sel);
+    contacts.forEach(function(c){
+      var opt = document.createElement("option");
+      opt.value = c.id;
+      opt.textContent = c.name + " — " + c.status;
+      sel.appendChild(opt);
+    });
+    if(prev && contactById(prev)) sel.value = prev;
+  }
+
+  function renderQueue(){
+    var body = byId("queueTableBody");
+    clear(body);
+    var rows = queue.filter(function(j){ return queueFilter==="all" || j.state===queueFilter; });
+    rows.forEach(function(j){
+      var c = contactById(j.contactId);
+      var tr = el("tr");
+      if(j._new){ tr.className = "just-added"; delete j._new; }
+
+      var tdKey = el("td");
+      tdKey.appendChild(el("span","id-mono",j.key));
+      tr.appendChild(tdKey);
+
+      var tdContact = el("td");
+      var nc = el("div","name-cell");
+      nc.appendChild(el("b", c ? c.name : "—"));
+      tdContact.appendChild(nc);
+      tr.appendChild(tdContact);
+
+      tr.appendChild(el("td",null,j.template));
+      tr.appendChild(el("td",null,providers[j.provider].label));
+
+      var tdState = el("td");
+      tdState.appendChild(pill(j.state,j.state));
+      tr.appendChild(tdState);
+
+      tr.appendChild(el("td",null,j.schedule + " · attempt " + j.attempts));
+      tr.appendChild(el("td","row-note",j.note));
+
+      var tdAction = el("td");
+      if(j.state==="dead-letter"){
+        var btn = el("button","row-action-btn","Requeue");
+        btn.type = "button";
+        btn.setAttribute("data-requeue",j.id);
+        tdAction.appendChild(btn);
+      } else {
+        tdAction.appendChild(document.createTextNode("—"));
+      }
+      tr.appendChild(tdAction);
+
+      body.appendChild(tr);
+    });
+  }
+
+  function renderContacts(){
+    var body = byId("contactsTableBody");
+    clear(body);
+    var rows = contacts.filter(function(c){ return contactFilter==="all" || c.status===contactFilter; });
+    rows.forEach(function(c){
+      var tr = el("tr");
+      if(c._new){ tr.className = "just-added"; delete c._new; }
+
+      var tdName = el("td");
+      var nc = el("div","name-cell");
+      nc.appendChild(el("b",c.name));
+      nc.appendChild(el("span",null,c.email));
+      tdName.appendChild(nc);
+      tr.appendChild(tdName);
+
+      tr.appendChild(el("td",null,c.company));
+
+      var tdTags = el("td");
+      var tl = el("div","tag-list");
+      c.tags.forEach(function(t){ tl.appendChild(el("span","tag",t)); });
+      tdTags.appendChild(tl);
+      tr.appendChild(tdTags);
+
+      var tdStatus = el("td");
+      tdStatus.appendChild(pill(c.status,c.status));
+      tr.appendChild(tdStatus);
+
+      tr.appendChild(el("td","row-note",c.step));
+
+      body.appendChild(tr);
+    });
+  }
+
+  function logEvent(type, bodyText, dedupText, isDupe){
+    var log = byId("eventLog");
+    var row = el("div","log-entry");
+    row.appendChild(el("span","t",nowTime()));
+    row.appendChild(el("span","type "+type,type));
+    row.appendChild(el("span","body",bodyText));
+    row.appendChild(el("span","dedup"+(isDupe?" dupe":""),dedupText));
+    log.insertBefore(row, log.firstChild);
+  }
+
+  function setSeqActivity(text, activeIndex){
+    var host = byId("seqActivityText");
+    clear(host);
+    var strong = el("strong","","Latest: ");
+    var frag = document.createDocumentFragment();
+    frag.appendChild(strong);
+    frag.appendChild(document.createTextNode(text));
+    host.appendChild(frag);
+    for(var i=0;i<4;i++){
+      byId("seqStep"+i).classList.toggle("active", activeIndex.indexOf(i) !== -1);
+    }
+  }
+
+  var namePool = [
+    {name:"Marcus Ige",company:"Harborview Consulting"},
+    {name:"Talia Nakamura",company:"Ridgeline Freight"},
+    {name:"Curtis Dellape",company:"Solstice Manufacturing"},
+    {name:"Renee Okonkwo",company:"Bellwether Insurance"},
+    {name:"Ivo Kastanas",company:"Grainhouse Foods"}
+  ];
+  var nameCursor = 0;
+
+  function simulateSignup(){
+    var pick = namePool[nameCursor % namePool.length];
+    nameCursor++;
+    var id = "c" + (contactIdSeq++);
+    var slug = pick.name.toLowerCase().replace(/[^a-z]+/g,".").replace(/(^\.|\.$)/g,"");
+    var contact = {
+      id:id, name:pick.name, email: slug + "@sample-inbox.test", company:pick.company,
+      plan:"Trial", tags:["trial"], status:"active",
+      step:"Email A sent · Email B scheduled (+3d)", seqIndex:1, _new:true
+    };
+    contacts.unshift(contact);
+
+    queue.unshift({
+      id:"q"+(queueIdSeq++), contactId:id, template:"Email B", provider:currentProvider,
+      state:"scheduled", schedule:"in 3d", attempts:0, key:"seq-"+id+"-emailb-01", note:"—", _new:true
+    });
+    queue.unshift({
+      id:"q"+(queueIdSeq++), contactId:id, template:"Email A", provider:currentProvider,
+      state:"sent", schedule:"sent just now", attempts:1, key:"seq-"+id+"-emaila-01", note:"—", _new:true
+    });
+
+    logEvent("note", pick.name + " signed up. Email A dispatched, Email B scheduled for +3 days (idempotency seq-"+id+"-emaila-01 / -emailb-01).", "signup");
+    setSeqActivity(pick.name + " enrolled — Email A sent immediately, now waiting 3 days for Email B.", [0,1]);
+
+    renderTargetSelect();
+    renderContacts();
+    renderQueue();
+    renderMetrics();
+  }
+
+  function suppressContact(kind){
+    var sel = byId("targetContact");
+    var id = sel.value;
+    var c = contactById(id);
+    if(!c) return;
+
+    if(c.status !== "active"){
+      logEvent("note", "No action: "+c.name+" is already "+c.status+".", "no-op");
+      return;
+    }
+
+    c.status = kind;
+    c.step = kind === "bounced" ? "Suppressed after hard bounce" : "Suppressed after unsubscribe";
+    c.seqIndex = -1;
+
+    queue.forEach(function(j){
+      if(j.contactId === id && (j.state==="scheduled"||j.state==="running"||j.state==="retry")){
+        j.state = "cancelled";
+        j.note = "Suppressed: contact "+kind;
+        j.schedule = "cancelled before send";
+      }
+    });
+
+    var eid = "evt_" + (eventIdSeq++);
+    processedEventIds[eid] = true;
+    var type = kind === "bounced" ? "bounced" : "unsubscribed";
+    var summary = c.name + " — " + (kind==="bounced" ? "hard bounce" : "unsubscribe") + " via " + providers[currentProvider].label + ". Contact suppressed, pending sends cancelled.";
+    lastEvent = {id:eid, type:type, summary:summary};
+    logEvent(type, summary, eid);
+
+    renderTargetSelect();
+    renderContacts();
+    renderQueue();
+    renderMetrics();
+  }
+
+  function replayLastEvent(){
+    if(processedEventIds[lastEvent.id]){
+      logEvent("note", "Duplicate webhook ignored — event "+lastEvent.id+" was already processed. No contact or queue state changed.", lastEvent.id, true);
+    }
+  }
+
+  function requeueJob(jobId){
+    var job = null;
+    for(var i=0;i<queue.length;i++) if(queue[i].id===jobId) job = queue[i];
+    if(!job || job.state !== "dead-letter") return;
+    job.state = "scheduled";
+    job.schedule = "in 5m (manual requeue)";
+    job.attempts += 1;
+    job.note = "Requeued after manual review — backoff reset";
+    job._new = true;
+    var c = contactById(job.contactId);
+    logEvent("note", (c?c.name:job.contactId) + " — dead-letter job "+job.key+" requeued after manual review (attempt "+job.attempts+").", "requeue");
+    renderQueue();
+    renderMetrics();
+  }
+
+  function wireFilters(){
+    document.getElementById("queueFilters").addEventListener("click", function(e){
+      var btn = e.target.closest("[data-qfilter]");
+      if(!btn) return;
+      queueFilter = btn.getAttribute("data-qfilter");
+      document.querySelectorAll("#queueFilters .chip").forEach(function(b){
+        b.setAttribute("aria-pressed", b===btn ? "true" : "false");
+      });
+      renderQueue();
+    });
+    document.getElementById("contactFilters").addEventListener("click", function(e){
+      var btn = e.target.closest("[data-cfilter]");
+      if(!btn) return;
+      contactFilter = btn.getAttribute("data-cfilter");
+      document.querySelectorAll("#contactFilters .chip").forEach(function(b){
+        b.setAttribute("aria-pressed", b===btn ? "true" : "false");
+      });
+      renderContacts();
+    });
+  }
+
+  function wireProvider(){
+    document.querySelectorAll(".provider-btn").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        currentProvider = btn.getAttribute("data-provider");
+        renderProvider();
+        logEvent("note", "Provider switched to "+providers[currentProvider].label+". New sends use this provider; already-queued jobs keep the provider they were created with.", "provider");
+      });
+    });
+  }
+
+  function wireActions(){
+    byId("btnSignup").addEventListener("click", simulateSignup);
+    byId("btnBounce").addEventListener("click", function(){ suppressContact("bounced"); });
+    byId("btnUnsub").addEventListener("click", function(){ suppressContact("unsubscribed"); });
+    byId("btnReplay").addEventListener("click", replayLastEvent);
+    byId("queueTableBody").addEventListener("click", function(e){
+      var btn = e.target.closest("[data-requeue]");
+      if(!btn) return;
+      requeueJob(btn.getAttribute("data-requeue"));
+    });
+  }
+
+  function init(){
+    wireFilters();
+    wireProvider();
+    wireActions();
+    renderProvider();
+    renderTargetSelect();
+    renderContacts();
+    renderQueue();
+    renderMetrics();
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
