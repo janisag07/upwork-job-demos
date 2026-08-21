@@ -1,6 +1,6 @@
 # Upwork Proposal Pack — Jobs 1 and 2 — 2026-08-21
 
-Status: prepared; demos built, independently reviewed and published. Do not submit until the authenticated Apply page confirms all gates, Connects and additional questions.
+Status: prepared; demos built, independently reviewed, published and live-verified (GitHub Pages `built`, both URLs HTTP 200). Submission remains blocked until Janis manually logs into the dedicated Upwork Chrome profile so live gates, Connects and additional questions can be verified.
 
 ## Job 1 — Full-Stack Developer Needed to Build Custom Email Automation & Drip Campaign Tool
 
